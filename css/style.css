@@ -68,7 +68,7 @@ nav a {
 	background: rgba(255, 255, 255, 0.95);
 	border-bottom: 2px solid #fffdd0; /* Borde en crema */
 	z-index: 100;
-	padding: 15px 0;
+	padding: 8px 0;
 	text-align: center;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     backdrop-filter: blur(5px);
@@ -935,4 +935,41 @@ h1, h2, h3 {
     h1 { font-size: 2rem; }
     h2 { font-size: 1.8rem; }
     h3 { font-size: 1.5rem; }
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo img {
+    height: 100%;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.nav-logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Ajuste responsive para el logo en la navegación */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-logo {
+        height: 35px;
+    }
 }
