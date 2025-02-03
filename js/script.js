@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => modal.classList.add('active'), 10);
         document.body.style.overflow = 'hidden';
         showImage(currentImageIndex);
+        adjustModalForMobile();
     });
 
     closeModal.addEventListener('click', () => {
@@ -293,4 +294,38 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         requestAnimationFrame(updateScrollIndicators);
     }, { passive: true });
+
+    // Agregar soporte para gestos táctiles
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    document.addEventListener('touchstart', e => {
+        touchStartY = e.touches[0].clientY;
+    });
+
+    document.addEventListener('touchend', e => {
+        touchEndY = e.changedTouches[0].clientY;
+        handleSwipe();
+    });
+
+    const handleSwipe = () => {
+        const swipeDistance = touchStartY - touchEndY;
+        const minSwipeDistance = 50;
+
+        if (Math.abs(swipeDistance) > minSwipeDistance) {
+            if (swipeDistance > 0) {
+                goToSection(1); // Swipe hacia arriba
+            } else {
+                goToSection(-1); // Swipe hacia abajo
+            }
+        }
+    };
+
+    // Ajustar modal para dispositivos móviles
+    const adjustModalForMobile = () => {
+        if (window.innerWidth <= 768) {
+            modal.style.paddingTop = '20px';
+            document.body.style.position = 'fixed';
+        }
+    };
 });

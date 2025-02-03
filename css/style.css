@@ -148,6 +148,12 @@ nav a {
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    white-space: normal;
+    line-height: 1.4;
+    min-width: 200px;
+    max-width: 90%;
+    margin: 10px auto;
+    display: inline-block;
 }
 .btn:hover {
 	background-color: #fffdd0; /* Fondo crema en hover */
@@ -722,4 +728,211 @@ h1, h2, h3 {
 .progress-dot.active {
     background: var(--primary);
     transform: scale(1.3);
+}
+
+/* Mejoras Responsive */
+@media (max-width: 1024px) {
+    section {
+        padding: 40px 15px;
+    }
+
+    .hero-content {
+        padding: 2rem;
+        margin: 0 15px;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .gallery-container {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 50px;
+    }
+
+    header {
+        padding: 1rem;
+    }
+
+    header img {
+        width: 120px;
+    }
+
+    .fixed-nav {
+        padding: 10px 0;
+    }
+
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+
+    .productos-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .beneficios-container {
+        gap: 15px;
+    }
+
+    .beneficio {
+        flex: 1 1 100%;
+    }
+
+    .scroll-indicator {
+        right: 10px;
+        transform: scale(0.8);
+    }
+
+    .modal-gallery {
+        aspect-ratio: 4/3;
+    }
+
+    .gallery-nav {
+        width: 30px;
+        height: 30px;
+    }
+
+    .gallery-nav.prev {
+        left: -15px;
+    }
+
+    .gallery-nav.next {
+        right: -15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        padding: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        white-space: normal;
+        line-height: 1.4;
+        min-width: 200px;
+        max-width: 90%;
+        margin: 10px auto;
+        display: inline-block;
+        font-size: 0.9rem;
+        padding: 0.8rem 1.2rem;
+        min-width: 150px;
+        margin: 8px auto;
+        white-space: normal;
+        height: auto;
+        line-height: 1.2;
+    }
+
+    .hero-content .btn {
+        display: block;
+        width: auto;
+        max-width: 280px;
+        margin: 15px auto;
+    }
+
+    #hero {
+        padding: 60px 15px;
+    }
+
+    #hero .hero-content {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .hero-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .testimonios-container {
+        gap: 15px;
+    }
+
+    blockquote {
+        margin: 15px 0;
+        padding: 15px;
+    }
+
+    #contactForm {
+        padding: 1.5rem;
+    }
+
+    .modal-content {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .gallery-container {
+        height: 250px;
+    }
+
+    .scroll-down-btn {
+        width: 35px;
+        height: 35px;
+        bottom: 20px;
+    }
+
+    .scroll-indicator {
+        display: none; /* Ocultar en móviles muy pequeños */
+    }
+}
+
+/* Ajustes para orientación horizontal en móviles */
+@media (max-height: 480px) and (orientation: landscape) {
+    section {
+        min-height: auto;
+        padding: 30px 15px;
+    }
+
+    .hero-content {
+        padding: 1rem;
+    }
+
+    .beneficios-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* Mejoras para tablets en modo retrato */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .productos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .beneficios-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimonios-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Ajustes de fuentes responsive */
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.5rem; }
 }
