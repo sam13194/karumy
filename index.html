@@ -1,158 +1,1947 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>Karumy Cosmeticos</title>
-	<!-- Favicons usando SVG -->
-    <link rel="icon" type="image/svg+xml" href="./assets/logo.svg">
-    <link rel="alternate icon" type="image/png" href="./assets/favicon/favicon.png">
-    <link rel="apple-touch-icon" href="./assets/favicon/apple-touch-icon.png">
-    <link rel="manifest" href="./assets/favicon/site.webmanifest">
-    <meta name="theme-color" content="#ff4081">
-	<meta name="description" content="Karumy Cosmeticos - cuidado para mujeres y hombres, descubre nuestra mantequilla Karumy.">
-	<link rel="stylesheet" href="css/style.css">
-	<script defer src="js/script.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karumy Cosmeticos - Belleza Natural</title>
+    
+    <!-- Enlaces a Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Estilos completos inline para garantizar la visualización correcta -->
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary: #ff4081;
+            --secondary: #fffdd0;
+            --dark: #333333;
+            --light: #ffffff;
+            --background: #fafafa;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 15px;
+            --transition-fast: 0.3s ease;
+            --transition-normal: 0.5s ease;
+        }
+        
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--background);
+        }
+        
+        /* Accesibilidad - Skip to content */
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            z-index: 9999;
+            text-decoration: none;
+            transition: top 0.3s ease;
+        }
+        
+        .skip-to-content:focus {
+            top: 0;
+        }
+        
+        /* Header y navegación */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 15px 20px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-logo img:hover {
+            transform: scale(1.05);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Main content */
+        main {
+            margin-top: 80px; /* Para compensar el header fijo */
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f8f8;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffe6f2 0%, #fff9e6 100%);
+            z-index: -1;
+        }
+        
+        .hero-content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-card {
+            background-color: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .hero-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+        }
+        
+        .hero-button:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+        }
+        
+        .hero-indicators {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 3;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        .scroll-down-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            z-index: 3;
+            box-shadow: var(--shadow);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+        
+        /* Secciones generales */
+        .section-container {
+            padding: 100px 20px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-container:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .section-description {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Sección Nosotros */
+        #nosotros {
+            background: linear-gradient(135deg, #fff5f9 0%, #fffcee 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #nosotros::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), transparent);
+        }
+        
+        /* Productos Carousel */
+        .productos-carousel {
+            position: relative;
+            margin: 60px auto 40px;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 25px;
+        }
+        
+        .carousel-dots {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        .producto-slide {
+            flex: 0 0 auto;
+            width: 320px;
+            transition: transform 0.3s ease;
+        }
+        
+        .producto-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(0);
+        }
+        
+        .producto-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(255, 64, 129, 0.2);
+        }
+        
+        .imagen-container {
+            height: 220px;
+            overflow: hidden;
+            background-color: #f5f5f5;
+            position: relative;
+        }
+        
+        .imagen-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .producto-card:hover .imagen-container img {
+            transform: scale(1.1);
+        }
+        
+        .imagen-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #ccc;
+            font-size: 60px;
+        }
+        
+        .producto-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to top, white 80%, rgba(255, 255, 255, 0.8));
+        }
+        
+        .producto-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .producto-info p {
+            color: #666;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .producto-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid var(--primary);
+            align-self: center;
+            margin-top: auto;
+        }
+        
+        .producto-btn:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.2);
+        }
+        
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .carousel-arrow:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-arrow.prev {
+            left: -15px;
+        }
+        
+        .carousel-arrow.next {
+            right: -15px;
+        }
+        
+        .carousel-arrow:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #e0e0e0;
+            transform: translateY(-50%) scale(1);
+        }
+        
+        /* Beneficios */
+        .beneficios-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        
+        .beneficio {
+            background-color: white;
+            padding: 35px 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            flex: 1 1 250px;
+            max-width: 300px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .beneficio::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary);
+            z-index: -1;
+            transition: height 0.3s ease;
+        }
+        
+        .beneficio:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .beneficio:hover::before {
+            height: 10px;
+        }
+        
+        .beneficio i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .beneficio:hover i {
+            transform: scale(1.1);
+        }
+        
+        .beneficio h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .beneficio p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Testimonios */
+        .testimonios-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        
+        .testimonio {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            flex: 1 1 300px;
+            max-width: 400px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonio:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonio::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            line-height: 1;
+            font-family: serif;
+            color: rgba(255, 64, 129, 0.1);
+        }
+        
+        .testimonio p {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonio-autor {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .testimonio-autor-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #999;
+        }
+        
+        .testimonio-autor-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .testimonio-autor-info p {
+            font-size: 0.9rem;
+            margin: 0;
+            color: #777;
+            font-style: normal;
+        }
+        
+        /* Contacto */
+        #contacto {
+            background: linear-gradient(135deg, #fff5f9 0%, #fffcee 100%);
+        }
+        
+        .contacto-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 50px;
+            justify-content: center;
+        }
+        
+        .contacto-info {
+            flex: 1 1 300px;
+            max-width: 400px;
+            text-align: left;
+        }
+        
+        .contacto-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .contacto-item {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        
+        .contacto-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+        
+        .contacto-item-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .contacto-item-text p, .contacto-item-text a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contacto-item-text a:hover {
+            color: var(--primary);
+        }
+        
+        .contacto-form {
+            flex: 1 1 400px;
+            max-width: 500px;
+        }
+        
+        #contactForm {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+            color: var(--dark);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 64, 129, 0.1);
+            background-color: white;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        
+        .form-submit:hover {
+            background-color: #e93a76;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 60px 20px 30px;
+            position: relative;
+        }
+        
+        .footer-wave {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: #333;
+            clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% 50%, 0 0);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .footer-logo-section {
+            flex: 1 1 300px;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .footer-description {
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .footer-links {
+            flex: 1 1 200px;
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .footer-contact {
+            flex: 1 1 250px;
+        }
+        
+        .footer-contact-item {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        
+        .footer-contact-item i {
+            color: var(--primary);
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .footer-contact-item p {
+            color: #ccc;
+            margin: 0;
+        }
+        
+        .footer-social {
+            flex: 1 1 200px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .carousel-container {
+                max-width: 700px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .nav-logo img {
+                height: 40px;
+            }
+            
+            .hero-card {
+                padding: 30px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+            }
+            
+            .section-container {
+                padding: 70px 15px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .carousel-dots, .hero-indicators {
+                right: 10px;
+            }
+            
+            .producto-slide {
+                width: 280px;
+            }
+            
+            .imagen-container {
+                height: 180px;
+            }
+            
+            .producto-info {
+                padding: 20px;
+            }
+            
+            .producto-info h3 {
+                font-size: 1.2rem;
+            }
+            
+            .beneficio {
+                padding: 25px 20px;
+            }
+            
+            .form-submit {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            main {
+                margin-top: 70px;
+            }
+            
+            .hero-card {
+                padding: 25px;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-button {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .hero-indicators {
+                flex-direction: row;
+                bottom: 20px;
+                top: auto;
+                right: 0;
+                left: 0;
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title::after {
+                width: 60px;
+            }
+            
+            .section-description {
+                font-size: 1rem;
+            }
+            
+            .carousel-track {
+                gap: 15px;
+            }
+            
+            .carousel-dots {
+                flex-direction: row;
+                top: auto;
+                bottom: -30px;
+                right: 0;
+                left: 0;
+                justify-content: center;
+            }
+            
+            .carousel-container {
+                margin-bottom: 50px;
+            }
+            
+            .carousel-arrow {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .producto-slide {
+                width: 250px;
+            }
+            
+            .imagen-container {
+                height: 160px;
+            }
+            
+            .producto-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .contacto-info, .contacto-form {
+                flex: 1 1 100%;
+            }
+            
+            .footer-content > div {
+                flex: 1 1 100%;
+            }
+        }
+        
+        /* Menu móvil */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background-color: white;
+            z-index: 2000;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .mobile-menu-logo img {
+            height: 40px;
+        }
+        
+        .close-mobile-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .mobile-menu-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-links a:hover {
+            background-color: #f9f9f9;
+            color: var(--primary);
+        }
+        
+        .mobile-menu-social {
+            margin-top: auto;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+        }
+        
+        /* Reducción de animaciones para personas sensibles */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.001ms !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
 </head>
+
 <body>
-	<header>
-		<!-- ...existing code... -->
-		<img src="assets/logo.jpg" alt="Karumy Logo">
-		<h1>Karumy Cosmeticos</h1>
-		<p class="tagline">Belleza que inspira, cuidado que transforma.</p>
-		<!-- Se eliminó el menú de navegación fijo del header -->
-	</header>
-	<nav class="fixed-nav">
-		<div class="nav-container">
-			<div class="nav-logo">
-				<img src="assets/logo.svg" alt="Karumy Logo">
-			</div>
-			<ul>
-				<li><a href="#nosotros">Nosotros</a></li>
-				<li><a href="#productos">Productos</a></li>
-				<li><a href="#contacto">Contacto</a></li>
-			</ul>
-		</div>
-	</nav>
-	<section id="hero">
-		<!-- ...existing code... -->
-		<div class="hero-content">
-			<h2>Bienvenido a Karumy</h2>
-			<p>Innovación y cuidado en cada producto, para mujeres y hombres.</p>
-			<a href="#mantequilla" class="btn">Descubre nuestra mantequilla Karumy</a>
-		</div>
-	</section>
-	<section id="nosotros">
-		<h2>Sobre Nosotros</h2>
-		<p>
-			En <strong>Karumy Cosmeticos</strong> nos esforzamos por ofrecer cosméticos de la más alta calidad y productos para el cuidado integral de tu piel. Nuestro compromiso es resaltar tu belleza natural a través de soluciones innovadoras y personalizadas.
-		</p>
-	</section>
-	<section id="productos">
-		<h2>Nuestros Productos</h2>
-		<p>
-			Descubre nuestra exclusiva selección de cosméticos y artículos para el cuidado personal, diseñados para realzar y proteger tu piel.
-		</p>
-		
-		<div class="productos-grid">
-			<div class="producto-card">
-				<div class="imagen-container">
-					<img src="assets/mantequilla.jpg" alt="Mantequilla Karumy: Nutrición profunda que hidrata y revitaliza la piel">
-				</div>
-				<div class="producto-info">
-					<h3>Mantequilla Karumy</h3>
-					<p>
-						Nutrición profunda que hidrata y revitaliza tu piel, ideal para un cuidado diario excepcional.
-					</p>
-					<a href="#contacto" class="btn">Más información</a>
-				</div>
-			</div>
-			<!-- Agregar más productos aquí -->
-		</div>
-	</section>
-	<section id="beneficios">
-		<h2>Beneficios de Nuestros Productos</h2>
-		<div class="beneficios-container">
-			<div class="beneficio">
-				<i class="fas fa-star"></i>
-				<h3>Calidad Superior</h3>
-				<p>Productos elaborados con ingredientes de primera.</p>
-			</div>
-			<div class="beneficio">
-				<h3>Eficacia Comprobada</h3>
-				<p>Resultados visibles en el cuidado de la piel.</p>
-			</div>
-			<div class="beneficio">
-				<h3>Seguridad Certificada</h3>
-				<p>Respaldado por normas internacionales de calidad.</p>
-			</div>
-		</div>
-	</section>
-
-
-	<section id="testimonios">
-		<h2>Testimonios</h2>
-		<div class="testimonios-container">
-			<blockquote>
-				<p>"La mantequilla Karumy cambió mi rutina de cuidado, ¡mi piel luce radiante!"</p>
-				<footer>- Cliente Satisfecho</footer>
-			</blockquote>
-			<blockquote>
-				<p>"Calidad y efectividad en cada producto, recomiendo Karumy sin dudar."</p>
-				<footer>- Usuario Feliz</footer>
-			</blockquote>
-		</div>
-	</section>
-	<section id="contacto">
-		<!-- ...existing code... -->
-		<h2>Contacto</h2>
-		<p>¿Tienes preguntas? Escríbenos y te asesoramos en el cuidado de tu piel.</p>
-			<form id="contactForm">
-			<input type="text" name="nombre" placeholder="Tu nombre" required>
-			<input type="email" name="correo" placeholder="Tu correo" required>
-			<textarea name="mensaje" placeholder="Tu mensaje" required></textarea>
-			<button type="submit">Enviar</button>
-		</form>
-	</section>
-	<footer>
-		<!-- ...existing code... -->
-		<p>&copy; 2023 Karumy Cosmeticos. Todos los derechos reservados.</p>
-	</footer>
-	<div id="modal-mantequilla" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <div class="modal-gallery">
-            <button class="gallery-nav prev">&lt;</button>
-            <div class="gallery-container">
-                <img src="assets/mantequilla.jpg" alt="Mantequilla Karumy vista frontal">
-                <img src="assets/mantequilla-2.jpg" alt="Mantequilla Karumy textura">
-                <img src="assets/mantequilla-3.jpg" alt="Mantequilla Karumy uso">
+    <!-- Enlace para saltar al contenido principal (accesibilidad) -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+    
+    <!-- Header y navegación -->
+    <header>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <!-- Usa la imagen existente -->
+                <img src="assets/logo.jpg" alt="Karumy Logo">
             </div>
-            <button class="gallery-nav next">&gt;</button>
-        </div>
-        <div class="modal-description">
-            <h3>Mantequilla Karumy</h3>
-            <p class="product-description">
-                Nuestra exclusiva mantequilla corporal, formulada con ingredientes naturales 
-                selectos, proporciona una hidratación profunda y duradera. Su textura sedosa 
-                se absorbe rápidamente, dejando tu piel suave, nutrida y radiante.
-            </p>
-            <div class="product-details">
-                <h4>Beneficios principales:</h4>
+            <nav>
                 <ul>
-                    <li>Hidratación profunda 24 horas</li>
-                    <li>Textura no grasa</li>
-                    <li>Aroma delicado y duradero</li>
-                    <li>Con manteca de karité y vitamina E</li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#beneficios">Beneficios</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
                 </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Menú móvil -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+                <img src="assets/logo.jpg" alt="Karumy Logo">
             </div>
-            <a href="#contacto" class="btn">Solicitar información</a>
+            <button class="close-mobile-menu" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="#nosotros">Nosotros</a>
+            <a href="#productos">Productos</a>
+            <a href="#beneficios">Beneficios</a>
+            <a href="#testimonios">Testimonios</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+        <div class="mobile-menu-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
         </div>
     </div>
-</div>
-<button class="scroll-down-btn">
-    <i class="fas fa-chevron-down"></i>
-</button>
+    <div class="overlay"></div>
+    
+    <main id="main-content">
+        <!-- Hero Section Mejorada -->
+        <section id="hero" class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-content-wrapper">
+                <div class="hero-card">
+                    <h1 class="hero-title">Bienvenido a Karumy</h1>
+                    <p class="hero-description">Innovación y cuidado en cada producto, para mujeres y hombres.</p>
+                    <a href="#mantequilla" class="hero-button">DESCUBRE NUESTRA MANTEQUILLA KARUMY</a>
+                </div>
+            </div>
+            
+            <!-- Indicadores de slide a la derecha -->
+            <div class="hero-indicators">
+                <button class="indicator active" aria-label="Slide 1"></button>
+                <button class="indicator" aria-label="Slide 2"></button>
+                <button class="indicator" aria-label="Slide 3"></button>
+                <button class="indicator" aria-label="Slide 4"></button>
+                <button class="indicator" aria-label="Slide 5"></button>
+            </div>
+            
+            <!-- Botón de scroll down -->
+            <button class="scroll-down-btn" aria-label="Desplazar hacia abajo">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </section>
+        
+        <!-- Sección Nosotros -->
+        <section id="nosotros" class="section-container">
+            <div class="content-wrapper">
+                <h2 class="section-title">Sobre Nosotros</h2>
+                <p class="section-description">
+                    En <strong>Karumy Cosmeticos</strong> nos esforzamos por ofrecer cosméticos de la más alta calidad y productos para el cuidado integral de tu piel. Nuestro compromiso es resaltar tu belleza natural a través de soluciones innovadoras y personalizadas.
+                </p>
+                <p class="section-description">
+                    Desarrollamos fórmulas exclusivas con ingredientes naturales seleccionados cuidadosamente para proporcionarte una experiencia única en el cuidado de tu piel, respetando el medio ambiente y la sostenibilidad en todos nuestros procesos.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Sección Productos con Slider Horizontal -->
+        <section id="productos" class="section-container">
+            <div class="content-wrapper">
+                <h2 class="section-title">Nuestros Productos</h2>
+                <p class="section-description">
+                    Descubre nuestra exclusiva selección de cosméticos y artículos para el cuidado personal, diseñados para realzar y proteger tu piel con ingredientes de la más alta calidad.
+                </p>
+                
+                <div class="productos-carousel">
+                    <!-- Puntos de navegación -->
+                    <div class="carousel-dots">
+                        <button class="dot active" aria-label="Slide 1"></button>
+                        <button class="dot" aria-label="Slide 2"></button>
+                        <button class="dot" aria-label="Slide 3"></button>
+                        <button class="dot" aria-label="Slide 4"></button>
+                        <button class="dot" aria-label="Slide 5"></button>
+                    </div>
+                    
+                    <!-- Contenedor del carrusel -->
+                    <div class="carousel-container">
+                        <div class="carousel-track">
+                            <!-- Producto 1: Mantequilla Karumy (sabemos que esta imagen existe) -->
+                            <div class="producto-slide">
+                                <div class="producto-card" id="mantequilla">
+                                    <div class="imagen-container">
+                                        <img src="assets/mantequilla.jpg" alt="Mantequilla Karumy">
+                                    </div>
+                                    <div class="producto-info">
+                                        <h3>Mantequilla Karumy</h3>
+                                        <p>Nutrición profunda que hidrata y revitaliza tu piel, ideal para un cuidado diario excepcional.</p>
+                                        <a href="#mantequilla" class="producto-btn">Ver detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 2: Usando placeholder para crema facial -->
+                            <div class="producto-slide">
+                                <div class="producto-card">
+                                    <div class="imagen-container">
+                                        <!-- Placeholder en vez de imagen que no existe -->
+                                        <div class="imagen-placeholder">
+                                            <i class="fas fa-spa"></i>
+                                        </div>
+                                    </div>
+                                    <div class="producto-info">
+                                        <h3>Crema Facial</h3>
+                                        <p>Fórmula ligera con protección UV que hidrata y protege tu rostro durante todo el día.</p>
+                                        <a href="#crema" class="producto-btn">Ver detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 3: Usando placeholder para sérum -->
+                            <div class="producto-slide">
+                                <div class="producto-card">
+                                    <div class="imagen-container">
+                                        <!-- Placeholder en vez de imagen que no existe -->
+                                        <div class="imagen-placeholder">
+                                            <i class="fas fa-tint"></i>
+                                        </div>
+                                    </div>
+                                    <div class="producto-info">
+                                        <h3>Sérum Revitalizante</h3>
+                                        <p>Concentrado de activos que combate signos de envejecimiento y revitaliza la piel.</p>
+                                        <a href="#serum" class="producto-btn">Ver detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 4: Usando placeholder -->
+                            <div class="producto-slide">
+                                <div class="producto-card">
+                                    <div class="imagen-container">
+                                        <div class="imagen-placeholder">
+                                            <i class="fas fa-soap"></i>
+                                        </div>
+                                    </div>
+                                    <div class="producto-info">
+                                        <h3>Loción Corporal</h3>
+                                        <p>Absorción rápida con hidratación profunda y aroma duradero para todo el día.</p>
+                                        <a href="#locion" class="producto-btn">Ver detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 5: Usando placeholder -->
+                            <div class="producto-slide">
+                                <div class="producto-card">
+                                    <div class="imagen-container">
+                                        <div class="imagen-placeholder">
+                                            <i class="fas fa-leaf"></i>
+                                        </div>
+                                    </div>
+                                    <div class="producto-info">
+                                        <h3>Exfoliante Facial</h3>
+                                        <p>Elimina células muertas y revitaliza la piel con ingredientes naturales.</p>
+                                        <a href="#exfoliante" class="producto-btn">Ver detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Botones de navegación -->
+                        <button class="carousel-arrow prev" aria-label="Anterior">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-arrow next" aria-label="Siguiente">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección Beneficios -->
+        <section id="beneficios" class="section-container">
+            <div class="content-wrapper">
+                <h2 class="section-title">Beneficios de Nuestros Productos</h2>
+                <p class="section-description">
+                    Descubre por qué nuestros clientes confían en Karumy para el cuidado diario de su piel. Nuestros productos están diseñados pensando en tu bienestar.
+                </p>
+                <div class="beneficios-container">
+                    <div class="beneficio">
+                        <i class="fas fa-star"></i>
+                        <h3>Calidad Superior</h3>
+                        <p>Productos elaborados con ingredientes naturales de primera calidad, seleccionados cuidadosamente para garantizar resultados excepcionales.</p>
+                    </div>
+                    <div class="beneficio">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Eficacia Comprobada</h3>
+                        <p>Resultados visibles en el cuidado de la piel, respaldados por pruebas dermatológicas y testimonios de clientes satisfechos.</p>
+                    </div>
+                    <div class="beneficio">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Seguridad Certificada</h3>
+                        <p>Respaldado por normas internacionales de calidad, garantizando productos seguros para todo tipo de piel.</p>
+                    </div>
+                    <div class="beneficio">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Compromiso Ecológico</h3>
+                        <p>Formulaciones respetuosas con el medio ambiente y envases reciclables para un futuro sostenible.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección Testimonios -->
+        <section id="testimonios" class="section-container">
+            <div class="content-wrapper">
+                <h2 class="section-title">Testimonios</h2>
+                <p class="section-description">
+                    Lo que nuestros clientes dicen sobre la experiencia Karumy. Su satisfacción es nuestro mayor orgullo.
+                </p>
+                <div class="testimonios-container">
+                    <div class="testimonio">
+                        <p>"La mantequilla Karumy cambió mi rutina de cuidado, ¡mi piel luce radiante! La uso todos los días y la diferencia es notable desde la primera semana."</p>
+                        <div class="testimonio-autor">
+                            <div class="testimonio-autor-img">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="testimonio-autor-info">
+                                <h4>María García</h4>
+                                <p>Cliente desde 2022</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonio">
+                        <p>"Calidad y efectividad en cada producto, recomiendo Karumy sin dudar. Los resultados son visibles y la atención al cliente es excelente."</p>
+                        <div class="testimonio-autor">
+                            <div class="testimonio-autor-img">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="testimonio-autor-info">
+                                <h4>Carlos Mendoza</h4>
+                                <p>Cliente desde 2021</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonio">
+                        <p>"Después de probar diferentes marcas, finalmente encontré en Karumy productos que realmente cumplen lo que prometen. Mi piel nunca se ha sentido mejor."</p>
+                        <div class="testimonio-autor">
+                            <div class="testimonio-autor-img">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="testimonio-autor-info">
+                                <h4>Laura Jiménez</h4>
+                                <p>Cliente desde 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección Contacto -->
+        <section id="contacto" class="section-container">
+            <div class="content-wrapper">
+                <h2 class="section-title">Contacto</h2>
+                <p class="section-description">
+                    ¿Tienes preguntas? Estamos aquí para ayudarte. Contáctanos y te asesoramos en el cuidado de tu piel.
+                </p>
+                
+                <div class="contacto-wrapper">
+                    <div class="contacto-info">
+                        <h3>Información de Contacto</h3>
+                        
+                        <div class="contacto-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="contacto-item-text">
+                                <h4>Dirección</h4>
+                                <p>Av. Principal #123, Colonia Centro<br>Ciudad de México, México</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contacto-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div class="contacto-item-text">
+                                <h4>Teléfono</h4>
+                                <p><a href="tel:+525512345678">+52 55 1234 5678</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contacto-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="contacto-item-text">
+                                <h4>Email</h4>
+                                <p><a href="mailto:info@karumycosmeticos.com">info@karumycosmeticos.com</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contacto-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="contacto-item-text">
+                                <h4>Horario de Atención</h4>
+                                <p>Lunes a Viernes: 9:00 AM - 6:00 PM<br>Sábados: 10:00 AM - 2:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contacto-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="correo">Correo electrónico</label>
+                                <input type="email" id="correo" name="correo" class="form-control" placeholder="Tu correo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="asunto">Asunto</label>
+                                <input type="text" id="asunto" name="asunto" class="form-control" placeholder="Asunto de tu mensaje">
+                            </div>
+                            <div class="form-group">
+                                <label for="mensaje">Mensaje</label>
+                                <textarea id="mensaje" name="mensaje" class="form-control" placeholder="Tu mensaje" required></textarea>
+                            </div>
+                            <button type="submit" class="form-submit">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-wave"></div>
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <div class="footer-logo">
+                    <img src="assets/logo.jpg" alt="Karumy Logo">
+                </div>
+                <p class="footer-description">
+                    Productos cosméticos de alta calidad para el cuidado integral de tu piel. Innovación y belleza natural en cada producto.
+                </p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 class="footer-title">Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#beneficios">Beneficios</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 class="footer-title">Contáctanos</h3>
+                <div class="footer-contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Av. Principal #123, Col. Centro<br>Ciudad de México, México</p>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>+52 55 1234 5678</p>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>info@karumycosmeticos.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <h3 class="footer-title">Síguenos</h3>
+                <p>Mantente conectado con nosotros en nuestras redes sociales para conocer las últimas novedades y promociones.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Karumy Cosmeticos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ======= Variables y funciones globales =======
+            const body = document.body;
+            
+            // Función para comprobar si un elemento está en el viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            // Animación de elementos al entrar en viewport
+            function animateOnScroll() {
+                const sections = document.querySelectorAll('.section-container');
+                
+                sections.forEach(section => {
+                    if (isInViewport(section) && !section.classList.contains('animated')) {
+                        section.classList.add('animate-fade-in', 'animated');
+                    }
+                });
+            }
+            
+            // ======= Navegación y Header =======
+            const header = document.querySelector('header');
+            
+            // Cambiar estilo del header al hacer scroll
+            function handleHeaderScroll() {
+                if (window.scrollY > 100) {
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+                    header.style.boxShadow = 'none';
+                }
+            }
+            
+            // ======= Menú Móvil =======
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const closeMenu = document.querySelector('.close-mobile-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.overlay');
+            const mobileLinks = document.querySelectorAll('.mobile-menu-links a');
+            
+            // Abrir menú móvil
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                overlay.classList.add('active');
+                body.style.overflow = 'hidden';
+            });
+            
+            // Cerrar menú móvil
+            function closeMenuMobile() {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                body.style.overflow = '';
+            }
+            
+            closeMenu.addEventListener('click', closeMenuMobile);
+            overlay.addEventListener('click', closeMenuMobile);
+            
+            // Cerrar al clickear un enlace
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', closeMenuMobile);
+            });
+            
+            // ======= Carrusel de productos =======
+            const track = document.querySelector('.carousel-track');
+            const slides = document.querySelectorAll('.producto-slide');
+            const dotsContainer = document.querySelector('.carousel-dots');
+            const dots = document.querySelectorAll('.carousel-dots .dot');
+            const prevBtn = document.querySelector('.carousel-arrow.prev');
+            const nextBtn = document.querySelector('.carousel-arrow.next');
+            
+            // Si no existe el carrusel, no continuar
+            if (track && slides.length > 0) {
+                let currentIndex = 0;
+                const slideCount = slides.length;
+                
+                // Obtener dimensiones
+                function getSlideWidth() {
+                    const slide = slides[0];
+                    const style = window.getComputedStyle(slide);
+                    return slide.offsetWidth + parseInt(style.marginRight) + parseInt(style.marginLeft);
+                }
+                
+                // Determinar cuántos slides mostrar según el ancho
+                function getVisibleSlides() {
+                    const viewportWidth = window.innerWidth;
+                    
+                    if (viewportWidth < 576) return 1;
+                    if (viewportWidth < 992) return 2;
+                    return 3;
+                }
+                
+                let slideWidth = getSlideWidth();
+                let visibleSlides = getVisibleSlides();
+                
+                // Actualizar ancho del carrusel en resize
+                function updateCarouselDimensions() {
+                    slideWidth = getSlideWidth();
+                    visibleSlides = getVisibleSlides();
+                    goToSlide(currentIndex);
+                }
+                
+                // Ir a un slide específico
+                function goToSlide(index) {
+                    // No permitir índices fuera de rango
+                    const maxIndex = slideCount - visibleSlides;
+                    currentIndex = Math.max(0, Math.min(index, maxIndex));
+                    
+                    // Mover el track
+                    const offset = -currentIndex * slideWidth;
+                    track.style.transform = `translateX(${offset}px)`;
+                    
+                    // Actualizar dots
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === currentIndex);
+                    });
+                    
+                    // Actualizar estado de botones
+                    updateButtonState();
+                }
+                
+                // Actualizar estado de botones
+                function updateButtonState() {
+                    prevBtn.disabled = currentIndex === 0;
+                    nextBtn.disabled = currentIndex >= slideCount - visibleSlides;
+                }
+                
+                // Iniciar el carrusel
+                updateButtonState();
+                
+                // Eventos para botones de navegación
+                prevBtn.addEventListener('click', () => {
+                    goToSlide(currentIndex - 1);
+                });
+                
+                nextBtn.addEventListener('click', () => {
+                    goToSlide(currentIndex + 1);
+                });
+                
+                // Eventos para dots
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        goToSlide(index);
+                    });
+                });
+                
+                // Soporte para swipe en móviles
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                track.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+                
+                track.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                }, { passive: true });
+                
+                function handleSwipe() {
+                    const swipeThreshold = 50;
+                    
+                    if (touchStartX - touchEndX > swipeThreshold) {
+                        // Swipe a la izquierda (siguiente)
+                        goToSlide(currentIndex + 1);
+                    } else if (touchEndX - touchStartX > swipeThreshold) {
+                        // Swipe a la derecha (anterior)
+                        goToSlide(currentIndex - 1);
+                    }
+                }
+                
+                // Auto-rotación del carrusel
+                let autoRotateInterval;
+                
+                function startAutoRotate() {
+                    autoRotateInterval = setInterval(() => {
+                        if (currentIndex < slideCount - visibleSlides) {
+                            goToSlide(currentIndex + 1);
+                        } else {
+                            goToSlide(0);
+                        }
+                    }, 5000);
+                }
+                
+                function stopAutoRotate() {
+                    clearInterval(autoRotateInterval);
+                }
+                
+                // Iniciar auto-rotación
+                startAutoRotate();
+                
+                // Detener en hover o touch
+                track.addEventListener('mouseenter', stopAutoRotate);
+                track.addEventListener('touchstart', stopAutoRotate, { passive: true });
+                
+                // Reanudar al salir
+                track.addEventListener('mouseleave', startAutoRotate);
+                track.addEventListener('touchend', () => {
+                    setTimeout(startAutoRotate, 1000);
+                }, { passive: true });
+                
+                // Actualizar en resize
+                window.addEventListener('resize', updateCarouselDimensions);
+            }
+            
+            // ======= Indicadores Hero =======
+            const heroIndicators = document.querySelectorAll('.hero-indicators .indicator');
+            const scrollDownBtn = document.querySelector('.scroll-down-btn');
+            
+            // Activar indicador al hacer click
+            heroIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    heroIndicators.forEach(ind => ind.classList.remove('active'));
+                    indicator.classList.add('active');
+                    
+                    // Aquí podrías añadir código para cambiar la imagen o contenido del hero
+                    console.log(`Cambiar al slide ${index + 1} del hero`);
+                });
+            });
+            
+            // Scroll down button
+            if (scrollDownBtn) {
+                scrollDownBtn.addEventListener('click', () => {
+                    const nosotrosSection = document.getElementById('nosotros');
+                    if (nosotrosSection) {
+                        nosotrosSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+            
+            // ======= Formulario de Contacto =======
+            const contactForm = document.getElementById('contactForm');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    // Validación básica
+                    const nombre = document.getElementById('nombre');
+                    const correo = document.getElementById('correo');
+                    const mensaje = document.getElementById('mensaje');
+                    
+                    if (!nombre.value.trim() || !correo.value.trim() || !mensaje.value.trim()) {
+                        alert('Por favor, completa todos los campos obligatorios.');
+                        return;
+                    }
+                    
+                    // Validar email
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(correo.value)) {
+                        alert('Por favor, introduce un correo electrónico válido.');
+                        return;
+                    }
+                    
+                    // Simulación de envío
+                    const submitBtn = contactForm.querySelector('.form-submit');
+                    const originalText = submitBtn.textContent;
+                    
+                    submitBtn.textContent = 'Enviando...';
+                    submitBtn.disabled = true;
+                    
+                    // Simular respuesta del servidor
+                    setTimeout(() => {
+                        alert('¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.');
+                        contactForm.reset();
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }, 1500);
+                });
+            }
+            
+            // ======= Inicialización y Event Listeners =======
+            // Ejecutar animaciones iniciales
+            animateOnScroll();
+            handleHeaderScroll();
+            
+            // Event listeners para scroll
+            window.addEventListener('scroll', () => {
+                animateOnScroll();
+                handleHeaderScroll();
+            });
+            
+            // Smooth scroll para enlaces internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
