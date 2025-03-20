@@ -1,0 +1,447 @@
+{
+  "productos": [
+    {
+      "id": "mantequilla-karumy",
+      "nombre": "Mantequilla Karumy",
+      "categoria": "mantequillas-corporales",
+      "categoria_nombre": "Mantequillas Corporales",
+      "descripcion_corta": "Nutrición profunda que hidrata y revitaliza tu piel, ideal para un cuidado diario excepcional.",
+      "precio": 42000,
+      "precio_oferta": null,
+      "imagen_principal": "assets/img/mantequilla.jpg",
+      "imagenes_adicionales": [],
+      "es_nuevo": true,
+      "es_oferta": false,
+      "etiquetas": ["hidratación", "corporal", "natural"],
+      "sku": "MK-250-001",
+      "descripcion_completa": [
+        "La Mantequilla Karumy es una fórmula especial desarrollada por nuestros expertos cosmetólogos para ofrecer una hidratación profunda y duradera. A diferencia de las cremas corporales comunes, nuestra mantequilla corporal tiene una textura rica y cremosa que nutre la piel desde las capas más profundas.",
+        "Ideal para pieles secas o deshidratadas, este producto es perfecto para combatir la resequedad producida por factores ambientales como el sol, el viento o el aire acondicionado. Su fórmula concentrada se absorbe rápidamente sin dejar residuos grasos.",
+        "Nuestro compromiso con la calidad se refleja en cada ingrediente seleccionado para esta mantequilla. Utilizamos manteca de karité, aceite de coco, aceite de almendras dulces y otros ingredientes naturales que trabajan en sinergia para proporcionar resultados excepcionales."
+      ],
+      "beneficios": [
+        "Hidratación profunda y duradera",
+        "Mejora la elasticidad de la piel",
+        "Textura no grasa de rápida absorción",
+        "Aroma suave y duradero",
+        "Ideal para todo tipo de piel"
+      ],
+      "ingredientes": [
+        "Manteca de Karité: Rica en vitaminas A, E y F, proporciona hidratación profunda y ayuda a proteger la piel.",
+        "Aceite de Coco: Conocido por sus propiedades antimicrobianas y su capacidad para retener la humedad.",
+        "Aceite de Almendras Dulces: Suaviza e hidrata, ideal para pieles sensibles.",
+        "Aloe Vera: Calma la piel y proporciona hidratación adicional.",
+        "Vitamina E: Antioxidante natural que protege la piel contra los radicales libres.",
+        "Glicerina: Retiene la humedad para una hidratación duradera.",
+        "Aceites Esenciales Naturales: Proporcionan un aroma agradable y propiedades adicionales según la variante."
+      ],
+      "modo_uso": [
+        "Limpieza: Aplica después de la ducha o el baño, cuando la piel está ligeramente húmeda, para mejor absorción.",
+        "Cantidad: Toma una pequeña cantidad (aproximadamente del tamaño de una nuez) para zonas como brazos o piernas. Ajusta según el área a tratar.",
+        "Aplicación: Frota suavemente entre tus manos para calentar el producto y facilitar su aplicación.",
+        "Masaje: Aplica con movimientos circulares ascendentes, masajeando hasta su completa absorción.",
+        "Frecuencia: Para resultados óptimos, utiliza diariamente, preferiblemente después del baño y antes de dormir."
+      ],
+      "opciones": {
+        "tamaño": [
+          {"valor": "250ml", "precio_adicional": 0},
+          {"valor": "500ml", "precio_adicional": 18000},
+          {"valor": "1000ml", "precio_adicional": 35000}
+        ]
+      },
+      "productos_relacionados": ["mantequilla-corporal-chocolate", "locion-corporal", "exfoliante-facial"]
+    },
+    {
+      "id": "crema-facial",
+      "nombre": "Crema Facial",
+      "categoria": "cremas-faciales",
+      "categoria_nombre": "Cremas Faciales",
+      "descripcion_corta": "Fórmula ligera con protección UV que hidrata y protege tu rostro durante todo el día.",
+      "precio": 38000,
+      "precio_oferta": 32000,
+      "imagen_principal": null,
+      "imagenes_adicionales": [],
+      "es_nuevo": false,
+      "es_oferta": true,
+      "etiquetas": ["facial", "hidratante", "protección uv"],
+      "sku": "CF-50-001",
+      "descripcion_completa": [
+        "Nuestra Crema Facial es una fórmula especializada para el cuidado diario de la piel del rostro. Combina hidratación profunda con protección UV para cuidar tu piel de los factores ambientales dañinos.",
+        "Su textura ligera se absorbe rápidamente sin dejar sensación grasosa, lo que la hace ideal para usar bajo el maquillaje o como tratamiento hidratante nocturno.",
+        "Formulada con ingredientes cuidadosamente seleccionados, nuestra crema facial ayuda a mantener la elasticidad de la piel y prevenir líneas finas y signos de envejecimiento prematuro."
+      ],
+      "beneficios": [
+        "Hidratación prolongada sin sensación grasosa",
+        "Protección UV contra factores ambientales",
+        "Mejora la textura y apariencia de la piel",
+        "Fórmula ligera ideal para uso diario",
+        "Compatible con todos los tipos de piel"
+      ],
+      "ingredientes": [
+        "Agua de Rosas: Calmante natural que ayuda a equilibrar el pH de la piel.",
+        "Ácido Hialurónico: Retiene la humedad y proporciona hidratación profunda.",
+        "Vitamina C: Antioxidante que ayuda a iluminar y unificar el tono de la piel.",
+        "Extracto de Aloe Vera: Hidrata y calma la piel irritada.",
+        "Manteca de Karité: Nutre y protege la barrera natural de la piel.",
+        "Filtro UV Natural: Ayuda a proteger la piel de los rayos solares."
+      ],
+      "modo_uso": [
+        "Aplica por la mañana después de limpiar y tonificar la piel.",
+        "Toma una pequeña cantidad (tamaño de una perla) y caliéntala ligeramente entre los dedos.",
+        "Aplica con movimientos ascendentes y hacia afuera, evitando el área de los ojos.",
+        "Espera unos minutos antes de aplicar maquillaje.",
+        "Para mejores resultados, utiliza también como tratamiento nocturno."
+      ],
+      "opciones": {
+        "tamaño": [
+          {"valor": "50ml", "precio_adicional": 0},
+          {"valor": "100ml", "precio_adicional": 15000}
+        ]
+      },
+      "productos_relacionados": ["serum-revitalizante", "mascarilla-hidratante", "exfoliante-facial"]
+    },
+    {
+      "id": "serum-revitalizante",
+      "nombre": "Sérum Revitalizante",
+      "categoria": "serums",
+      "categoria_nombre": "Sérums",
+      "descripcion_corta": "Concentrado de activos que combate signos de envejecimiento y revitaliza la piel.",
+      "precio": 55000,
+      "precio_oferta": null,
+      "imagen_principal": null,
+      "imagenes_adicionales": [],
+      "es_nuevo": false,
+      "es_oferta": false,
+      "etiquetas": ["antiedad", "facial", "revitalizante"],
+      "sku": "SR-30-001",
+      "descripcion_completa": [
+        "El Sérum Revitalizante es un concentrado de principios activos diseñado para combatir los signos visibles de envejecimiento. Su fórmula liviana pero potente penetra profundamente en la piel para nutrir, reparar y revitalizar.",
+        "Rico en antioxidantes y péptidos, este sérum ayuda a reducir líneas finas, mejorar la elasticidad y devolver el resplandor natural a la piel. Es ideal como tratamiento intensivo para pieles maduras o estresadas que necesitan un impulso de vitalidad.",
+        "Nuestra exclusiva combinación de ingredientes trabaja durante la noche para regenerar y renovar las células de la piel, haciendo que despiertes con un rostro visiblemente más radiante y juvenil."
+      ],
+      "beneficios": [
+        "Reduce visiblemente líneas finas y arrugas",
+        "Mejora la firmeza y elasticidad de la piel",
+        "Ilumina el tono del rostro y reduce manchas",
+        "Protege contra el daño de los radicales libres",
+        "Hidrata intensamente sin obstruir los poros"
+      ],
+      "ingredientes": [
+        "Ácido Hialurónico de Bajo Peso Molecular: Penetra profundamente para hidratar desde el interior.",
+        "Vitamina C Estabilizada: Ilumina y unifica el tono, estimula la producción de colágeno.",
+        "Coenzima Q10: Potente antioxidante que protege y energiza las células de la piel.",
+        "Péptidos de Colágeno: Refuerzan la estructura de la piel y mejoran su elasticidad.",
+        "Niacinamida (Vitamina B3): Reduce poros dilatados y mejora la textura de la piel.",
+        "Extracto de Centella Asiática: Calmante y regenerador celular."
+      ],
+      "modo_uso": [
+        "Aplica sobre la piel limpia y seca, preferiblemente después del tónico.",
+        "Coloca 2-3 gotas en la yema de los dedos y aplica con suaves toques en rostro y cuello.",
+        "Espera 1-2 minutos hasta su completa absorción antes de continuar con tu rutina.",
+        "Para mejores resultados, usa por la mañana y por la noche, antes de tu crema hidratante.",
+        "En la rutina diurna, siempre finaliza con protector solar."
+      ],
+      "opciones": {
+        "tamaño": [
+          {"valor": "30ml", "precio_adicional": 0}
+        ]
+      },
+      "productos_relacionados": ["crema-facial", "mascarilla-hidratante", "exfoliante-facial"]
+    },
+    {
+      "id": "locion-corporal",
+      "nombre": "Loción Corporal",
+      "categoria": "lociones-corporales",
+      "categoria_nombre": "Lociones Corporales",
+      "descripcion_corta": "Absorción rápida con hidratación profunda y aroma duradero para todo el día.",
+      "precio": 38000,
+      "precio_oferta": null,
+      "imagen_principal": null,
+      "imagenes_adicionales": [],
+      "es_nuevo": false,
+      "es_oferta": false,
+      "etiquetas": ["hidratante", "corporal", "aroma"],
+      "sku": "LC-250-001",
+      "descripcion_completa": [
+        "Nuestra Loción Corporal proporciona hidratación inmediata con una textura ligera que se absorbe rápidamente. Perfecta para el uso diario, deja la piel suave, nutrida y con un delicado aroma que perdura durante horas.",
+        "Formulada con ingredientes hidratantes de origen natural, esta loción ayuda a restaurar la barrera natural de la piel y prevenir la sequedad. Su fórmula no grasa la hace ideal para aplicar en cualquier momento del día.",
+        "Especialmente recomendada para pieles normales a secas que necesitan hidratación constante sin la sensación pesada de las mantequillas o cremas más densas."
+      ],
+      "beneficios": [
+        "Hidratación inmediata y duradera",
+        "Textura ligera de rápida absorción",
+        "Aroma delicado que perdura en la piel",
+        "No deja residuos grasos",
+        "Mejora la elasticidad y suavidad de la piel"
+      ],
+      "ingredientes": [
+        "Agua de Hamamelis: Tónica y refrescante, ayuda a cerrar los poros.",
+        "Glicerina Vegetal: Hidratante natural que retiene la humedad en la piel.",
+        "Aceite de Jojoba: Hidrata sin obstruir los poros, similar al sebo natural de la piel.",
+        "Manteca de Karité: Nutre y protege la piel contra la sequedad.",
+        "Alantoína: Calma y promueve la renovación celular.",
+        "Extracto de Caléndula: Calmante y regenerador para pieles sensibles."
+      ],
+      "modo_uso": [
+        "Aplica sobre la piel limpia, preferiblemente después del baño cuando la piel está ligeramente húmeda.",
+        "Vierte una cantidad generosa en la palma de la mano y frota ligeramente para calentar el producto.",
+        "Masajea con movimientos circulares hasta su completa absorción.",
+        "Usa diariamente, mañana y noche, para mantener la piel hidratada.",
+        "Ideal para aplicar después de la exposición al sol para calmar y refrescar la piel."
+      ],
+      "opciones": {
+        "tamaño": [
+          {"valor": "250ml", "precio_adicional": 0},
+          {"valor": "500ml", "precio_adicional": 15000}
+        ]
+      },
+      "productos_relacionados": ["mantequilla-karumy", "mantequilla-corporal-chocolate", "exfoliante-facial"]
+    },
+    {
+      "id": "exfoliante-facial",
+      "nombre": "Exfoliante Facial",
+      "categoria": "exfoliantes",
+      "categoria_nombre": "Exfoliantes",
+      "descripcion_corta": "Elimina células muertas y revitaliza la piel con ingredientes naturales.",
+      "precio": 45000,
+      "precio_oferta": null,
+      "imagen_principal": null,
+      "imagenes_adicionales": [],
+      "es_nuevo": false,
+      "es_oferta": false,
+      "etiquetas": ["exfoliante", "facial", "renovación"],
+      "sku": "EF-100-001",
+      "descripcion_completa": [
+        "Nuestro Exfoliante Facial combina partículas naturales exfoliantes con ingredientes hidratantes para eliminar suavemente las células muertas sin irritar la piel. Este tratamiento esencial revela una piel más radiante, suave y receptiva a los tratamientos posteriores.",
+        "Su formulación equilibrada es suficientemente efectiva para limpiar profundamente los poros y eliminar impurezas, pero lo bastante suave para no dañar la barrera protectora natural de la piel.",
+        "Ideal para todo tipo de pieles, este exfoliante prepara tu rostro para aprovechar al máximo los beneficios de sérums y cremas, mejorando su absorción y potenciando su eficacia."
+      ],
+      "beneficios": [
+        "Elimina células muertas e impurezas",
+        "Desobstruye los poros y previene puntos negros",
+        "Mejora la textura y luminosidad de la piel",
+        "Ayuda a controlar el exceso de grasa",
+        "Prepara la piel para una mejor absorción de tratamientos"
+      ],
+      "ingredientes": [
+        "Partículas de Bambú: Exfoliante natural que elimina suavemente las células muertas.",
+        "Ácido Salicílico: Ayuda a desobstruir los poros y controlar la producción de sebo.",
+        "Extracto de Papaya: Contiene enzimas naturales que disuelven suavemente las células muertas.",
+        "Aloe Vera: Calma e hidrata la piel durante la exfoliación.",
+        "Aceite de Jojoba: Mantiene la hidratación y evita la irritación.",
+        "Extracto de Manzanilla: Calma y reduce la inflamación de la piel sensible."
+      ],
+      "modo_uso": [
+        "Aplica sobre la piel húmeda del rostro, evitando el contorno de los ojos.",
+        "Masajea suavemente con movimientos circulares durante 1-2 minutos.",
+        "Enjuaga abundantemente con agua tibia y seca con palmaditas suaves.",
+        "Utiliza 1-2 veces por semana para pieles normales o secas, y hasta 3 veces para pieles grasas.",
+        "Finaliza siempre con un tónico y crema hidratante."
+      ],
+      "opciones": {
+        "tamaño": [
+          {"valor": "100ml", "precio_adicional": 0}
+        ]
+      },
+      "productos_relacionados": ["crema-facial", "serum-revitalizante", "mascarilla-hidratante"]
+    },
+    {
+      "id": "mascarilla-hidratante",
+      "nombre": "Mascarilla Hidratante",
+      "categoria": "mascarillas",
+      "categoria_nombre": "Mascarillas",
+      "descripcion_corta": "Tratamiento intensivo que restaura la hidratación y vitalidad de la piel.",
+      "precio": 35000,
+      "precio_oferta": null,
+      "imagen_principal": null,
+      "imagenes_adicionales": [],
+      "es_nuevo": true,
+      "es_oferta": false,
+      "etiquetas": ["hidratación", "facial", "tratamiento"],
+      "sku": "MH-100-001",
+      "descripcion_completa": [
+        "La Mascarilla Hidratante es un tratamiento intensivo diseñado para restaurar niveles óptimos de hidratación en pieles deshidratadas o estresadas. Su formulación rica en ácido hialurónico y extractos botánicos proporciona un efecto inmediato de hidratación profunda.",
+        "Ideal como tratamiento semanal, esta mascarilla no solo hidrata sino que también calma, reduce enrojecimiento y mejora la elasticidad de la piel. Su textura cremosa se transforma en un velo ligero que permite a la piel respirar mientras recibe nutrientes esenciales.",
+        "Perfecta para combatir los efectos de la exposición a factores ambientales adversos como aire acondicionado, calefacción, sol o viento, devolviendo a tu piel su aspecto radiante y saludable."
+      ],
+      "beneficios": [
+        "Hidratación intensiva y profunda",
+        "Calma irritaciones y reduce enrojecimiento",
+        "Restaura la barrera natural de la piel",
+        "Mejora la elasticidad y firmeza",
+        "Efecto reparador y regenerador"
+      ],
+      "ingredientes": [
+        "Ácido Hialurónico: Molécula capaz de retener hasta 1000 veces su peso en agua.",
+        "Glicerina Vegetal: Humectante natural que atrae y retiene la humedad.",
+        "Gel de Aloe Vera: Calma, hidrata y reduce inflamación.",
+        "Manteca de Karité: Nutre profundamente y repara la barrera cutánea.",
+        "Extracto de Pepino: Refresca y descongestiona la piel.",
+        "Ceramidas: Refuerzan la función barrera de la piel y previenen la pérdida de agua."
+      ],
+      "modo_uso": [
+        "Aplica sobre la piel limpia y seca, después del tónico.",
+        "Extiende una capa generosa sobre rostro y cuello, evitando el contorno de ojos.",
+        "Deja actuar durante 15-20 minutos para una hidratación normal, o toda la noche como tratamiento intensivo.",
+        "Retira el exceso con una toalla suave o enjuaga con agua tibia según el tipo de aplicación.",
+        "Usa 1-2 veces por semana o según necesite tu piel."
+      ],
+      "opciones": {
+        "tamaño": [
+          {"valor": "100ml", "precio_adicional": 0}
+        ]
+      },
+      "productos_relacionados": ["crema-facial", "serum-revitalizante", "exfoliante-facial"]
+    },
+    {
+      "id": "labial-hidratante",
+      "nombre": "Labial Hidratante",
+      "categoria": "labiales",
+      "categoria_nombre": "Labiales",
+      "descripcion_corta": "Hidratación intensa con un toque de color para unos labios suaves y protegidos.",
+      "precio": 28000,
+      "precio_oferta": null,
+      "imagen_principal": null,
+      "imagenes_adicionales": [],
+      "es_nuevo": false,
+      "es_oferta": false,
+      "etiquetas": ["labios", "hidratante", "color"],
+      "sku": "LH-001",
+      "descripcion_completa": [
+        "Nuestro Labial Hidratante combina el cuidado intensivo de un bálsamo con un sutil toque de color, perfecto para dar vida a tus labios mientras los nutres y proteges. Su fórmula enriquecida con manteca de karité y vitamina E previene la sequedad y agrietamiento.",
+        "A diferencia de los labiales convencionales, nuestro producto no reseca los labios con el uso prolongado. Al contrario, con cada aplicación estarás tratando tus labios con ingredientes nutritivos que mejoran su apariencia y salud a largo plazo.",
+        "Su textura suave se desliza fácilmente proporcionando un acabado natural con un brillo ligero. Ideal para uso diario, tanto solo como base para otros labiales de color más intenso."
+      ],
+      "beneficios": [
+        "Hidratación intensa y duradera",
+        "Protección contra factores ambientales",
+        "Previene agrietamiento y descamación",
+        "Aporta un sutil toque de color natural",
+        "Mejora la textura y apariencia de los labios con el uso continuo"
+      ],
+      "ingredientes": [
+        "Manteca de Karité: Nutre profundamente y previene la sequedad.",
+        "Aceite de Jojoba: Hidrata sin sensación grasa.",
+        "Vitamina E: Antioxidante que protege y repara.",
+        "Aceite de Coco: Proporciona hidratación profunda y brillo natural.",
+        "Cera de Abeja: Crea una barrera protectora que retiene la humedad.",
+        "Pigmentos Naturales: Aportan un toque de color suave."
+      ],
+      "modo_uso": [
+        "Aplica directamente sobre los labios limpios las veces que sea necesario durante el día.",
+        "Para labios muy secos, aplica una capa generosa antes de dormir como tratamiento nocturno.",
+        "Puede usarse solo para un look natural o como base antes de aplicar labiales de color más intenso.",
+        "Ideal para llevar en el bolso y reaplicar durante el día, especialmente en épocas de frío o calor extremo."
+      ],
+      "opciones": {
+        "color": [
+          {"valor": "Natural", "precio_adicional": 0},
+          {"valor": "Rosado", "precio_adicional": 0},
+          {"valor": "Coral", "precio_adicional": 0},
+          {"valor": "Cereza", "precio_adicional": 0}
+        ]
+      },
+      "productos_relacionados": ["exfoliante-facial", "crema-facial", "mascarilla-hidratante"]
+    },
+    {
+      "id": "mantequilla-corporal-chocolate",
+      "nombre": "Mantequilla Corporal Chocolate",
+      "categoria": "mantequillas-corporales",
+      "categoria_nombre": "Mantequillas Corporales",
+      "descripcion_corta": "Indulgente hidratación con aroma a chocolate que nutre intensamente la piel seca.",
+      "precio": 45000,
+      "precio_oferta": 38000,
+      "imagen_principal": null,
+      "imagenes_adicionales": [],
+      "es_nuevo": false,
+      "es_oferta": true,
+      "etiquetas": ["hidratación", "corporal", "chocolate"],
+      "sku": "MCH-250-001",
+      "descripcion_completa": [
+        "Nuestra Mantequilla Corporal de Chocolate es un verdadero placer para los sentidos. Combina las propiedades nutritivas del cacao puro con una fórmula de hidratación intensa para transformar el cuidado diario de la piel en una experiencia sensorial única.",
+        "Especialmente desarrollada para pieles secas o muy secas, esta rica mantequilla proporciona hidratación profunda y duradera. Sus activos naturales restauran la elasticidad y suavidad de la piel, mientras su delicioso aroma a chocolate puro eleva el estado de ánimo.",
+        "El extracto de cacao es naturalmente rico en antioxidantes que ayudan a proteger la piel contra los radicales libres, mientras que su combinación con manteca de karité y aceite de coco crea una barrera protectora que previene la pérdida de humedad."
+      ],
+      "beneficios": [
+        "Hidratación extra intensiva para pieles muy secas",
+        "Aroma natural a chocolate que mejora el estado de ánimo",
+        "Protección antioxidante contra el envejecimiento prematuro",
+        "Mejora significativa de la elasticidad y suavidad de la piel",
+        "Creación de una barrera protectora que retiene la humedad"
+      ],
+      "ingredientes": [
+        "Extracto de Cacao: Rico en antioxidantes, mejora la circulación y protege la piel.",
+        "Manteca de Karité: Nutre profundamente y repara la barrera cutánea.",
+        "Aceite de Coco: Hidrata intensamente y aporta propiedades antimicrobianas.",
+        "Aceite de Almendras Dulces: Suaviza e hidrata sin sensación grasa.",
+        "Manteca de Cacao: Mejora la elasticidad y previene estrías.",
+        "Vitamina E: Potente antioxidante que protege y repara."
+      ],
+      "modo_uso": [
+        "Aplica después de la ducha o baño, con la piel ligeramente húmeda para maximizar la absorción.",
+        "Toma una cantidad generosa y caliéntala entre las manos para facilitar su aplicación.",
+        "Masajea con movimientos circulares hasta su completa absorción, prestando especial atención a zonas secas como codos, rodillas y talones.",
+        "Para un tratamiento intensivo, aplica una capa generosa antes de dormir y deja actuar durante la noche.",
+        "Ideal para uso diario, especialmente en temporadas de frío o en climas secos."
+      ],
+      "opciones": {
+        "tamaño": [
+          {"valor": "250ml", "precio_adicional": 0},
+          {"valor": "500ml", "precio_adicional": 18000}
+        ]
+      },
+      "productos_relacionados": ["mantequilla-karumy", "locion-corporal", "exfoliante-facial"]
+    }
+  ],
+  "categorias": [
+    {
+      "id": "mantequillas-corporales",
+      "nombre": "Mantequillas Corporales",
+      "descripcion": "Fórmulas ricas y nutritivas para una hidratación profunda y duradera. Ideal para pieles secas que necesitan un cuidado extra.",
+      "imagen": "assets/img/categorias/mantequillas.jpg",
+      "icono": "fas fa-spa"
+    },
+    {
+      "id": "cremas-faciales",
+      "nombre": "Cremas Faciales",
+      "descripcion": "Tratamientos especializados para el cuidado del rostro, adaptados a las necesidades específicas de cada tipo de piel.",
+      "imagen": "assets/img/categorias/cremas.jpg",
+      "icono": "fas fa-smile"
+    },
+    {
+      "id": "serums",
+      "nombre": "Sérums",
+      "descripcion": "Concentrados de principios activos diseñados para tratar preocupaciones específicas de la piel con resultados visibles.",
+      "imagen": "assets/img/categorias/serums.jpg",
+      "icono": "fas fa-tint"
+    },
+    {
+      "id": "lociones-corporales",
+      "nombre": "Lociones Corporales",
+      "descripcion": "Hidratación ligera y rápida absorción para el cuidado diario del cuerpo, con delicados aromas que perduran.",
+      "imagen": "assets/img/categorias/lociones.jpg",
+      "icono": "fas fa-soap"
+    },
+    {
+      "id": "exfoliantes",
+      "nombre": "Exfoliantes",
+      "descripcion": "Tratamientos para renovar y revitalizar la piel, eliminando células muertas y estimulando la regeneración celular.",
+      "imagen": "assets/img/categorias/exfoliantes.jpg",
+      "icono": "fas fa-leaf"
+    },
+    {
+      "id": "mascarillas",
+      "nombre": "Mascarillas",
+      "descripcion": "Tratamientos intensivos para necesidades específicas, desde hidratación profunda hasta purificación y luminosidad.",
+      "imagen": "assets/img/categorias/mascarillas.jpg",
+      "icono": "fas fa-mask"
+    },
+    {
+      "id": "labiales",
+      "nombre": "Labiales",
+      "descripcion": "Cuidado y color para tus labios, con fórmulas hidratantes que protegen y embellecen a la vez.",
+      "imagen": "assets/img/categorias/labiales.jpg",
+      "icono": "fas fa-kiss-wink-heart"
+    }
+  ]
+}

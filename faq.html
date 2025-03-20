@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes - Karumy Cosmeticos</title>
+    
+    <!-- Enlaces a Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        /* Estilos específicos para FAQ */
+        .faq-header {
+            background: linear-gradient(135deg, #fff5f9 0%, #fffcee 100%);
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .faq-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .faq-description {
+            max-width: 800px;
+            margin: 0 auto;
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+        
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .category-tab {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border-radius: 30px;
+            color: #666;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: none;
+        }
+        
+        .category-tab:hover {
+            background-color: #e5e5e5;
+            color: var(--dark);
+        }
+        
+        .category-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .category-section {
+            margin-bottom: 50px;
+        }
+        
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background-color: white;
+            color: var(--dark);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .faq-question:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .faq-question.active {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        
+        .faq-question i {
+            transition: transform var(--transition-fast);
+        }
+        
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            background-color: white;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .answer-content {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .answer-content p {
+            margin-bottom: 15px;
+        }
+        
+        .answer-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .answer-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .answer-content li {
+            margin-bottom: 8px;
+        }
+        
+        .faq-contact {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+        }
+        
+        .faq-contact-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .faq-contact-text {
+            color: #666;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .faq-contact-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+            border: 2px solid var(--primary);
+        }
+        
+        .faq-contact-btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.2);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .faq-title {
+                font-size: 2rem;
+            }
+            
+            .category-title {
+                font-size: 1.5rem;
+            }
+            
+            .faq-question {
+                padding: 15px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .faq-header {
+                padding: 40px 15px;
+            }
+            
+            .faq-title {
+                font-size: 1.8rem;
+            }
+            
+            .faq-description {
+                font-size: 1rem;
+            }
+            
+            .category-tab {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .category-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Enlace para saltar al contenido principal (accesibilidad) -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+    
+    <!-- Header y navegación -->
+    <header>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="carrito.html" class="cart-icon-container">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Menú móvil -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+                <img src="assets/img/logo.jpg" alt="Karumy Logo">
+            </div>
+            <button class="close-mobile-menu" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="index.html#nosotros">Nosotros</a>
+            <a href="catalogo.html">Productos</a>
+            <a href="index.html#beneficios">Beneficios</a>
+            <a href="index.html#testimonios">Testimonios</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html">
+                <i class="fas fa-shopping-cart"></i> Carrito 
+                <span class="cart-count" id="mobile-cart-count">0</span>
+            </a>
+        </div>
+        <div class="mobile-menu-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    
+    <main id="main-content">
+        <!-- Encabezado FAQ -->
+        <section class="faq-header">
+            <div class="container">
+                <h1 class="faq-title">Preguntas Frecuentes</h1>
+                <p class="faq-description">
+                    Encuentra respuestas a las dudas más comunes sobre nuestros productos, pedidos, envíos y más. Si no encuentras lo que buscas, no dudes en contactarnos.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Contenido FAQ -->
+        <div class="faq-container">
+            <!-- Tabs para categorías -->
+            <div class="faq-categories">
+                <button class="category-tab active" data-category="pedidos">Pedidos</button>
+                <button class="category-tab" data-category="envios">Envíos</button>
+                <button class="category-tab" data-category="productos">Productos</button>
+                <button class="category-tab" data-category="pagos">Pagos</button>
+                <button class="category-tab" data-category="devoluciones">Devoluciones</button>
+            </div>
+            
+            <!-- Sección Pedidos -->
+            <div class="category-section active" id="pedidos-section">
+                <h2 class="category-title">Pedidos</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cómo realizo un pedido en la tienda online?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Realizar un pedido en nuestra tienda es muy sencillo:</p>
+                            <ol>
+                                <li>Explora nuestro catálogo y elige los productos que deseas.</li>
+                                <li>Haz clic en "Añadir al carrito" para cada producto.</li>
+                                <li>Cuando termines, haz clic en el icono del carrito en la parte superior.</li>
+                                <li>Revisa tu pedido y haz clic en "Proceder al checkout".</li>
+                                <li>Completa tus datos de contacto y dirección de envío.</li>
+                                <li>Elige tu método de pago preferido.</li>
+                                <li>Haz clic en "Finalizar pedido" para ser redirigido a WhatsApp, donde confirmaremos tu pedido.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Puedo modificar o cancelar mi pedido?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Sí, puedes modificar o cancelar tu pedido siempre que no haya sido procesado aún:</p>
+                            <ul>
+                                <li>Para modificar cantidades o productos, comunícate con nosotros inmediatamente a través de WhatsApp al +57 322 5201123.</li>
+                                <li>Las cancelaciones deben solicitarse lo antes posible, preferiblemente dentro de las primeras 2 horas después de realizar el pedido.</li>
+                                <li>Si tu pedido ya está en proceso de envío, lamentablemente no podremos cancelarlo, pero podemos discutir opciones de devolución después de recibirlo.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Recibiré una confirmación de mi pedido?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Sí, recibirás confirmación de varias maneras:</p>
+                            <ul>
+                                <li>Inmediatamente después de finalizar tu pedido, serás redirigido a WhatsApp con un mensaje detallado de tu pedido.</li>
+                                <li>Nuestro equipo responderá a tu mensaje de WhatsApp para confirmar la recepción y validar los detalles.</li>
+                                <li>Cuando tu pedido sea procesado, recibirás otra confirmación con información sobre el envío.</li>
+                            </ul>
+                            <p>Si no recibes ninguna confirmación en las primeras 24 horas, por favor contáctanos.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cuánto tiempo tarda en procesarse mi pedido?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Procesamos la mayoría de los pedidos en un plazo de 24 a 48 horas hábiles después de recibir la confirmación de pago. Durante temporadas de alta demanda como fechas especiales, este tiempo puede extenderse ligeramente.</p>
+                            <p>Una vez procesado el pedido, recibirás una notificación por WhatsApp con la información de envío correspondiente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección Envíos -->
+            <div class="category-section" id="envios-section">
+                <h2 class="category-title">Envíos</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cuáles son los tiempos de entrega?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Los tiempos de entrega aproximados son:</p>
+                            <ul>
+                                <li><strong>Bogotá y ciudades principales:</strong> 1-3 días hábiles</li>
+                                <li><strong>Ciudades intermedias:</strong> 3-5 días hábiles</li>
+                                <li><strong>Zonas rurales o remotas:</strong> 5-7 días hábiles</li>
+                            </ul>
+                            <p>Estos tiempos son estimados y pueden variar según la disponibilidad de las empresas de transporte y condiciones externas.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cuánto cuesta el envío?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>El costo de envío se calcula en función del peso del paquete y la ubicación de entrega:</p>
+                            <ul>
+                                <li><strong>Bogotá:</strong> Desde $8,000 COP</li>
+                                <li><strong>Ciudades principales:</strong> Desde $12,000 COP</li>
+                                <li><strong>Otras localidades:</strong> Desde $15,000 COP</li>
+                            </ul>
+                            <p>Para pedidos superiores a $100,000 COP, ofrecemos envío gratuito a las principales ciudades del país.</p>
+                            <p>El costo exacto de envío se confirmará durante el proceso de checkout antes de finalizar tu compra.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cómo puedo hacer seguimiento a mi envío?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Una vez que tu pedido ha sido enviado, recibirás un mensaje por WhatsApp con:</p>
+                            <ul>
+                                <li>Empresa transportadora encargada del envío</li>
+                                <li>Número de guía para seguimiento</li>
+                                <li>Enlace para realizar el seguimiento online (si está disponible)</li>
+                            </ul>
+                            <p>También puedes contactarnos directamente para consultar el estado de tu envío proporcionando tu número de pedido.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Realizan envíos internacionales?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Actualmente nuestros envíos están disponibles solo dentro de Colombia. Estamos trabajando para ampliar nuestros servicios a países vecinos en el futuro.</p>
+                            <p>Si te encuentras fuera de Colombia y estás interesado en nuestros productos, contáctanos directamente para evaluar opciones personalizadas según tu caso.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección Productos -->
+            <div class="category-section" id="productos-section">
+                <h2 class="category-title">Productos</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Los productos Karumy son hipoalergénicos?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>La mayoría de nuestros productos están formulados pensando en pieles sensibles, sin embargo, no todos pueden clasificarse como estrictamente hipoalergénicos. Cada producto especifica en su descripción si es apto para pieles sensibles.</p>
+                            <p>Recomendamos siempre realizar una prueba en una pequeña área de la piel antes de usar cualquier producto cosmético por primera vez, especialmente si tienes piel sensible o antecedentes de reacciones alérgicas.</p>
+                            <p>Si tienes dudas específicas sobre algún ingrediente, no dudes en contactarnos para obtener información detallada.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Los productos Karumy son cruetly-free?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Sí, todos nuestros productos son cruelty-free. Nos comprometemos a no realizar pruebas en animales en ninguna fase del desarrollo o producción de nuestros productos.</p>
+                            <p>Además, seleccionamos cuidadosamente a nuestros proveedores para asegurarnos de que también cumplen con estas prácticas éticas.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cuál es la vida útil de los productos Karumy?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>La vida útil de nuestros productos varía según el tipo:</p>
+                            <ul>
+                                <li><strong>Mantequillas corporales:</strong> 12-18 meses después de abierto el envase</li>
+                                <li><strong>Cremas faciales:</strong> 6-12 meses después de abierto el envase</li>
+                                <li><strong>Sérums:</strong> 6-8 meses después de abierto el envase</li>
+                                <li><strong>Mascarillas:</strong> 8-12 meses después de abierto el envase</li>
+                            </ul>
+                            <p>Todos nuestros productos incluyen un símbolo PAO (Period After Opening) en el envase que indica el tiempo recomendado de uso una vez abierto.</p>
+                            <p>Para mantener la calidad y efectividad, recomendamos almacenar los productos en un lugar fresco y seco, alejados de la luz solar directa.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Son productos naturales o contienen químicos?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Nuestros productos combinan ingredientes naturales de alta calidad con componentes seguros de origen sintético para garantizar la eficacia, estabilidad y conservación adecuada.</p>
+                            <p>Nos esforzamos por maximizar el uso de ingredientes naturales como manteca de karité, aceite de coco, aloe vera y extractos botánicos, evitando ingredientes potencialmente dañinos como:</p>
+                            <ul>
+                                <li>Parabenos</li>
+                                <li>Sulfatos agresivos</li>
+                                <li>Siliconas</li>
+                                <li>Colorantes artificiales</li>
+                                <li>Fragancias sintéticas agresivas</li>
+                            </ul>
+                            <p>Cada producto incluye una lista completa de ingredientes para que puedas conocer exactamente lo que contiene.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección Pagos -->
+            <div class="category-section" id="pagos-section">
+                <h2 class="category-title">Pagos</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Qué métodos de pago aceptan?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Actualmente aceptamos los siguientes métodos de pago:</p>
+                            <ul>
+                                <li><strong>Transferencia bancaria:</strong> A nuestra cuenta Bancolombia</li>
+                                <li><strong>Nequi:</strong> Transferencia al número asociado a nuestra cuenta</li>
+                                <li><strong>Daviplata:</strong> Transferencia al número asociado a nuestra cuenta</li>
+                                <li><strong>Contra entrega:</strong> Disponible en algunas ciudades principales (se aplica un cargo adicional)</li>
+                            </ul>
+                            <p>Una vez finalices tu pedido y elijas tu método de pago, te proporcionaremos los datos necesarios para realizar la transacción.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cómo funciona el pago contra entrega?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>El pago contra entrega te permite pagar en efectivo al momento de recibir tu pedido:</p>
+                            <ul>
+                                <li>Este método tiene un cargo adicional de $5,000 COP.</li>
+                                <li>Solo está disponible en Bogotá y algunas ciudades principales.</li>
+                                <li>El monto máximo para pedidos contra entrega es de $200,000 COP.</li>
+                                <li>Debes tener el monto exacto al momento de la entrega.</li>
+                                <li>Si no te encuentras disponible en el momento de la entrega, el pedido será devuelto y se aplicarán cargos por reenvío.</li>
+                            </ul>
+                            <p>Este método debe seleccionarse durante el proceso de checkout.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cuándo debo realizar el pago de mi pedido?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Para métodos de pago anticipado (transferencia, Nequi, Daviplata):</p>
+                            <ul>
+                                <li>Debes realizar el pago dentro de las 24 horas siguientes a la confirmación de tu pedido.</li>
+                                <li>Una vez recibamos tu pago, procesaremos y enviaremos tu pedido.</li>
+                                <li>Si no recibimos confirmación de pago en este plazo, tu pedido será cancelado automáticamente.</li>
+                            </ul>
+                            <p>Para pago contra entrega:</p>
+                            <ul>
+                                <li>Realizarás el pago en efectivo al momento de recibir tu pedido.</li>
+                                <li>Debes tener preparado el monto exacto.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cómo confirmo que mi pago fue recibido?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Una vez realices tu pago, sigue estos pasos:</p>
+                            <ol>
+                                <li>Envíanos el comprobante de pago por WhatsApp al número +57 322 5201123.</li>
+                                <li>Incluye tu número de pedido en el mensaje.</li>
+                                <li>Nuestro equipo verificará el pago y te enviará una confirmación.</li>
+                                <li>Una vez confirmado, recibirás una notificación de que tu pedido está siendo procesado.</li>
+                            </ol>
+                            <p>El tiempo de verificación puede tomar hasta 24 horas en días hábiles. Durante fines de semana o festivos puede demorar un poco más.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección Devoluciones -->
+            <div class="category-section" id="devoluciones-section">
+                <h2 class="category-title">Devoluciones</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cuál es la política de devoluciones?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Nuestra política de devoluciones incluye los siguientes puntos clave:</p>
+                            <ul>
+                                <li>Aceptamos devoluciones dentro de los 5 días calendario después de recibido el producto.</li>
+                                <li>El producto debe estar sin usar, con todos sus sellos intactos y en su embalaje original.</li>
+                                <li>Para productos con defectos de fabricación o problemas de calidad, el plazo se extiende a 10 días.</li>
+                                <li>No aceptamos devoluciones de productos que hayan sido abiertos, usados o dañados por el cliente.</li>
+                                <li>El costo de envío para la devolución corre por cuenta del cliente, excepto en casos de error de envío o defectos de fabricación.</li>
+                            </ul>
+                            <p>Para iniciar un proceso de devolución, contáctanos por WhatsApp al +57 322 5201123 indicando el número de pedido y el motivo de la devolución.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Qué hago si recibo un producto dañado?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Si recibes un producto dañado, sigue estos pasos:</p>
+                            <ol>
+                                <li>Toma fotografías claras del embalaje exterior y del producto dañado.</li>
+                                <li>Contáctanos por WhatsApp al +57 322 5201123 dentro de las 24 horas siguientes a la recepción.</li>
+                                <li>Incluye las fotografías, tu número de pedido y una descripción del daño.</li>
+                                <li>Nuestro equipo evaluará el caso y te proporcionará instrucciones adicionales.</li>
+                            </ol>
+                            <p>En caso de daños durante el transporte, gestionaremos el reemplazo del producto sin costo adicional o te ofreceremos un reembolso según tu preferencia.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cómo se procesan los reembolsos?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>El proceso de reembolso funciona de la siguiente manera:</p>
+                            <ul>
+                                <li>Una vez aprobada la devolución y recibido el producto en nuestras instalaciones, procesaremos el reembolso en un plazo de 5 a 10 días hábiles.</li>
+                                <li>El reembolso se realizará al mismo método de pago utilizado para la compra.</li>
+                                <li>Para pagos con transferencia bancaria, Nequi o Daviplata, necesitaremos confirmar los datos de tu cuenta.</li>
+                                <li>Para compras contra entrega, el reembolso se realizará mediante transferencia bancaria.</li>
+                                <li>Te notificaremos por WhatsApp una vez que el reembolso haya sido procesado.</li>
+                            </ul>
+                            <p>Los tiempos para recibir el dinero en tu cuenta pueden variar según la entidad bancaria o método de pago utilizado.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Puedo cambiar un producto por otro?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Sí, ofrecemos la opción de cambiar un producto por otro, bajo las siguientes condiciones:</p>
+                            <ul>
+                                <li>El producto a cambiar debe estar sin usar, con sus sellos intactos y en su embalaje original.</li>
+                                <li>La solicitud debe realizarse dentro de los 5 días calendario después de recibido el producto.</li>
+                                <li>Si el producto de reemplazo tiene un precio mayor, deberás pagar la diferencia.</li>
+                                <li>Si el producto de reemplazo tiene un precio menor, te proporcionaremos un crédito para futuras compras por la diferencia.</li>
+                                <li>Los costos de envío para el cambio corren por cuenta del cliente, excepto en casos de error de envío.</li>
+                            </ul>
+                            <p>Para solicitar un cambio, contáctanos por WhatsApp al +57 322 5201123 con tu número de pedido y los detalles del cambio deseado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección de contacto adicional -->
+            <div class="faq-contact">
+                <h3 class="faq-contact-title">¿No encontraste lo que buscabas?</h3>
+                <p class="faq-contact-text">
+                    Si tienes alguna pregunta que no ha sido respondida aquí, no dudes en contactarnos directamente. Nuestro equipo estará encantado de ayudarte.
+                </p>
+                <a href="contacto.html" class="faq-contact-btn">Contáctanos</a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-wave"></div>
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <div class="footer-logo">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </div>
+                <p class="footer-description">
+                    Productos cosméticos de alta calidad para el cuidado integral de tu piel. Innovación y belleza natural en cada producto.
+                </p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 class="footer-title">Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="faq.html">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 class="footer-title">Contáctanos</h3>
+                
+                <div class="footer-contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>+57 322 5201123</p>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>cosmeticskataleya9@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <h3 class="footer-title">Síguenos</h3>
+                <p>Mantente conectado con nosotros en nuestras redes sociales para conocer las últimas novedades y promociones.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Karumy Cosmeticos. Todos los derechos reservados.</p>
+            <p>
+                <a href="privacidad.html">Política de Privacidad</a> | 
+                <a href="terminos.html">Términos de Servicio</a>
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cart.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Acordeón
+            const questions = document.querySelectorAll('.faq-question');
+            
+            questions.forEach(question => {
+                question.addEventListener('click', function() {
+                    // Toggle active class en la pregunta clickeada
+                    this.classList.toggle('active');
+                    
+                    // Toggle active class en la respuesta correspondiente
+                    const answer = this.nextElementSibling;
+                    answer.classList.toggle('active');
+                    
+                    // Cerrar otras preguntas (comportamiento de acordeón)
+                    questions.forEach(otherQuestion => {
+                        if (otherQuestion !== question) {
+                            otherQuestion.classList.remove('active');
+                            otherQuestion.nextElementSibling.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Tabs de categorías
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            const categorySections = document.querySelectorAll('.category-section');
+            
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remover clase active de todos los tabs
+                    categoryTabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Añadir clase active al tab clickeado
+                    this.classList.add('active');
+                    
+                    // Mostrar la sección correspondiente
+                    const categoryId = this.getAttribute('data-category');
+                    
+                    // Ocultar todas las secciones
+                    categorySections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Mostrar la sección seleccionada
+                    document.getElementById(`${categoryId}-section`).classList.add('active');
+                    
+                    // Cerrar todas las preguntas al cambiar de categoría
+                    questions.forEach(question => {
+                        question.classList.remove('active');
+                        question.nextElementSibling.classList.remove('active');
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Karumy Cosmeticos</title>
+    
+    <!-- Enlaces a Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
+</head>
+
+<body>
+    <!-- Enlace para saltar al contenido principal (accesibilidad) -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+    
+    <!-- Header y navegación -->
+    <header>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="carrito.html" class="cart-icon-container">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Menú móvil -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+                <img src="assets/img/logo.jpg" alt="Karumy Logo">
+            </div>
+            <button class="close-mobile-menu" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="index.html#nosotros">Nosotros</a>
+            <a href="catalogo.html">Productos</a>
+            <a href="index.html#beneficios">Beneficios</a>
+            <a href="index.html#testimonios">Testimonios</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html" class="active">
+                <i class="fas fa-shopping-cart"></i> Carrito 
+                <span class="cart-count" id="mobile-cart-count">0</span>
+            </a>
+        </div>
+        <div class="mobile-menu-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    
+    <main id="main-content">
+        <div class="cart-page-container">
+            <h1 class="cart-title">Tu Carrito de Compras</h1>
+            
+            <!-- Mensaje de carrito vacío -->
+            <div class="cart-empty" id="empty-cart-message">
+                <div class="cart-empty-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h2 class="cart-empty-title">Tu carrito está vacío</h2>
+                <p class="cart-empty-text">Parece que aún no has añadido productos a tu carrito. Explora nuestro catálogo y descubre nuestros excelentes productos de belleza.</p>
+                <a href="catalogo.html" class="cart-empty-btn">Explorar productos</a>
+            </div>
+            
+            <!-- Contenedor del carrito con productos -->
+            <div class="cart-content">
+                <!-- Columna principal con items -->
+                <div class="cart-items">
+                    <!-- Encabezado de la tabla -->
+                    <div class="cart-items-header">
+                        <div class="cart-header-product">Producto</div>
+                        <div class="cart-header-quantity">Cantidad</div>
+                        <div class="cart-header-subtotal">Subtotal</div>
+                        <div class="cart-header-remove"></div>
+                    </div>
+                    
+                    <!-- Contenedor de items (se llenará dinámicamente con JS) -->
+                    <div id="cart-items-container">
+                        <!-- Contenido dinámico desde cart.js -->
+                    </div>
+                </div>
+                
+                <!-- Columna de resumen y checkout -->
+                <div class="cart-summary">
+                    <div class="cart-summary-box">
+                        <h3 class="summary-title">Resumen del Pedido</h3>
+                        
+                        <div class="summary-row">
+                            <div class="summary-label">Subtotal:</div>
+                            <div class="summary-value" id="cart-subtotal">$0</div>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <div class="summary-label">IVA (19%):</div>
+                            <div class="summary-value" id="cart-tax">$0</div>
+                        </div>
+                        
+                        <div class="summary-row total-row">
+                            <div class="summary-label">Total:</div>
+                            <div class="summary-value" id="cart-total">$0</div>
+                        </div>
+                        
+                        <a href="checkout.html" class="checkout-btn">
+                            Proceder al Checkout
+                        </a>
+                        
+                        <a href="catalogo.html" class="continue-shopping">
+                            Continuar comprando
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Acciones del carrito (botones) -->
+            <div class="cart-actions" id="cart-actions">
+                <button id="clear-cart-btn" class="clear-cart-btn">
+                    <i class="fas fa-trash-alt"></i> Vaciar carrito
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-wave"></div>
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <div class="footer-logo">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </div>
+                <p class="footer-description">
+                    Productos cosméticos de alta calidad para el cuidado integral de tu piel. Innovación y belleza natural en cada producto.
+                </p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 class="footer-title">Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="faq.html">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 class="footer-title">Contáctanos</h3>
+                
+                <div class="footer-contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>+57 322 5201123</p>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>cosmeticskataleya9@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <h3 class="footer-title">Síguenos</h3>
+                <p>Mantente conectado con nosotros en nuestras redes sociales para conocer las últimas novedades y promociones.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Karumy Cosmeticos. Todos los derechos reservados.</p>
+            <p>
+                <a href="privacidad.html">Política de Privacidad</a> | 
+                <a href="terminos.html">Términos de Servicio</a>
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/productos.js"></script>   <!-- El nuevo sistema de productos -->
+    <script src="assets/js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Confirmado - Karumy Cosmeticos</title>
+    
+    <!-- Enlaces a Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
+</head>
+
+<body>
+    <!-- Enlace para saltar al contenido principal (accesibilidad) -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+    
+    <!-- Header y navegación -->
+    <header>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="carrito.html" class="cart-icon-container">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Menú móvil -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+                <img src="assets/img/logo.jpg" alt="Karumy Logo">
+            </div>
+            <button class="close-mobile-menu" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="index.html#nosotros">Nosotros</a>
+            <a href="catalogo.html">Productos</a>
+            <a href="index.html#beneficios">Beneficios</a>
+            <a href="index.html#testimonios">Testimonios</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html">
+                <i class="fas fa-shopping-cart"></i> Carrito 
+                <span class="cart-count" id="mobile-cart-count">0</span>
+            </a>
+        </div>
+        <div class="mobile-menu-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    
+    <main id="main-content">
+        <div class="confirmation-page">
+            <div class="confirmation-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1 class="confirmation-title">¡Gracias por tu pedido!</h1>
+            <p class="confirmation-text">
+                Hemos enviado los detalles de tu pedido a WhatsApp. Pronto recibirás una confirmación de nuestro equipo y te contactaremos para coordinar la entrega y el pago.
+            </p>
+            
+            <div class="confirmation-details">
+                <h2 class="confirmation-subtitle">Resumen del Pedido</h2>
+                
+                <div class="order-info" id="order-customer-info">
+                    <!-- Esta información se llenará con JavaScript -->
+                </div>
+                
+                <h3>Productos en tu pedido</h3>
+                <div id="order-products">
+                    <!-- Esta información se llenará con JavaScript -->
+                </div>
+            </div>
+            
+            <p class="confirmation-text">
+                Si tienes alguna pregunta sobre tu pedido, no dudes en contactarnos a través de WhatsApp o por correo electrónico.
+            </p>
+            
+            <a href="index.html" class="back-to-home">
+                <i class="fas fa-home"></i> Volver a la página principal
+            </a>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-wave"></div>
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <div class="footer-logo">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </div>
+                <p class="footer-description">
+                    Productos cosméticos de alta calidad para el cuidado integral de tu piel. Innovación y belleza natural en cada producto.
+                </p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 class="footer-title">Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="faq.html">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 class="footer-title">Contáctanos</h3>
+                
+                <div class="footer-contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>+57 322 5201123</p>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>cosmeticskataleya9@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <h3 class="footer-title">Síguenos</h3>
+                <p>Mantente conectado con nosotros en nuestras redes sociales para conocer las últimas novedades y promociones.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Karumy Cosmeticos. Todos los derechos reservados.</p>
+            <p>
+                <a href="privacidad.html">Política de Privacidad</a> | 
+                <a href="terminos.html">Términos de Servicio</a>
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intentar recuperar la información del último pedido
+            const lastOrder = localStorage.getItem('karumyLastOrder');
+            
+            if (lastOrder) {
+                try {
+                    const orderData = JSON.parse(lastOrder);
+                    displayOrderInfo(orderData);
+                } catch (e) {
+                    console.error('Error al analizar los datos del pedido:', e);
+                    showErrorMessage();
+                }
+            } else {
+                showErrorMessage();
+            }
+            
+            // Formatear precios en formato colombiano
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('es-CO', {
+                    style: 'currency',
+                    currency: 'COP',
+                    minimumFractionDigits: 0
+                }).format(value);
+            }
+            
+            // Formatear fecha y hora
+            function formatDate(dateString) {
+                const options = { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+                return new Date(dateString).toLocaleDateString('es-CO', options);
+            }
+            
+            // Mostrar información del pedido
+            function displayOrderInfo(orderData) {
+                // Información del cliente
+                const customerInfoContainer = document.getElementById('order-customer-info');
+                if (customerInfoContainer && orderData.customerData) {
+                    const customerHtml = `
+                        <div class="order-info-row">
+                            <div class="order-info-label">Fecha del pedido:</div>
+                            <div class="order-info-value">${formatDate(orderData.orderDate)}</div>
+                        </div>
+                        <div class="order-info-row">
+                            <div class="order-info-label">Nombre:</div>
+                            <div class="order-info-value">${orderData.customerData.nombre || 'No especificado'}</div>
+                        </div>
+                        <div class="order-info-row">
+                            <div class="order-info-label">Email:</div>
+                            <div class="order-info-value">${orderData.customerData.email || 'No especificado'}</div>
+                        </div>
+                        <div class="order-info-row">
+                            <div class="order-info-label">Teléfono:</div>
+                            <div class="order-info-value">${orderData.customerData.telefono || 'No especificado'}</div>
+                        </div>
+                        <div class="order-info-row">
+                            <div class="order-info-label">Dirección:</div>
+                            <div class="order-info-value">${orderData.customerData.direccion || 'No especificado'}</div>
+                        </div>
+                        <div class="order-info-row">
+                            <div class="order-info-label">Ciudad:</div>
+                            <div class="order-info-value">${orderData.customerData.ciudad || 'No especificado'}</div>
+                        </div>
+                        <div class="order-info-row">
+                            <div class="order-info-label">Método de pago:</div>
+                            <div class="order-info-value">${orderData.customerData.metodoPago || 'No especificado'}</div>
+                        </div>
+                    `;
+                    customerInfoContainer.innerHTML = customerHtml;
+                }
+                
+                // Productos en el pedido
+                const productsContainer = document.getElementById('order-products');
+                if (productsContainer && orderData.items && orderData.items.length > 0) {
+                    let productsHtml = '<div class="confirmation-products">';
+                    
+                    // Añadir cada producto
+                    orderData.items.forEach(item => {
+                        let optionsText = '';
+                        
+                        // Crear texto de opciones si existen
+                        if (item.options && Object.keys(item.options).length > 0) {
+                            optionsText = Object.entries(item.options)
+                                .map(([key, value]) => `<span class="product-option">${key}: ${value}</span>`)
+                                .join('');
+                        }
+                        
+                        productsHtml += `
+                            <div class="confirmation-product">
+                                <div class="product-image">
+                                    <img src="${item.image}" alt="${item.name}">
+                                </div>
+                                <div class="product-details">
+                                    <h4>${item.name}</h4>
+                                    ${optionsText ? `<div class="product-options">${optionsText}</div>` : ''}
+                                    <div class="product-price">${formatCurrency(item.price)} x ${item.quantity}</div>
+                                    <div class="product-subtotal">${formatCurrency(item.price * item.quantity)}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    // Añadir totales
+                    productsHtml += `
+                        <div class="confirmation-totals">
+                            <div class="total-row">
+                                <div class="total-label">Subtotal:</div>
+                                <div class="total-value">${formatCurrency(orderData.subtotal)}</div>
+                            </div>
+                            <div class="total-row">
+                                <div class="total-label">IVA (19%):</div>
+                                <div class="total-value">${formatCurrency(orderData.tax)}</div>
+                            </div>
+                            <div class="total-row total-final">
+                                <div class="total-label">Total:</div>
+                                <div class="total-value">${formatCurrency(orderData.total)}</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    productsHtml += '</div>';
+                    productsContainer.innerHTML = productsHtml;
+                }
+            }
+            
+            // Mostrar mensaje de error si no hay datos
+            function showErrorMessage() {
+                const customerInfoContainer = document.getElementById('order-customer-info');
+                const productsContainer = document.getElementById('order-products');
+                
+                if (customerInfoContainer) {
+                    customerInfoContainer.innerHTML = '<p class="error-message">No se encontró información del pedido.</p>';
+                }
+                
+                if (productsContainer) {
+                    productsContainer.innerHTML = '';
+                }
+                
+                document.querySelector('.confirmation-text').textContent = 'No pudimos encontrar los detalles de tu pedido. Por favor, contacta con nosotros si tienes alguna pregunta.';
+            }
+        });
+    </script>
+</body>
+</html>

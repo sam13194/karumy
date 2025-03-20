@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantequilla Karumy - Karumy Cosmeticos</title>
+    
+    <!-- Enlaces a Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
+    
+    <style>
+        /* Estilos específicos para la página de producto */
+        .product-container {
+            max-width: 1200px;
+            margin: 30px auto 60px;
+            padding: 0 20px;
+        }
+        
+        .product-breadcrumbs {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .product-breadcrumbs a {
+            color: #666;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        .product-breadcrumbs a:hover {
+            color: var(--primary);
+        }
+        
+        .product-breadcrumbs span {
+            margin: 0 8px;
+        }
+        
+        .product-detail {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .product-gallery {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .product-info-container {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-thumbs {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .thumb:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .thumb.active {
+            border: 2px solid var(--primary);
+        }
+        
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Placeholder para imágenes */
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            color: #ccc;
+        }
+        
+        .main-image .image-placeholder {
+            font-size: 80px;
+        }
+        
+        .thumb .image-placeholder {
+            font-size: 30px;
+        }
+        
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .product-category {
+            color: #888;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .product-price-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+        
+        .sale-badge {
+            background-color: #ff9800;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 15px;
+        }
+        
+        .product-description {
+            margin-bottom: 30px;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .product-features {
+            margin-bottom: 30px;
+        }
+        
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .features-list {
+            list-style-type: none;
+        }
+        
+        .features-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .features-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .product-options {
+            margin-bottom: 30px;
+        }
+        
+        .option-group {
+            margin-bottom: 20px;
+        }
+        
+        .option-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .option-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        .option-select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .quantity-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .quantity-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #eee;
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .quantity-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            border: none;
+            border-left: 2px solid #eee;
+            border-right: 2px solid #eee;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+        
+        .add-to-cart-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart-btn:hover {
+            background-color: #e93a76;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+        }
+        
+        .continue-shopping {
+            display: block;
+            text-align: center;
+            color: #666;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        .continue-shopping:hover {
+            color: var(--primary);
+        }
+        
+        .product-meta {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .meta-item {
+            margin-bottom: 5px;
+        }
+        
+        .meta-label {
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        
+        /* Tabs para detalles, ingredientes, etc. */
+        .product-tabs {
+            margin-bottom: 50px;
+        }
+        
+        .tabs-nav {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+        
+        .tab-button {
+            padding: 15px 25px;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+        
+        .tab-button:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary);
+            transition: width var(--transition-fast);
+        }
+        
+        .tab-button:hover {
+            color: var(--dark);
+        }
+        
+        .tab-button.active {
+            color: var(--primary);
+        }
+        
+        .tab-button.active:after {
+            width: 100%;
+        }
+        
+        .tab-content {
+            display: none;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .tab-content p {
+            margin-bottom: 15px;
+        }
+        
+        .tab-content ul, .tab-content ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .tab-content li {
+            margin-bottom: 8px;
+        }
+        
+        /* Productos relacionados */
+        .related-products {
+            margin-top: 60px;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .products-slider {
+            position: relative;
+        }
+        
+        .slider-container {
+            overflow: hidden;
+            padding: 10px 5px;
+        }
+        
+        .slider-track {
+            display: flex;
+            gap: 30px;
+            transition: transform 0.5s ease;
+        }
+        
+        .slider-item {
+            flex: 0 0 auto;
+            width: 250px;
+        }
+        
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5;
+            transition: all var(--transition-fast);
+            font-size: 1.2rem;
+        }
+        
+        .slider-arrow:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .slider-prev {
+            left: -15px;
+        }
+        
+        .slider-next {
+            right: -15px;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 992px) {
+            .product-title {
+                font-size: 1.8rem;
+            }
+            
+            .product-detail {
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-image {
+                height: 350px;
+            }
+            
+            .thumb {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .product-title {
+                font-size: 1.6rem;
+            }
+            
+            .product-price {
+                font-size: 1.5rem;
+            }
+            
+            .tabs-nav {
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .tab-button {
+                padding: 15px 20px;
+            }
+            
+            .slider-item {
+                width: 220px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .product-container {
+                margin: 20px auto 40px;
+            }
+            
+            .main-image {
+                height: 280px;
+            }
+            
+            .product-title {
+                font-size: 1.4rem;
+            }
+            
+            .product-price {
+                font-size: 1.3rem;
+            }
+            
+            .product-tabs {
+                margin-bottom: 30px;
+            }
+            
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .slider-item {
+                width: 180px;
+            }
+            
+            .gallery-thumbs {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Enlace para saltar al contenido principal (accesibilidad) -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+    
+    <!-- Header y navegación -->
+    <header>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html" class="active">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="carrito.html" class="cart-icon-container">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Menú móvil -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+                <img src="assets/img/logo.jpg" alt="Karumy Logo">
+            </div>
+            <button class="close-mobile-menu" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="index.html#nosotros">Nosotros</a>
+            <a href="catalogo.html">Productos</a>
+            <a href="index.html#beneficios">Beneficios</a>
+            <a href="index.html#testimonios">Testimonios</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html">
+                <i class="fas fa-shopping-cart"></i> Carrito 
+                <span class="cart-count" id="mobile-cart-count">0</span>
+            </a>
+        </div>
+        <div class="mobile-menu-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    
+    <main id="main-content">
+        <div class="product-container">
+            <!-- Breadcrumbs para navegación -->
+            <div class="product-breadcrumbs">
+                <a href="index.html">Inicio</a>
+                <span>/</span>
+                <a href="catalogo.html">Productos</a>
+                <span>/</span>
+                <a href="categorias/mantequillas.html">Mantequillas Corporales</a>
+                <span>/</span>
+                <span>Mantequilla Karumy</span>
+            </div>
+            
+            <!-- Detalle del producto -->
+            <div class="product-detail" id="mantequilla-karumy">
+                <!-- Galería de imágenes -->
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="assets/img/mantequilla.jpg" alt="Mantequilla Karumy" id="main-product-image">
+                    </div>
+                    <div class="gallery-thumbs">
+                        <div class="thumb active" data-image="assets/img/mantequilla.jpg">
+                            <img src="assets/img/mantequilla.jpg" alt="Mantequilla Karumy - Vista principal">
+                        </div>
+                        <div class="thumb" data-image="placeholder">
+                            <div class="image-placeholder">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                        </div>
+                        <div class="thumb" data-image="placeholder">
+                            <div class="image-placeholder">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                        </div>
+                        <div class="thumb" data-image="placeholder">
+                            <div class="image-placeholder">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Información del producto -->
+                <div class="product-info-container">
+                    <h1 class="product-title">Mantequilla Karumy</h1>
+                    <div class="product-category">Mantequillas Corporales</div>
+                    
+                    <div class="product-price-container">
+                        <div class="product-price">$42,000</div>
+                    </div>
+                    
+                    <div class="product-description">
+                        <p>Nutrición profunda que hidrata y revitaliza tu piel, ideal para un cuidado diario excepcional. Formulada con ingredientes naturales seleccionados cuidadosamente para proporcionar una hidratación intensa y duradera.</p>
+                    </div>
+                    
+                    <div class="product-features">
+                        <h3 class="feature-title">Beneficios</h3>
+                        <ul class="features-list">
+                            <li>Hidratación profunda y duradera</li>
+                            <li>Mejora la elasticidad de la piel</li>
+                            <li>Textura no grasa de rápida absorción</li>
+                            <li>Aroma suave y duradero</li>
+                            <li>Ideal para todo tipo de piel</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Opciones del producto -->
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label for="size" class="option-label">Tamaño</label>
+                            <select id="size" name="size" class="option-select">
+                                <option value="250ml">250ml</option>
+                                <option value="500ml">500ml (+$18,000)</option>
+                                <option value="1000ml">1000ml (+$35,000)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Control de cantidad -->
+                    <div class="quantity-group">
+                        <span class="quantity-label">Cantidad:</span>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" id="decrease-quantity">-</button>
+                            <input type="number" value="1" min="1" class="quantity-input" id="product-quantity">
+                            <button class="quantity-btn" id="increase-quantity">+</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Botón añadir al carrito -->
+                    <button class="add-to-cart-btn" id="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i> Añadir al Carrito
+                    </button>
+                    
+                    <a href="catalogo.html" class="continue-shopping">
+                        <i class="fas fa-arrow-left"></i> Continuar comprando
+                    </a>
+                    
+                    <!-- Metadatos del producto -->
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">SKU:</span> MK-250-001
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Categoría:</span> Mantequillas Corporales
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Etiquetas:</span> hidratación, corporal, natural
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs de información detallada -->
+            <div class="product-tabs">
+                <div class="tabs-nav">
+                    <button class="tab-button active" data-tab="description">Descripción detallada</button>
+                    <button class="tab-button" data-tab="ingredients">Ingredientes</button>
+                    <button class="tab-button" data-tab="how-to-use">Modo de uso</button>
+                    <button class="tab-button" data-tab="reviews">Opiniones</button>
+                </div>
+                
+                <div class="tab-content active" id="description-tab">
+                    <h3>Descripción detallada</h3>
+                    <p>La Mantequilla Karumy es una fórmula especial desarrollada por nuestros expertos cosmetólogos para ofrecer una hidratación profunda y duradera. A diferencia de las cremas corporales comunes, nuestra mantequilla corporal tiene una textura rica y cremosa que nutre la piel desde las capas más profundas.</p>
+                    
+                    <p>Ideal para pieles secas o deshidratadas, este producto es perfecto para combatir la resequedad producida por factores ambientales como el sol, el viento o el aire acondicionado. Su fórmula concentrada se absorbe rápidamente sin dejar residuos grasos.</p>
+                    
+                    <p>Nuestro compromiso con la calidad se refleja en cada ingrediente seleccionado para esta mantequilla. Utilizamos manteca de karité, aceite de coco, aceite de almendras dulces y otros ingredientes naturales que trabajan en sinergia para proporcionar resultados excepcionales.</p>
+                    
+                    <h3>Principales beneficios:</h3>
+                    <ul>
+                        <li><strong>Hidratación intensiva:</strong> Actúa desde el interior para restaurar la hidratación natural de la piel.</li>
+                        <li><strong>Efecto regenerador:</strong> Ayuda a reparar la barrera cutánea y mejorar la apariencia de la piel.</li>
+                        <li><strong>Suavidad inmediata:</strong> Desde la primera aplicación, notarás una diferencia en la textura de tu piel.</li>
+                        <li><strong>Protección duradera:</strong> Crea una barrera protectora natural contra los agentes externos.</li>
+                        <li><strong>Aroma delicado:</strong> Su fragancia suave y natural persiste sutilmente durante horas.</li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="ingredients-tab">
+                    <h3>Ingredientes</h3>
+                    <p>Nuestra Mantequilla Karumy está formulada con ingredientes de alta calidad seleccionados por sus propiedades nutritivas y cuidadosamente combinados para maximizar sus beneficios:</p>
+                    
+                    <ul>
+                        <li><strong>Manteca de Karité:</strong> Rica en vitaminas A, E y F, proporciona hidratación profunda y ayuda a proteger la piel.</li>
+                        <li><strong>Aceite de Coco:</strong> Conocido por sus propiedades antimicrobianas y su capacidad para retener la humedad.</li>
+                        <li><strong>Aceite de Almendras Dulces:</strong> Suaviza e hidrata, ideal para pieles sensibles.</li>
+                        <li><strong>Aloe Vera:</strong> Calma la piel y proporciona hidratación adicional.</li>
+                        <li><strong>Vitamina E:</strong> Antioxidante natural que protege la piel contra los radicales libres.</li>
+                        <li><strong>Glicerina:</strong> Retiene la humedad para una hidratación duradera.</li>
+                        <li><strong>Aceites Esenciales Naturales:</strong> Proporcionan un aroma agradable y propiedades adicionales según la variante.</li>
+                    </ul>
+                    
+                    <p><strong>Sin:</strong> Parabenos, sulfatos, colorantes artificiales, fragancias sintéticas ni ingredientes de origen animal.</p>
+                </div>
+                
+                <div class="tab-content" id="how-to-use-tab">
+                    <h3>Modo de uso</h3>
+                    <p>Para obtener los mejores resultados con nuestra Mantequilla Karumy, sigue estos sencillos pasos:</p>
+                    
+                    <ol>
+                        <li><strong>Limpieza:</strong> Aplica después de la ducha o el baño, cuando la piel está ligeramente húmeda, para mejor absorción.</li>
+                        <li><strong>Cantidad:</strong> Toma una pequeña cantidad (aproximadamente del tamaño de una nuez) para zonas como brazos o piernas. Ajusta según el área a tratar.</li>
+                        <li><strong>Aplicación:</strong> Frota suavemente entre tus manos para calentar el producto y facilitar su aplicación.</li>
+                        <li><strong>Masaje:</strong> Aplica con movimientos circulares ascendentes, masajeando hasta su completa absorción.</li>
+                        <li><strong>Frecuencia:</strong> Para resultados óptimos, utiliza diariamente, preferiblemente después del baño y antes de dormir.</li>
+                    </ol>
+                    
+                    <p><strong>Consejos adicionales:</strong></p>
+                    <ul>
+                        <li>Presta especial atención a zonas con tendencia a la sequedad como codos, rodillas y talones.</li>
+                        <li>En zonas muy resecas, puedes aplicar una capa más generosa como tratamiento nocturno.</li>
+                        <li>Durante los meses más fríos, puedes aumentar la frecuencia de aplicación para combatir la sequedad estacional.</li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="reviews-tab">
+                    <h3>Opiniones de clientes</h3>
+                    <div class="review">
+                        <div class="review-header">
+                            <div class="reviewer-name">María García</div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="review-date">15/01/2023</div>
+                        </div>
+                        <div class="review-content">
+                            <p>"La mantequilla Karumy cambió mi rutina de cuidado, ¡mi piel luce radiante! La uso todos los días y la diferencia es notable desde la primera semana. La textura es perfecta, no deja sensación grasosa y el aroma es muy agradable. Definitivamente la mejor mantequilla corporal que he probado."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review">
+                        <div class="review-header">
+                            <div class="reviewer-name">Carlos Mendoza</div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="review-date">22/02/2023</div>
+                        </div>
+                        <div class="review-content">
+                            <p>"Excelente producto para la piel seca. Antes tenía problemas constantes de descamación en codos y rodillas, pero después de dos semanas usando esta mantequilla, mi piel está mucho mejor. Le doy 4 estrellas porque el envase podría mejorar, pero el producto en sí es genial."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review">
+                        <div class="review-header">
+                            <div class="reviewer-name">Laura Jiménez</div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="review-date">05/03/2023</div>
+                        </div>
+                        <div class="review-content">
+                            <p>"Después de probar diferentes marcas, finalmente encontré en Karumy productos que realmente cumplen lo que prometen. Esta mantequilla corporal ha sido una revelación para mi piel sensible. No causa irritación y la hidratación dura todo el día. Vale cada peso invertido."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Productos relacionados -->
+            <div class="related-products">
+                <h2 class="section-title">También te puede interesar</h2>
+                
+                <div class="products-slider">
+                    <button class="slider-arrow slider-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="slider-container">
+                        <div class="slider-track">
+                            <!-- Producto 1 -->
+                            <div class="slider-item">
+                                <div class="product-card" data-product-id="mantequilla-corporal-chocolate">
+                                    <div class="product-image">
+                                        <div class="image-placeholder">
+                                            <i class="fas fa-cookie"></i>
+                                        </div>
+                                        <div class="product-tags">
+                                            <span class="product-tag tag-sale">Oferta</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-name">Mantequilla Corporal Chocolate</h3>
+                                        <div class="product-category">Mantequillas Corporales</div>
+                                        <div class="product-price">
+                                            <span class="old-price">$45,000</span>
+                                            $38,000
+                                        </div>
+                                        <div class="product-actions">
+                                            <a href="producto.html?id=mantequilla-corporal-chocolate" class="view-product">Ver detalles</a>
+                                            <button class="add-to-cart-btn">Añadir</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 2 -->
+                            <div class="slider-item">
+                                <div class="product-card" data-product-id="locion-corporal">
+                                    <div class="product-image">
+                                        <div class="image-placeholder">
+                                            <i class="fas fa-soap"></i>
+                                        </div>
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-name">Loción Corporal</h3>
+                                        <div class="product-category">Lociones Corporales</div>
+                                        <div class="product-price">$38,000</div>
+                                        <div class="product-actions">
+                                            <a href="producto.html?id=locion-corporal" class="view-product">Ver detalles</a>
+                                            <button class="add-to-cart-btn">Añadir</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 3 -->
+                            <div class="slider-item">
+                                <div class="product-card" data-product-id="exfoliante-facial">
+                                    <div class="product-image">
+                                        <div class="image-placeholder">
+                                            <i class="fas fa-leaf"></i>
+                                        </div>
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-name">Exfoliante Facial</h3>
+                                        <div class="product-category">Exfoliantes</div>
+                                        <div class="product-price">$45,000</div>
+                                        <div class="product-actions">
+                                            <a href="producto.html?id=exfoliante-facial" class="view-product">Ver detalles</a>
+                                            <button class="add-to-cart-btn">Añadir</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Producto 4 -->
+                            <div class="slider-item">
+                                <div class="product-card" data-product-id="mascarilla-hidratante">
+                                    <div class="product-image">
+                                        <div class="image-placeholder">
+                                            <i class="fas fa-mask"></i>
+                                        </div>
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-name">Mascarilla Hidratante</h3>
+                                        <div class="product-category">Mascarillas</div>
+                                        <div class="product-price">$35,000</div>
+                                        <div class="product-actions">
+                                            <a href="producto.html?id=mascarilla-hidratante" class="view-product">Ver detalles</a>
+                                            <button class="add-to-cart-btn">Añadir</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="slider-arrow slider-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-wave"></div>
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <div class="footer-logo">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </div>
+                <p class="footer-description">
+                    Productos cosméticos de alta calidad para el cuidado integral de tu piel. Innovación y belleza natural en cada producto.
+                </p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 class="footer-title">Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="faq.html">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 class="footer-title">Contáctanos</h3>
+                
+                <div class="footer-contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>+57 322 5201123</p>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>cosmeticskataleya9@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <h3 class="footer-title">Síguenos</h3>
+                <p>Mantente conectado con nosotros en nuestras redes sociales para conocer las últimas novedades y promociones.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Karumy Cosmeticos. Todos los derechos reservados.</p>
+            <p>
+                <a href="privacidad.html">Política de Privacidad</a> | 
+                <a href="terminos.html">Términos de Servicio</a>
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cart.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Galería de imágenes
+            const mainImage = document.getElementById('main-product-image');
+            const thumbs = document.querySelectorAll('.thumb');
+            
+            thumbs.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    // Remover clase active de todos los thumbs
+                    thumbs.forEach(t => t.classList.remove('active'));
+                    
+                    // Añadir clase active al thumb clickeado
+                    this.classList.add('active');
+                    
+                    // Actualizar imagen principal
+                    const imageSrc = this.getAttribute('data-image');
+                    
+                    if (imageSrc !== 'placeholder') {
+                        mainImage.src = imageSrc;
+                    } else {
+                        // Si es placeholder, mostrar un mensaje o manejar de otra forma
+                        console.log('Esta vista no está disponible actualmente');
+                    }
+                });
+            });
+            
+            // Tabs de información
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remover clase active de todos los botones y contenidos
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Añadir clase active al botón clickeado
+                    button.classList.add('active');
+                    
+                    // Mostrar el contenido correspondiente
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Control de cantidad
+            const quantityInput = document.getElementById('product-quantity');
+            const decreaseBtn = document.getElementById('decrease-quantity');
+            const increaseBtn = document.getElementById('increase-quantity');
+            
+            decreaseBtn.addEventListener('click', function() {
+                let quantity = parseInt(quantityInput.value);
+                if (quantity > 1) {
+                    quantityInput.value = quantity - 1;
+                }
+            });
+            
+            increaseBtn.addEventListener('click', function() {
+                let quantity = parseInt(quantityInput.value);
+                quantityInput.value = quantity + 1;
+            });
+            
+            // Slider de productos relacionados
+            const sliderTrack = document.querySelector('.slider-track');
+            const sliderItems = document.querySelectorAll('.slider-item');
+            const prevBtn = document.querySelector('.slider-prev');
+            const nextBtn = document.querySelector('.slider-next');
+            
+            let currentIndex = 0;
+            const itemWidth = sliderItems[0].offsetWidth;
+            const gap = 30; // debe coincidir con el gap en CSS
+            
+            function getVisibleItems() {
+                const containerWidth = document.querySelector('.slider-container').offsetWidth;
+                return Math.floor(containerWidth / (itemWidth + gap));
+            }
+            
+            function updateSlider() {
+                const visibleItems = getVisibleItems();
+                const maxIndex = sliderItems.length - visibleItems;
+                
+                if (currentIndex < 0) currentIndex = 0;
+                if (currentIndex > maxIndex) currentIndex = maxIndex;
+                
+                const offset = -currentIndex * (itemWidth + gap);
+                sliderTrack.style.transform = `translateX(${offset}px)`;
+                
+                // Activar/desactivar botones según posición
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex >= maxIndex;
+                
+                // Reflejar estado visual
+                prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+                nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+            }
+            
+            prevBtn.addEventListener('click', function() {
+                currentIndex--;
+                updateSlider();
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                currentIndex++;
+                updateSlider();
+            });
+            
+            // Inicializar slider
+            updateSlider();
+            
+            // Actualizar en resize
+            window.addEventListener('resize', updateSlider);
+            
+            // Añadir al carrito funcionalidad específica de la página de producto
+            const addToCartButton = document.getElementById('add-to-cart');
+            
+            addToCartButton.addEventListener('click', function() {
+                // Obtener datos del producto
+                const productId = document.querySelector('.product-detail').id;
+                const productName = document.querySelector('.product-title').textContent;
+                
+                // Obtener precio actual (sin formatear)
+                const priceText = document.querySelector('.product-price').textContent;
+                const price = parseFloat(priceText.replace(/[^\d]/g, ''));
+                
+                // Obtener imagen
+                const productImage = document.getElementById('main-product-image').src;
+                
+                // Obtener opciones seleccionadas
+                const sizeSelect = document.getElementById('size');
+                const selectedSize = sizeSelect ? sizeSelect.value : null;
+                
+                // Obtener cantidad
+                const quantity = parseInt(document.getElementById('product-quantity').value);
+                
+                // Crear objeto de producto con opciones
+                const product = {
+                    id: productId,
+                    name: productName,
+                    price: price,
+                    image: productImage,
+                    quantity: quantity,
+                    options: {
+                        size: selectedSize
+                    }
+                };
+                
+                // Añadir al carrito a través de la clase ShoppingCart
+                if (window.karumyCart) {
+                    window.karumyCart.addItem(product);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

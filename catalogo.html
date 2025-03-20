@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos - Karumy Cosmeticos</title>
+    
+    <!-- Enlaces a Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
+    
+    <style>
+        /* Estilos específicos para el catálogo */
+        .catalog-header {
+            background: linear-gradient(135deg, #fff5f9 0%, #fffcee 100%);
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .catalog-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .catalog-description {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .catalog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+        
+        .catalog-filters {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            background-color: white;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .filter-group label {
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .filter-select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        .catalog-layout {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .catalog-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+        
+        .catalog-products {
+            flex-grow: 1;
+        }
+        
+        .sidebar-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .sidebar-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .category-list {
+            list-style: none;
+        }
+        
+        .category-list li {
+            margin-bottom: 10px;
+        }
+        
+        .category-list a {
+            color: #666;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color var(--transition-fast);
+        }
+        
+        .category-list a:hover, 
+        .category-list a.active {
+            color: var(--primary);
+        }
+        
+        .category-list a i {
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .price-filter {
+            margin-top: 15px;
+        }
+        
+        .price-inputs {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .price-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .filter-btn {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color var(--transition-fast);
+        }
+        
+        .filter-btn:hover {
+            background-color: #e93a76;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-tags {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .product-tag {
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+        
+        .tag-new {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tag-sale {
+            background-color: #ff9800;
+            color: white;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .product-category {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .view-product {
+            padding: 8px 15px;
+            background-color: #f0f0f0;
+            color: #666;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .view-product:hover {
+            background-color: #e0e0e0;
+            color: var(--dark);
+        }
+        
+        .add-to-cart-btn {
+            padding: 8px 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 0.9rem;
+        }
+        
+        .add-to-cart-btn:hover {
+            background-color: #e93a76;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        
+        .pagination-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pagination-item:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .pagination-item.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Placeholder para imágenes */
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            color: #ccc;
+            font-size: 50px;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 992px) {
+            .catalog-layout {
+                flex-direction: column;
+            }
+            
+            .catalog-sidebar {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .catalog-title {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .product-image {
+                height: 180px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .catalog-header {
+                padding: 40px 15px;
+            }
+            
+            .catalog-filters {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            
+            .filter-group {
+                justify-content: space-between;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 15px;
+            }
+            
+            .product-info {
+                padding: 15px;
+            }
+            
+            .product-name {
+                font-size: 1rem;
+            }
+            
+            .product-image {
+                height: 150px;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .view-product, 
+            .add-to-cart-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Enlace para saltar al contenido principal (accesibilidad) -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+    
+    <!-- Header y navegación -->
+    <header>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html" class="active">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="carrito.html" class="cart-icon-container">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Menú móvil -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+                <img src="assets/img/logo.jpg" alt="Karumy Logo">
+            </div>
+            <button class="close-mobile-menu" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="index.html#nosotros">Nosotros</a>
+            <a href="catalogo.html">Productos</a>
+            <a href="index.html#beneficios">Beneficios</a>
+            <a href="index.html#testimonios">Testimonios</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html">
+                <i class="fas fa-shopping-cart"></i> Carrito 
+                <span class="cart-count" id="mobile-cart-count">0</span>
+            </a>
+        </div>
+        <div class="mobile-menu-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    
+    <main id="main-content">
+        <!-- Encabezado del catálogo -->
+        <section class="catalog-header">
+            <div class="container">
+                <h1 class="catalog-title">Nuestros Productos</h1>
+                <p class="catalog-description">
+                    Descubre nuestra exclusiva selección de cosméticos y artículos para el cuidado personal, diseñados para realzar y proteger tu piel con ingredientes naturales de la más alta calidad.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Contenido del catálogo -->
+        <div class="catalog-container">
+            <!-- Filtros superiores -->
+            <div class="catalog-filters">
+                <div class="filter-group">
+                    <label for="sortBy">Ordenar por:</label>
+                    <select id="sortBy" class="filter-select">
+                        <option value="relevance">Relevancia</option>
+                        <option value="price_asc">Precio: menor a mayor</option>
+                        <option value="price_desc">Precio: mayor a menor</option>
+                        <option value="name_asc">Nombre: A-Z</option>
+                        <option value="name_desc">Nombre: Z-A</option>
+                        <option value="newest">Más recientes</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <span id="product-count">Mostrando 12 productos</span>
+                </div>
+            </div>
+            
+            <!-- Layout principal: sidebar + productos -->
+            <div class="catalog-layout">
+                <!-- Sidebar con filtros -->
+                <div class="catalog-sidebar">
+                    <!-- Categorías -->
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Categorías</h3>
+                        <ul class="category-list">
+                            <li>
+                                <a href="categorias/mantequillas.html" class="active">
+                                    <i class="fas fa-chevron-right"></i> Mantequillas Corporales
+                                </a>
+                            </li>
+                            <li>
+                                <a href="categorias/cremas.html">
+                                    <i class="fas fa-chevron-right"></i> Cremas Faciales
+                                </a>
+                            </li>
+                            <li>
+                                <a href="categorias/serums.html">
+                                    <i class="fas fa-chevron-right"></i> Sérums
+                                </a>
+                            </li>
+                            <li>
+                                <a href="categorias/lociones.html">
+                                    <i class="fas fa-chevron-right"></i> Lociones Corporales
+                                </a>
+                            </li>
+                            <li>
+                                <a href="categorias/exfoliantes.html">
+                                    <i class="fas fa-chevron-right"></i> Exfoliantes
+                                </a>
+                            </li>
+                            <li>
+                                <a href="categorias/labiales.html">
+                                    <i class="fas fa-chevron-right"></i> Labiales
+                                </a>
+                            </li>
+                            <li>
+                                <a href="categorias/mascarillas.html">
+                                    <i class="fas fa-chevron-right"></i> Mascarillas
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Filtro de precio -->
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Precio</h3>
+                        <div class="price-filter">
+                            <div class="price-inputs">
+                                <input type="number" placeholder="Min" class="price-input" id="min-price">
+                                <input type="number" placeholder="Max" class="price-input" id="max-price">
+                            </div>
+                            <button class="filter-btn">Aplicar Filtro</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtros adicionales -->
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Tipo de Piel</h3>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <input type="checkbox" id="skin-normal" class="filter-checkbox">
+                                <label for="skin-normal">Normal</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="skin-dry" class="filter-checkbox">
+                                <label for="skin-dry">Seca</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="skin-oily" class="filter-checkbox">
+                                <label for="skin-oily">Grasa</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="skin-mixed" class="filter-checkbox">
+                                <label for="skin-mixed">Mixta</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="skin-sensitive" class="filter-checkbox">
+                                <label for="skin-sensitive">Sensible</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cuadrícula de productos -->
+                <div class="catalog-products">
+                    <div class="products-grid">
+                        <!-- Producto 1: Mantequilla Karumy -->
+                        <div class="product-card" data-product-id="mantequilla-karumy">
+                            <div class="product-image">
+                                <img src="assets/img/mantequilla.jpg" alt="Mantequilla Karumy">
+                                <div class="product-tags">
+                                    <span class="product-tag tag-new">Nuevo</span>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">Mantequilla Karumy</h3>
+                                <div class="product-category">Mantequillas Corporales</div>
+                                <div class="product-price">$42,000</div>
+                                <div class="product-actions">
+                                    <a href="producto.html?id=mantequilla-karumy" class="view-product">Ver detalles</a>
+                                    <button class="add-to-cart-btn">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 2: Crema Facial -->
+                        <div class="product-card" data-product-id="crema-facial">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-spa"></i>
+                                </div>
+                                <div class="product-tags">
+                                    <span class="product-tag tag-sale">Oferta</span>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">Crema Facial</h3>
+                                <div class="product-category">Cremas Faciales</div>
+                                <div class="product-price">
+                                    <span class="old-price">$38,000</span>
+                                    $32,000
+                                </div>
+                                <div class="product-actions">
+                                    <a href="producto.html?id=crema-facial" class="view-product">Ver detalles</a>
+                                    <button class="add-to-cart-btn">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 3: Sérum Revitalizante -->
+                        <div class="product-card" data-product-id="serum-revitalizante">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">Sérum Revitalizante</h3>
+                                <div class="product-category">Sérums</div>
+                                <div class="product-price">$55,000</div>
+                                <div class="product-actions">
+                                    <a href="producto.html?id=serum-revitalizante" class="view-product">Ver detalles</a>
+                                    <button class="add-to-cart-btn">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 4: Loción Corporal -->
+                        <div class="product-card" data-product-id="locion-corporal">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-soap"></i>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">Loción Corporal</h3>
+                                <div class="product-category">Lociones Corporales</div>
+                                <div class="product-price">$38,000</div>
+                                <div class="product-actions">
+                                    <a href="producto.html?id=locion-corporal" class="view-product">Ver detalles</a>
+                                    <button class="add-to-cart-btn">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 5: Exfoliante Facial -->
+                        <div class="product-card" data-product-id="exfoliante-facial">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">Exfoliante Facial</h3>
+                                <div class="product-category">Exfoliantes</div>
+                                <div class="product-price">$45,000</div>
+                                <div class="product-actions">
+                                    <a href="producto.html?id=exfoliante-facial" class="view-product">Ver detalles</a>
+                                    <button class="add-to-cart-btn">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 6: Mascarilla Hidratante -->
+                        <div class="product-card" data-product-id="mascarilla-hidratante">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-mask"></i>
+                                </div>
+                                <div class="product-tags">
+                                    <span class="product-tag tag-new">Nuevo</span>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">Mascarilla Hidratante</h3>
+                                <div class="product-category">Mascarillas</div>
+                                <div class="product-price">$35,000</div>
+                                <div class="product-actions">
+                                    <a href="producto.html?id=mascarilla-hidratante" class="view-product">Ver detalles</a>
+                                    <button class="add-to-cart-btn">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Añadir más productos aquí para completar la cuadrícula -->
+                        <!-- Producto 7 -->
+                        <div class="product-card" data-product-id="labial-hidratante">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-kiss-wink-heart"></i>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">Labial Hidratante</h3>
+                                <div class="product-category">Labiales</div>
+                                <div class="product-price">$28,000</div>
+                                <div class="product-actions">
+                                    <a href="producto.html?id=labial-hidratante" class="view-product">Ver detalles</a>
+                                    <button class="add-to-cart-btn">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Producto 8 -->
+                        <div class="product-card" data-product-id="mantequilla-corporal-chocolate">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-cookie"></i>
+                                </div>
+                                <div class="product-tags">
+                                    <span class="product-tag tag-sale">Oferta</span>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">Mantequilla Corporal Chocolate</h3>
+                                <div class="product-category">Mantequillas Corporales</div>
+                                <div class="product-price">
+                                    <span class="old-price">$45,000</span>
+                                    $38,000
+                                </div>
+                                <div class="product-actions">
+                                    <a href="producto.html?id=mantequilla-corporal-chocolate" class="view-product">Ver detalles</a>
+                                    <button class="add-to-cart-btn">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Paginación -->
+                    <div class="pagination">
+                        <a href="#" class="pagination-item active">1</a>
+                        <a href="#" class="pagination-item">2</a>
+                        <a href="#" class="pagination-item">3</a>
+                        <a href="#" class="pagination-item">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-wave"></div>
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <div class="footer-logo">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </div>
+                <p class="footer-description">
+                    Productos cosméticos de alta calidad para el cuidado integral de tu piel. Innovación y belleza natural en cada producto.
+                </p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 class="footer-title">Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="faq.html">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 class="footer-title">Contáctanos</h3>
+                
+                <div class="footer-contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>+57 322 5201123</p>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>cosmeticskataleya9@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <h3 class="footer-title">Síguenos</h3>
+                <p>Mantente conectado con nosotros en nuestras redes sociales para conocer las últimas novedades y promociones.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Karumy Cosmeticos. Todos los derechos reservados.</p>
+            <p>
+                <a href="privacidad.html">Política de Privacidad</a> | 
+                <a href="terminos.html">Términos de Servicio</a>
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/productos.js"></script>   <!-- El nuevo sistema de productos -->
+    <script src="assets/js/cart.js"></script>
+    
+</body>
+</html>

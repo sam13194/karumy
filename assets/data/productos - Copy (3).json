@@ -1,0 +1,167 @@
+{
+  "categorias": [
+    {
+      "descripcion": "F\u00f3rmulas ricas y nutritivas para una hidrataci\u00f3n profunda y duradera. Ideal para pieles secas que necesitan un cuidado extra.",
+      "icono": "fas fa-spa",
+      "id": "mantequillas-corporales",
+      "imagen": "assets/img/categorias/mantequillas.jpg",
+      "nombre": "Mantequillas Corporales"
+    },
+    {
+      "descripcion": "Tratamientos especializados para el cuidado del rostro, adaptados a las necesidades espec\u00edficas de cada tipo de piel.",
+      "icono": "fas fa-smile",
+      "id": "cremas-faciales",
+      "imagen": "assets/img/categorias/cremas.jpg",
+      "nombre": "Cremas Faciales"
+    },
+    {
+      "descripcion": "Concentrados de principios activos dise\u00f1ados para tratar preocupaciones espec\u00edficas de la piel con resultados visibles.",
+      "icono": "fas fa-tint",
+      "id": "serums",
+      "imagen": "assets/img/categorias/serums.jpg",
+      "nombre": "S\u00e9rums"
+    },
+    {
+      "descripcion": "Hidrataci\u00f3n ligera y r\u00e1pida absorci\u00f3n para el cuidado diario del cuerpo, con delicados aromas que perduran.",
+      "icono": "fas fa-soap",
+      "id": "lociones-corporales",
+      "imagen": "assets/img/categorias/lociones.jpg",
+      "nombre": "Lociones Corporales"
+    },
+    {
+      "descripcion": "Tratamientos para renovar y revitalizar la piel, eliminando c\u00e9lulas muertas y estimulando la regeneraci\u00f3n celular.",
+      "icono": "fas fa-leaf",
+      "id": "exfoliantes",
+      "imagen": "assets/img/categorias/exfoliantes.jpg",
+      "nombre": "Exfoliantes"
+    },
+    {
+      "descripcion": "Tratamientos intensivos para necesidades espec\u00edficas, desde hidrataci\u00f3n profunda hasta purificaci\u00f3n y luminosidad.",
+      "icono": "fas fa-mask",
+      "id": "mascarillas",
+      "imagen": "assets/img/categorias/mascarillas.jpg",
+      "nombre": "Mascarillas"
+    },
+    {
+      "descripcion": "Cuidado y color para tus labios, con f\u00f3rmulas hidratantes que protegen y embellecen a la vez.",
+      "icono": "fas fa-kiss-wink-heart",
+      "id": "labiales",
+      "imagen": "assets/img/categorias/labiales.jpg",
+      "nombre": "Labiales"
+    }
+  ],
+  "productos": [
+    {
+      "categoria": "mantequillas-corporales",
+      "categoria_nombre": "Mantequillas Corporales",
+      "descripcion_corta": "Nutrici\u00f3n profunda que hidrata y revitaliza tu piel, ideal para un cuidado diario excepcional.",
+      "es_nuevo": true,
+      "es_oferta": false,
+      "etiquetas": "[\"hidrataci\\u00f3n\", \"corporal\", \"natural\"]",
+      "id": "mantequilla-karumy",
+      "imagen_principal": "assets/img/productos/mantequilla.jpg",
+      "nombre": "Mantequilla Karumy",
+      "precio": 42000.0,
+      "precio_oferta": null,
+      "sku": "MK-250-001"
+    },
+    {
+      "categoria": "cremas-faciales",
+      "categoria_nombre": "Cremas Faciales",
+      "descripcion_corta": "F\u00f3rmula ligera con protecci\u00f3n UV que hidrata y protege tu rostro durante todo el d\u00eda.",
+      "es_nuevo": false,
+      "es_oferta": true,
+      "etiquetas": "[\"facial\", \"hidratante\", \"protecci\\u00f3n uv\"]",
+      "id": "crema-facial",
+      "imagen_principal": "assets/img/productos/crema-facial_20250320181914.jpg",
+      "nombre": "Crema Facial",
+      "precio": 38000.0,
+      "precio_oferta": 32000.0,
+      "sku": "CF-50-001"
+    },
+    {
+      "categoria": "serums",
+      "categoria_nombre": "S\u00e9rums",
+      "descripcion_corta": "Concentrado de activos que combate signos de envejecimiento y revitaliza la piel.",
+      "es_nuevo": false,
+      "es_oferta": false,
+      "etiquetas": "[\"antiedad\", \"facial\", \"revitalizante\"]",
+      "id": "serum-revitalizante",
+      "imagen_principal": null,
+      "nombre": "S\u00e9rum Revitalizante",
+      "precio": 55000.0,
+      "precio_oferta": null,
+      "sku": "SR-30-001"
+    },
+    {
+      "categoria": "lociones-corporales",
+      "categoria_nombre": "Lociones Corporales",
+      "descripcion_corta": "Absorci\u00f3n r\u00e1pida con hidrataci\u00f3n profunda y aroma duradero para todo el d\u00eda.",
+      "es_nuevo": false,
+      "es_oferta": false,
+      "etiquetas": "[\"hidratante\", \"corporal\", \"aroma\"]",
+      "id": "locion-corporal",
+      "imagen_principal": "assets/img/productos/locion-corporal_20250320181840.jfif",
+      "nombre": "Loci\u00f3n Corporal",
+      "precio": 38000.0,
+      "precio_oferta": null,
+      "sku": "LC-250-001"
+    },
+    {
+      "categoria": "exfoliantes",
+      "categoria_nombre": "Exfoliantes",
+      "descripcion_corta": "Elimina c\u00e9lulas muertas y revitaliza la piel con ingredientes naturales.",
+      "es_nuevo": false,
+      "es_oferta": false,
+      "etiquetas": "[\"exfoliante\", \"facial\", \"renovaci\\u00f3n\"]",
+      "id": "exfoliante-facial",
+      "imagen_principal": "assets/img/productos/exfoliante-facial_20250320181932.jfif",
+      "nombre": "Exfoliante Facial",
+      "precio": 45000.0,
+      "precio_oferta": null,
+      "sku": "EF-100-001"
+    },
+    {
+      "categoria": "mascarillas",
+      "categoria_nombre": "Mascarillas",
+      "descripcion_corta": "Tratamiento intensivo que restaura la hidrataci\u00f3n y vitalidad de la piel.",
+      "es_nuevo": true,
+      "es_oferta": false,
+      "etiquetas": "[\"hidrataci\\u00f3n\", \"facial\", \"tratamiento\"]",
+      "id": "mascarilla-hidratante",
+      "imagen_principal": null,
+      "nombre": "Mascarilla Hidratante",
+      "precio": 35000.0,
+      "precio_oferta": null,
+      "sku": "MH-100-001"
+    },
+    {
+      "categoria": "labiales",
+      "categoria_nombre": "Labiales",
+      "descripcion_corta": "Hidrataci\u00f3n intensa con un toque de color para unos labios suaves y protegidos.",
+      "es_nuevo": false,
+      "es_oferta": false,
+      "etiquetas": "[\"labios\", \"hidratante\", \"color\"]",
+      "id": "labial-hidratante",
+      "imagen_principal": "assets/img/productos/labial-hidratante_20250320182014.jfif",
+      "nombre": "Labial Hidratante",
+      "precio": 28000.0,
+      "precio_oferta": null,
+      "sku": "LH-001"
+    },
+    {
+      "categoria": "mantequillas-corporales",
+      "categoria_nombre": "Mantequillas Corporales",
+      "descripcion_corta": "Indulgente hidrataci\u00f3n con aroma a chocolate que nutre intensamente la piel seca.",
+      "es_nuevo": false,
+      "es_oferta": true,
+      "etiquetas": "[\"hidrataci\\u00f3n\", \"corporal\", \"chocolate\"]",
+      "id": "mantequilla-corporal-chocolate",
+      "imagen_principal": null,
+      "nombre": "Mantequilla Corporal Chocolate",
+      "precio": 45000.0,
+      "precio_oferta": 38000.0,
+      "sku": "MCH-250-001"
+    }
+  ]
+}

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Karumy Cosmeticos</title>
+    
+    <!-- Enlaces a Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
+</head>
+
+<body>
+    <!-- Enlace para saltar al contenido principal (accesibilidad) -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+    
+    <!-- Header y navegación -->
+    <header>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="carrito.html" class="cart-icon-container">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Menú móvil -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+                <img src="assets/img/logo.jpg" alt="Karumy Logo">
+            </div>
+            <button class="close-mobile-menu" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="index.html#nosotros">Nosotros</a>
+            <a href="catalogo.html">Productos</a>
+            <a href="index.html#beneficios">Beneficios</a>
+            <a href="index.html#testimonios">Testimonios</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html">
+                <i class="fas fa-shopping-cart"></i> Carrito 
+                <span class="cart-count" id="mobile-cart-count">0</span>
+            </a>
+        </div>
+        <div class="mobile-menu-social">
+            <a href="#" class="social-icon" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    
+    <main id="main-content">
+        <div class="checkout-container">
+            <h1 class="checkout-title">Finalizar Compra</h1>
+            
+            <div class="checkout-content">
+                <!-- Formulario de checkout -->
+                <div class="checkout-form-container">
+                    <form id="checkout-form" class="checkout-form">
+                        <h2 class="checkout-form-title">Información de Contacto</h2>
+                        
+                        <div class="form-row two-columns">
+                            <div class="form-group">
+                                <label for="nombre">Nombre Completo <span class="required">*</span></label>
+                                <input type="text" id="nombre" name="nombre" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="telefono">Teléfono <span class="required">*</span></label>
+                                <input type="tel" id="telefono" name="telefono" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        
+                        <h2 class="checkout-form-title">Información de Envío</h2>
+                        
+                        <div class="form-group">
+                            <label for="direccion">Dirección de Envío <span class="required">*</span></label>
+                            <input type="text" id="direccion" name="direccion" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-row two-columns">
+                            <div class="form-group">
+                                <label for="ciudad">Ciudad <span class="required">*</span></label>
+                                <input type="text" id="ciudad" name="ciudad" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="departamento">Departamento <span class="required">*</span></label>
+                                <select id="departamento" name="departamento" class="form-control" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="Amazonas">Amazonas</option>
+                                    <option value="Antioquia">Antioquia</option>
+                                    <option value="Arauca">Arauca</option>
+                                    <option value="Atlántico">Atlántico</option>
+                                    <option value="Bolívar">Bolívar</option>
+                                    <option value="Boyacá">Boyacá</option>
+                                    <option value="Caldas">Caldas</option>
+                                    <option value="Caquetá">Caquetá</option>
+                                    <option value="Casanare">Casanare</option>
+                                    <option value="Cauca">Cauca</option>
+                                    <option value="Cesar">Cesar</option>
+                                    <option value="Chocó">Chocó</option>
+                                    <option value="Córdoba">Córdoba</option>
+                                    <option value="Cundinamarca">Cundinamarca</option>
+                                    <option value="Guainía">Guainía</option>
+                                    <option value="Guaviare">Guaviare</option>
+                                    <option value="Huila">Huila</option>
+                                    <option value="La Guajira">La Guajira</option>
+                                    <option value="Magdalena">Magdalena</option>
+                                    <option value="Meta">Meta</option>
+                                    <option value="Nariño">Nariño</option>
+                                    <option value="Norte de Santander">Norte de Santander</option>
+                                    <option value="Putumayo">Putumayo</option>
+                                    <option value="Quindío">Quindío</option>
+                                    <option value="Risaralda">Risaralda</option>
+                                    <option value="San Andrés y Providencia">San Andrés y Providencia</option>
+                                    <option value="Santander">Santander</option>
+                                    <option value="Sucre">Sucre</option>
+                                    <option value="Tolima">Tolima</option>
+                                    <option value="Valle del Cauca">Valle del Cauca</option>
+                                    <option value="Vaupés">Vaupés</option>
+                                    <option value="Vichada">Vichada</option>
+                                    <option value="Bogotá D.C.">Bogotá D.C.</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <h2 class="checkout-form-title">Método de Pago</h2>
+                        
+                        <div class="payment-options">
+                            <div class="payment-option">
+                                <input type="radio" id="payment-nequi" name="metodoPago" value="Nequi" class="payment-radio" checked>
+                                <label for="payment-nequi" class="payment-label">
+                                    <i class="fas fa-mobile-alt payment-icon"></i>
+                                    <span class="payment-text">Nequi</span>
+                                </label>
+                            </div>
+                            
+                            <div class="payment-option">
+                                <input type="radio" id="payment-bancolombia" name="metodoPago" value="Bancolombia" class="payment-radio">
+                                <label for="payment-bancolombia" class="payment-label">
+                                    <i class="fas fa-university payment-icon"></i>
+                                    <span class="payment-text">Bancolombia</span>
+                                </label>
+                            </div>
+                            
+                            <div class="payment-option">
+                                <input type="radio" id="payment-contra-entrega" name="metodoPago" value="Contra Entrega" class="payment-radio">
+                                <label for="payment-contra-entrega" class="payment-label">
+                                    <i class="fas fa-truck payment-icon"></i>
+                                    <span class="payment-text">Contra Entrega</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="comentarios">Comentarios adicionales</label>
+                            <textarea id="comentarios" name="comentarios" class="form-control" placeholder="Instrucciones especiales para la entrega, referencias de ubicación, etc."></textarea>
+                        </div>
+                        
+                        <div class="checkout-form-actions">
+                            <a href="carrito.html" class="back-to-cart">
+                                <i class="fas fa-arrow-left"></i> Volver al carrito
+                            </a>
+                            
+                            <button type="submit" class="checkout-submit">
+                                Finalizar Pedido por WhatsApp <i class="fab fa-whatsapp"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Resumen del pedido -->
+                <div class="checkout-summary">
+                    <div class="order-summary-container">
+                        <h2 class="order-summary-title">Resumen del Pedido</h2>
+                        
+                        <div id="order-summary">
+                            <!-- Contenido dinámico desde checkout.js -->
+                        </div>
+                        
+                        <div class="order-summary-security">
+                            <h3>Compra Segura</h3>
+                            <p>Al finalizar tu pedido, serás redirigido a WhatsApp donde podrás comunicarte directamente con nuestro equipo para confirmar los detalles y coordinar el pago.</p>
+                            <p>Tus datos personales están protegidos y solo serán utilizados para procesar tu pedido.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-wave"></div>
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <div class="footer-logo">
+                    <img src="assets/img/logo.jpg" alt="Karumy Logo">
+                </div>
+                <p class="footer-description">
+                    Productos cosméticos de alta calidad para el cuidado integral de tu piel. Innovación y belleza natural en cada producto.
+                </p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 class="footer-title">Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="catalogo.html">Productos</a></li>
+                    <li><a href="index.html#beneficios">Beneficios</a></li>
+                    <li><a href="index.html#testimonios">Testimonios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="faq.html">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 class="footer-title">Contáctanos</h3>
+                
+                <div class="footer-contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>+57 322 5201123</p>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>cosmeticskataleya9@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <h3 class="footer-title">Síguenos</h3>
+                <p>Mantente conectado con nosotros en nuestras redes sociales para conocer las últimas novedades y promociones.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Karumy Cosmeticos. Todos los derechos reservados.</p>
+            <p>
+                <a href="privacidad.html">Política de Privacidad</a> | 
+                <a href="terminos.html">Términos de Servicio</a>
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/productos.js"></script>   <!-- El nuevo sistema de productos -->
+
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/checkout.js"></script>
+</body>
+</html>
