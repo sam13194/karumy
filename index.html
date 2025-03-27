@@ -176,120 +176,237 @@
             </div>
         </section>
         
-        <!-- Sección Productos con Slider Horizontal -->
-        <section id="productos" class="section-container">
+        
+        
+        <!-- Sección de Categorías de Productos -->
+        <section id="categorias" class="section-container categories-section">
             <div class="content-wrapper">
-                <h2 class="section-title">Nuestros Productos</h2>
+                <h2 class="section-title">Nuestras Categorías</h2>
                 <p class="section-description">
-                    Descubre nuestra exclusiva selección de cosméticos y artículos para el cuidado personal, diseñados para realzar y proteger tu piel con ingredientes de la más alta calidad.
+                    Descubre nuestra exclusiva gama de cosméticos y productos para el cuidado personal, diseñados para realzar tu belleza natural con ingredientes de la más alta calidad.
                 </p>
                 
-                <div class="productos-carousel">
-                    <!-- Puntos de navegación -->
-                    <div class="carousel-dots">
-                        <button class="dot active" aria-label="Slide 1"></button>
-                        <button class="dot" aria-label="Slide 2"></button>
-                        <button class="dot" aria-label="Slide 3"></button>
-                        <button class="dot" aria-label="Slide 4"></button>
-                        <button class="dot" aria-label="Slide 5"></button>
+                <div class="categories-grid">
+                    <!-- Mantequillas Corporales -->
+                    <div class="category-card" data-category="mantequillas-corporales">
+                        <div class="category-image">
+                            <div class="image-overlay"></div>
+                            <i class="fas fa-spa category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Mantequillas Corporales</h3>
+                            <p>Nutrición intensa que hidrata y revitaliza tu piel en profundidad.</p>
+                            <a href="catalogo.html?categoria=mantequillas-corporales" class="category-btn">Ver Productos</a>
+                        </div>
                     </div>
                     
-                    <!-- Contenedor del carrusel -->
-                    <div class="carousel-container">
-                        <div class="carousel-track">
-                            <!-- Producto 1: Mantequilla Karumy (sabemos que esta imagen existe) -->
-                            <div class="producto-slide">
-                                <div class="producto-card" id="mantequilla">
-                                    <div class="imagen-container">
-                                        <img src="assets/mantequilla.jpg" alt="Mantequilla Karumy">
-                                    </div>
-                                    <div class="producto-info">
-                                        <h3>Mantequilla Karumy</h3>
-                                        <p>Nutrición profunda que hidrata y revitaliza tu piel, ideal para un cuidado diario excepcional.</p>
-                                        <a href="#mantequilla" class="producto-btn">Ver detalles</a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Producto 2: Usando placeholder para crema facial -->
-                            <div class="producto-slide">
-                                <div class="producto-card">
-                                    <div class="imagen-container">
-                                        <!-- Placeholder en vez de imagen que no existe -->
-                                        <div class="imagen-placeholder">
-                                            <i class="fas fa-spa"></i>
-                                        </div>
-                                    </div>
-                                    <div class="producto-info">
-                                        <h3>Crema Facial</h3>
-                                        <p>Fórmula ligera con protección UV que hidrata y protege tu rostro durante todo el día.</p>
-                                        <a href="#crema" class="producto-btn">Ver detalles</a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Producto 3: Usando placeholder para sérum -->
-                            <div class="producto-slide">
-                                <div class="producto-card">
-                                    <div class="imagen-container">
-                                        <!-- Placeholder en vez de imagen que no existe -->
-                                        <div class="imagen-placeholder">
-                                            <i class="fas fa-tint"></i>
-                                        </div>
-                                    </div>
-                                    <div class="producto-info">
-                                        <h3>Sérum Revitalizante</h3>
-                                        <p>Concentrado de activos que combate signos de envejecimiento y revitaliza la piel.</p>
-                                        <a href="#serum" class="producto-btn">Ver detalles</a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Producto 4: Usando placeholder -->
-                            <div class="producto-slide">
-                                <div class="producto-card">
-                                    <div class="imagen-container">
-                                        <div class="imagen-placeholder">
-                                            <i class="fas fa-soap"></i>
-                                        </div>
-                                    </div>
-                                    <div class="producto-info">
-                                        <h3>Loción Corporal</h3>
-                                        <p>Absorción rápida con hidratación profunda y aroma duradero para todo el día.</p>
-                                        <a href="#locion" class="producto-btn">Ver detalles</a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Producto 5: Usando placeholder -->
-                            <div class="producto-slide">
-                                <div class="producto-card">
-                                    <div class="imagen-container">
-                                        <div class="imagen-placeholder">
-                                            <i class="fas fa-leaf"></i>
-                                        </div>
-                                    </div>
-                                    <div class="producto-info">
-                                        <h3>Exfoliante Facial</h3>
-                                        <p>Elimina células muertas y revitaliza la piel con ingredientes naturales.</p>
-                                        <a href="#exfoliante" class="producto-btn">Ver detalles</a>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- Cremas Faciales -->
+                    <div class="category-card" data-category="cremas-faciales">
+                        <div class="category-image">
+                            <div class="image-overlay"></div>
+                            <i class="fas fa-smile category-icon"></i>
                         </div>
-                        
-                        <!-- Botones de navegación -->
-                        <button class="carousel-arrow prev" aria-label="Anterior">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="carousel-arrow next" aria-label="Siguiente">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
+                        <div class="category-info">
+                            <h3>Cremas Faciales</h3>
+                            <p>Tratamientos especializados para una piel radiante y saludable.</p>
+                            <a href="catalogo.html?categoria=cremas-faciales" class="category-btn">Ver Productos</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Sérums -->
+                    <div class="category-card" data-category="serums">
+                        <div class="category-image">
+                            <div class="image-overlay"></div>
+                            <i class="fas fa-tint category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Sérums</h3>
+                            <p>Fórmulas concentradas para tratar necesidades específicas de tu piel.</p>
+                            <a href="catalogo.html?categoria=serums" class="category-btn">Ver Productos</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Lociones Corporales -->
+                    <div class="category-card" data-category="lociones-corporales">
+                        <div class="category-image">
+                            <div class="image-overlay"></div>
+                            <i class="fas fa-soap category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Lociones Corporales</h3>
+                            <p>Hidratación ligera de rápida absorción para el día a día.</p>
+                            <a href="catalogo.html?categoria=lociones-corporales" class="category-btn">Ver Productos</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Exfoliantes -->
+                    <div class="category-card" data-category="exfoliantes">
+                        <div class="category-image">
+                            <div class="image-overlay"></div>
+                            <i class="fas fa-leaf category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Exfoliantes</h3>
+                            <p>Renovación celular para una piel suave y radiante.</p>
+                            <a href="catalogo.html?categoria=exfoliantes" class="category-btn">Ver Productos</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Labiales -->
+                    <div class="category-card" data-category="labiales">
+                        <div class="category-image">
+                            <div class="image-overlay"></div>
+                            <i class="fas fa-kiss-wink-heart category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Labiales</h3>
+                            <p>Hidratación y color para unos labios perfectos todo el día.</p>
+                            <a href="catalogo.html?categoria=labiales" class="category-btn">Ver Productos</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Mascarillas -->
+                    <div class="category-card" data-category="mascarillas">
+                        <div class="category-image">
+                            <div class="image-overlay"></div>
+                            <i class="fas fa-mask category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Mascarillas</h3>
+                            <p>Tratamientos intensivos para necesidades específicas de la piel.</p>
+                            <a href="catalogo.html?categoria=mascarillas" class="category-btn">Ver Productos</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        
+
+        <!-- Sección de Regiones Corporales -->
+        <section id="regiones" class="section-container regions-section">
+            <div class="content-wrapper">
+                <h2 class="section-title">Cuidado por Zona Corporal</h2>
+                <p class="section-description">
+                    Explora nuestros productos organizados según la región del cuerpo para la que han sido específicamente formulados.
+                </p>
+                
+                <div class="regions-tabs">
+                    <button class="region-tab active" data-region="facial">Facial</button>
+                    <button class="region-tab" data-region="corporal">Corporal</button>
+                    <button class="region-tab" data-region="manos">Manos</button>
+                    <button class="region-tab" data-region="labios">Labios</button>
+                    <button class="region-tab" data-region="cabello">Cabello</button>
+                </div>
+                
+                <div class="regions-content">
+                    <!-- Contenido para región Facial -->
+                    <div class="region-panel active" id="facial-panel">
+                        <div class="region-info">
+                            <h3>Cuidado Facial</h3>
+                            <p>Productos especialmente formulados para el cuidado delicado de la piel del rostro, adaptados a diferentes tipos de piel y necesidades específicas.</p>
+                            
+                            <div class="region-categories">
+                                <a href="catalogo.html?categoria=cremas-faciales" class="region-category-card">
+                                    <i class="fas fa-smile"></i>
+                                    <span>Cremas Faciales</span>
+                                </a>
+                                <a href="catalogo.html?categoria=serums" class="region-category-card">
+                                    <i class="fas fa-tint"></i>
+                                    <span>Sérums</span>
+                                </a>
+                                <a href="catalogo.html?categoria=exfoliantes" class="region-category-card">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>Exfoliantes</span>
+                                </a>
+                                <a href="catalogo.html?categoria=mascarillas" class="region-category-card">
+                                    <i class="fas fa-mask"></i>
+                                    <span>Mascarillas</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contenido para región Corporal -->
+                    <div class="region-panel" id="corporal-panel">
+                        <div class="region-info">
+                            <h3>Cuidado Corporal</h3>
+                            <p>Una gama completa de productos para nutrir, hidratar y embellecer la piel de todo tu cuerpo, dejándola suave, tersa y radiante.</p>
+                            
+                            <div class="region-categories">
+                                <a href="catalogo.html?categoria=mantequillas-corporales" class="region-category-card">
+                                    <i class="fas fa-spa"></i>
+                                    <span>Mantequillas</span>
+                                </a>
+                                <a href="catalogo.html?categoria=lociones-corporales" class="region-category-card">
+                                    <i class="fas fa-soap"></i>
+                                    <span>Lociones</span>
+                                </a>
+                                <a href="catalogo.html?categoria=exfoliantes" class="region-category-card">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>Exfoliantes</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contenido para región Manos -->
+                    <div class="region-panel" id="manos-panel">
+                        <div class="region-info">
+                            <h3>Cuidado de Manos</h3>
+                            <p>Productos especializados para nutrir y proteger tus manos, expuestas diariamente a factores agresivos que pueden resecarlas y envejecerlas prematuramente.</p>
+                            
+                            <div class="region-categories">
+                                <a href="catalogo.html?categoria=mantequillas-corporales&uso=manos" class="region-category-card">
+                                    <i class="fas fa-hand-sparkles"></i>
+                                    <span>Cremas de Manos</span>
+                                </a>
+                                <a href="catalogo.html?categoria=exfoliantes&uso=manos" class="region-category-card">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>Exfoliantes</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contenido para región Labios -->
+                    <div class="region-panel" id="labios-panel">
+                        <div class="region-info">
+                            <h3>Cuidado de Labios</h3>
+                            <p>Dale a tus labios el cuidado que merecen con productos que combinan hidratación profunda y protección con un toque de color y brillo.</p>
+                            
+                            <div class="region-categories">
+                                <a href="catalogo.html?categoria=labiales" class="region-category-card">
+                                    <i class="fas fa-kiss-wink-heart"></i>
+                                    <span>Labiales Hidratantes</span>
+                                </a>
+                                <a href="catalogo.html?categoria=labiales&tipo=balsamo" class="region-category-card">
+                                    <i class="fas fa-kiss"></i>
+                                    <span>Bálsamos Labiales</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contenido para región Cabello -->
+                    <div class="region-panel" id="cabello-panel">
+                        <div class="region-info">
+                            <h3>Cuidado del Cabello</h3>
+                            <p>Productos formulados para mejorar la salud y apariencia de tu cabello, proporcionando hidratación, brillo y protección contra factores ambientales.</p>
+                            
+                            <div class="region-categories">
+                                <a href="catalogo.html?categoria=cabello&tipo=mascarilla" class="region-category-card">
+                                    <i class="fas fa-pump-soap"></i>
+                                    <span>Mascarillas Capilares</span>
+                                </a>
+                                <a href="catalogo.html?categoria=cabello&tipo=aceite" class="region-category-card">
+                                    <i class="fas fa-tint"></i>
+                                    <span>Aceites Capilares</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Sección Beneficios -->
         <section id="beneficios" class="section-container">
             <div class="content-wrapper">

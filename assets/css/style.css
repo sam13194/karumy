@@ -1333,3 +1333,303 @@ footer {
         display: none;
     }
 }
+
+
+/* Estilos para la sección de Categorías */
+.categories-section {
+    background: linear-gradient(135deg, #fff5f9 0%, #fffcee 100%);
+    padding: 80px 0;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.category-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.category-image {
+    height: 180px;
+    background-color: #f9f9f9;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 64, 129, 0.2) 0%, rgba(255, 253, 208, 0.2) 100%);
+    z-index: 1;
+}
+
+.category-icon {
+    font-size: 60px;
+    color: var(--primary);
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.2);
+}
+
+.category-info {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.category-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.category-info p {
+    color: #666;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.category-btn {
+    display: inline-block;
+    align-self: flex-start;
+    background-color: var(--primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 2px solid var(--primary);
+}
+
+.category-btn:hover {
+    background-color: white;
+    color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 64, 129, 0.2);
+}
+
+/* Estilos para la sección de Regiones Corporales */
+.regions-section {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.regions-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 40px 0 30px;
+}
+
+.region-tab {
+    padding: 12px 25px;
+    background-color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.region-tab:hover {
+    background-color: #f0f0f0;
+    color: var(--dark);
+}
+
+.region-tab.active {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 64, 129, 0.2);
+}
+
+.regions-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.region-panel {
+    display: none;
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.region-panel.active {
+    display: block;
+}
+
+.region-info {
+    text-align: center;
+}
+
+.region-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--dark);
+    font-family: 'Playfair Display', serif;
+}
+
+.region-info p {
+    color: #666;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.region-categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.region-category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.region-category-card:hover {
+    background-color: #f9f9f9;
+    transform: translateY(-5px);
+}
+
+.region-category-card i {
+    font-size: 40px;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.region-category-card span {
+    color: var(--dark);
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Adaptabilidad para móviles */
+@media (max-width: 768px) {
+    .categories-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .category-image {
+        height: 150px;
+    }
+    
+    .category-icon {
+        font-size: 50px;
+    }
+    
+    .category-info {
+        padding: 20px;
+    }
+    
+    .category-info h3 {
+        font-size: 1.2rem;
+    }
+    
+    .region-tab {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .region-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .region-panel {
+        padding: 20px;
+    }
+    
+    .region-category-card {
+        width: 120px;
+        padding: 10px;
+    }
+    
+    .region-category-card i {
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 576px) {
+    .categories-section,
+    .regions-section {
+        padding: 50px 0;
+    }
+    
+    .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .regions-tabs {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        justify-content: flex-start;
+        margin: 30px 0 20px;
+    }
+    
+    .region-tab {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+    
+    .region-category-card {
+        width: 100px;
+    }
+    
+    .region-category-card i {
+        font-size: 30px;
+    }
+    
+    .region-category-card span {
+        font-size: 0.9rem;
+    }
+}

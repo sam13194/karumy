@@ -326,3 +326,114 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+/**
+ * Funcionalidad para las secciones de categorías y regiones corporales
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    // Funcionalidad para las tabs de regiones corporales
+    const regionTabs = document.querySelectorAll('.region-tab');
+    const regionPanels = document.querySelectorAll('.region-panel');
+    
+    regionTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remover clase active de todas las tabs
+            regionTabs.forEach(t => t.classList.remove('active'));
+            
+            // Añadir clase active a la tab seleccionada
+            this.classList.add('active');
+            
+            // Obtener región seleccionada
+            const region = this.getAttribute('data-region');
+            
+            // Ocultar todos los paneles
+            regionPanels.forEach(panel => panel.classList.remove('active'));
+            
+            // Mostrar panel correspondiente
+            document.getElementById(`${region}-panel`).classList.add('active');
+        });
+    });
+    
+    // Efecto hover para tarjetas de categorías (opcional)
+    const categoryCards = document.querySelectorAll('.category-card');
+    
+    categoryCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            const icon = this.querySelector('.category-icon');
+            if (icon) {
+                icon.style.transform = 'scale(1.2)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            const icon = this.querySelector('.category-icon');
+            if (icon) {
+                icon.style.transform = 'scale(1)';
+            }
+        });
+    });
+    
+    // Cargar dinámicamente los datos de categorías si existe el gestor de productos
+    if (window.productosManager) {
+        window.productosManager.loadPromise.then(() => {
+            // Cuando los datos estén cargados, actualizar las categorías
+            actualizarCategorias();
+        });
+    }
+    
+    // Función para actualizar las categorías con datos reales
+    function actualizarCategorias() {
+        // Verificar si el gestor de productos está disponible
+        if (!window.productosManager || !window.productosManager.categorias) return;
+        
+        const categorias = window.productosManager.categorias;
+        
+        // Actualizar tarjetas de categorías en la sección principal
+        categoryCards.forEach(card => {
+            const categoriaId = card.getAttribute('data-category');
+            if (!categoriaId) return;
+            
+            // Buscar datos de esta categoría
+            const categoriaData = categorias.find(cat => cat.id === categoriaId);
+            if (!categoriaData) return;
+            
+            // Actualizar icono si está definido
+            if (categoriaData.icono) {
+                const iconElement = card.querySelector('.category-icon');
+                if (iconElement) {
+                    iconElement.className = categoriaData.icono + ' category-icon';
+                }
+            }
+            
+            // Actualizar nombre y descripción
+            const titleElement = card.querySelector('h3');
+            const descElement = card.querySelector('p');
+            
+            if (titleElement && categoriaData.nombre) {
+                titleElement.textContent = categoriaData.nombre;
+            }
+            
+            if (descElement && categoriaData.descripcion) {
+                descElement.textContent = categoriaData.descripcion;
+            }
+            
+            // Actualizar imágenes si están definidas
+            if (categoriaData.imagen) {
+                const bgElement = card.querySelector('.category-image');
+                if (bgElement) {
+                    // Eliminar el icono
+                    const iconElement = bgElement.querySelector('.category-icon');
+                    if (iconElement) {
+                        iconElement.style.display = 'none';
+                    }
+                    
+                    // Añadir imagen de fondo
+                    bgElement.style.backgroundImage = `url('${categoriaData.imagen}')`;
+                    bgElement.style.backgroundSize = 'cover';
+                    bgElement.style.backgroundPosition = 'center';
+                }
+            }
+        });
+    }
+});
