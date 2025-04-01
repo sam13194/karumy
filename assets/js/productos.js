@@ -273,6 +273,10 @@ async function cargarProductosEnCatalogo() {
             productos = await window.productosManager.obtenerTodosLosProductos();
         }
         
+        // Aplicar ordenamiento según el valor seleccionado
+        const sortBy = document.getElementById('sortBy').value;
+        ordenarProductos(productos, sortBy);
+        
         // Mostrar contador de productos
         const productCountElement = document.getElementById('product-count');
         if (productCountElement) {
@@ -307,505 +311,35 @@ async function cargarProductosEnCatalogo() {
     }
 }
 
-// Cargar producto en página de producto individual
-async function cargarProductoIndividual() {
-    // Verificar si estamos en la página de producto
-    const productDetailContainer = document.querySelector('.product-detail');
-    if (!productDetailContainer) return;
-    
-    try {
-        // Obtener ID del producto desde la URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const productId = urlParams.get('id');
-        
-        if (!productId) {
-            window.location.href = 'catalogo.html';
-            return;
-        }
-        
-        // Esperar a que los datos estén cargados
-        await window.productosManager.loadPromise;
-        
-        // Obtener datos del producto
-        const producto = await window.productosManager.obtenerProductoPorId(productId);
-        
-        if (!producto) {
-            productDetailContainer.innerHTML = '<p class="error-message">Producto no encontrado</p>';
-            return;
-        }
-        
-        // Actualizar ID del contenedor
-        productDetailContainer.id = producto.id;
-        
-        // Actualizar título de la página
-        document.title = `${producto.nombre} - Karumy Cosmeticos`;
-        
-        // Actualizar breadcrumbs
-        const breadcrumbsContainer = document.querySelector('.product-breadcrumbs');
-        if (breadcrumbsContainer) {
-            breadcrumbsContainer.innerHTML = `
-                <a href="index.html">Inicio</a>
-                <span>/</span>
-                <a href="catalogo.html">Productos</a>
-                <span>/</span>
-                <a href="catalogo.html?categoria=${producto.categoria}">${producto.categoria_nombre}</a>
-                <span>/</span>
-                <span>${producto.nombre}</span>
-            `;
-        }
-        
-        // Actualizar imagen principal
-        const mainImageContainer = document.getElementById('main-product-image');
-        if (mainImageContainer) {
-            if (producto.imagen_principal) {
-                mainImageContainer.src = producto.imagen_principal;
-            } else {
-                // Si no hay imagen, reemplazar por un placeholder
-                const mainImageParent = mainImageContainer.parentElement;
-                mainImageParent.innerHTML = `
-                    <div class="image-placeholder">
-                        <i class="${producto.categoria ? window.productosManager.categorias.find(c => c.id === producto.categoria)?.icono || 'fas fa-spa' : 'fas fa-spa'}"></i>
-                    </div>
-                `;
-            }
-        }
-        
-        // Actualizar miniaturas
-        const thumbsContainer = document.querySelector('.gallery-thumbs');
-        if (thumbsContainer) {
-            // Limpiar thumbs existentes
-            thumbsContainer.innerHTML = '';
-            
-            // Añadir imagen principal como primer thumb
-            let thumbsHTML = '';
-            
-            if (producto.imagen_principal) {
-                thumbsHTML += `
-                    <div class="thumb active" data-image="${producto.imagen_principal}">
-                        <img src="${producto.imagen_principal}" alt="${producto.nombre} - Vista principal">
-                    </div>
-                `;
-            } else {
-                thumbsHTML += `
-                    <div class="thumb active" data-image="placeholder">
-                        <div class="image-placeholder">
-                            <i class="${producto.categoria ? window.productosManager.categorias.find(c => c.id === producto.categoria)?.icono || 'fas fa-spa' : 'fas fa-spa'}"></i>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            // Añadir imágenes adicionales como thumbs
-            if (producto.imagenes_adicionales && producto.imagenes_adicionales.length > 0) {
-                producto.imagenes_adicionales.forEach((imagen, index) => {
-                    thumbsHTML += `
-                        <div class="thumb" data-image="${imagen}">
-                            <img src="${imagen}" alt="${producto.nombre} - Vista ${index + 2}">
-                        </div>
-                    `;
-                });
-            }
-            
-            // Añadir placeholders para completar la galería
-            const totalThumbs = 4; // Total deseado de miniaturas
-            const actualThumbs = 1 + (producto.imagenes_adicionales?.length || 0);
-            
-            for (let i = actualThumbs; i < totalThumbs; i++) {
-                thumbsHTML += `
-                    <div class="thumb" data-image="placeholder">
-                        <div class="image-placeholder">
-                            <i class="fas fa-${i === 1 ? 'spa' : i === 2 ? 'leaf' : 'tint'}"></i>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            thumbsContainer.innerHTML = thumbsHTML;
-            
-            // Añadir event listeners a los thumbs
-            document.querySelectorAll('.thumb').forEach(thumb => {
-                thumb.addEventListener('click', function() {
-                    // Activar thumb
-                    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Cambiar imagen principal
-                    const imageSrc = this.getAttribute('data-image');
-                    const mainImage = document.getElementById('main-product-image');
-                    
-                    if (imageSrc !== 'placeholder' && mainImage) {
-                        mainImage.src = imageSrc;
-                    }
-                });
+// Función para ordenar productos según el criterio seleccionado
+function ordenarProductos(productos, criterio) {
+    switch(criterio) {
+        case 'price_asc':
+            productos.sort((a, b) => (a.precio_oferta || a.precio) - (b.precio_oferta || b.precio));
+            break;
+        case 'price_desc':
+            productos.sort((a, b) => (b.precio_oferta || b.precio) - (a.precio_oferta || a.precio));
+            break;
+        case 'name_asc':
+            productos.sort((a, b) => a.nombre.localeCompare(b.nombre));
+            break;
+        case 'name_desc':
+            productos.sort((a, b) => b.nombre.localeCompare(a.nombre));
+            break;
+        case 'newest':
+            productos.sort((a, b) => {
+                // Si hay fecha de lanzamiento, usarla; de lo contrario, usar ID como aproximación
+                const fechaA = a.fecha_lanzamiento ? new Date(a.fecha_lanzamiento) : a.id;
+                const fechaB = b.fecha_lanzamiento ? new Date(b.fecha_lanzamiento) : b.id;
+                return fechaB - fechaA;
             });
-        }
-        
-        // Actualizar información del producto
-        document.querySelector('.product-title').textContent = producto.nombre;
-        document.querySelector('.product-category').textContent = producto.categoria_nombre;
-        
-        // Actualizar precio
-        const precioContainer = document.querySelector('.product-price-container');
-        if (precioContainer) {
-            let precioHTML = '';
-            
-            if (producto.precio_oferta !== null) {
-                // Mostrar precio original y oferta
-                precioHTML = `
-                    <span class="old-price">${window.productosManager.formatearPrecio(producto.precio)}</span>
-                    <div class="product-price">${window.productosManager.formatearPrecio(producto.precio_oferta)}</div>
-                    <span class="sale-badge">Oferta</span>
-                `;
-            } else {
-                // Mostrar solo precio normal
-                precioHTML = `
-                    <div class="product-price">${window.productosManager.formatearPrecio(producto.precio)}</div>
-                `;
-            }
-            
-            precioContainer.innerHTML = precioHTML;
-        }
-        
-        // Actualizar descripción corta
-        document.querySelector('.product-description').innerHTML = `<p>${producto.descripcion_corta}</p>`;
-        
-        // Actualizar beneficios
-        const beneficiosContainer = document.querySelector('.features-list');
-        if (beneficiosContainer && producto.beneficios) {
-            let beneficiosHTML = '';
-            
-            producto.beneficios.forEach(beneficio => {
-                beneficiosHTML += `<li>${beneficio}</li>`;
-            });
-            
-            beneficiosContainer.innerHTML = beneficiosHTML;
-        }
-        
-        // Actualizar opciones del producto (tamaños, colores, etc.)
-        const opcionesContainer = document.querySelector('.product-options');
-        if (opcionesContainer && producto.opciones) {
-            let opcionesHTML = '';
-            
-            // Procesar cada tipo de opción
-            Object.entries(producto.opciones).forEach(([tipoOpcion, opciones]) => {
-                // Capitalizar primera letra del tipo
-                const tipoCapitalizado = tipoOpcion.charAt(0).toUpperCase() + tipoOpcion.slice(1);
-                
-                opcionesHTML += `
-                    <div class="option-group">
-                        <label for="${tipoOpcion}" class="option-label">${tipoCapitalizado}</label>
-                        <select id="${tipoOpcion}" name="${tipoOpcion}" class="option-select">
-                `;
-                
-                // Añadir cada opción
-                opciones.forEach(opcion => {
-                    const textoAdicional = opcion.precio_adicional ? ` (+${window.productosManager.formatearPrecio(opcion.precio_adicional)})` : '';
-                    opcionesHTML += `<option value="${opcion.valor}">${opcion.valor}${textoAdicional}</option>`;
-                });
-                
-                opcionesHTML += `
-                        </select>
-                    </div>
-                `;
-            });
-            
-            opcionesContainer.innerHTML = opcionesHTML;
-        }
-        
-        // Actualizar metadatos del producto (SKU, categoría, etiquetas)
-        const metaContainer = document.querySelector('.product-meta');
-        if (metaContainer) {
-            let etiquetasText = producto.etiquetas ? producto.etiquetas.join(', ') : '';
-            
-            metaContainer.innerHTML = `
-                <div class="meta-item">
-                    <span class="meta-label">SKU:</span> ${producto.sku}
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Categoría:</span> ${producto.categoria_nombre}
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Etiquetas:</span> ${etiquetasText}
-                </div>
-            `;
-        }
-        
-        // Actualizar tabs de contenido
-        // Tab de descripción
-        const descriptionTab = document.getElementById('description-tab');
-        if (descriptionTab && producto.descripcion_completa) {
-            let descHTML = '<h3>Descripción detallada</h3>';
-            
-            // Convertir array de párrafos a HTML
-            producto.descripcion_completa.forEach(parrafo => {
-                descHTML += `<p>${parrafo}</p>`;
-            });
-            
-            // Añadir beneficios
-            if (producto.beneficios && producto.beneficios.length > 0) {
-                descHTML += '<h3>Principales beneficios:</h3><ul>';
-                
-                producto.beneficios.forEach(beneficio => {
-                    // Extraer y destacar título si existe (formato: "Título: descripción")
-                    if (beneficio.includes(':')) {
-                        const [titulo, desc] = beneficio.split(':');
-                        descHTML += `<li><strong>${titulo}:</strong>${desc}</li>`;
-                    } else {
-                        descHTML += `<li>${beneficio}</li>`;
-                    }
-                });
-                
-                descHTML += '</ul>';
-            }
-            
-            descriptionTab.innerHTML = descHTML;
-        }
-        
-        // Tab de ingredientes
-        const ingredientsTab = document.getElementById('ingredients-tab');
-        if (ingredientsTab && producto.ingredientes) {
-            let ingHTML = '<h3>Ingredientes</h3>';
-            
-            ingHTML += '<p>Nuestra ' + producto.nombre + ' está formulada con ingredientes de alta calidad seleccionados por sus propiedades nutritivas y cuidadosamente combinados para maximizar sus beneficios:</p>';
-            
-            ingHTML += '<ul>';
-            producto.ingredientes.forEach(ingrediente => {
-                // Extraer y destacar el nombre del ingrediente si existe (formato: "Ingrediente: descripción")
-                if (ingrediente.includes(':')) {
-                    const [nombre, desc] = ingrediente.split(':');
-                    ingHTML += `<li><strong>${nombre}:</strong>${desc}</li>`;
-                } else {
-                    ingHTML += `<li>${ingrediente}</li>`;
-                }
-            });
-            ingHTML += '</ul>';
-            
-            ingHTML += '<p><strong>Sin:</strong> Parabenos, sulfatos, colorantes artificiales, fragancias sintéticas ni ingredientes de origen animal.</p>';
-            
-            ingredientsTab.innerHTML = ingHTML;
-        }
-        
-        // Tab de modo de uso
-        const howToUseTab = document.getElementById('how-to-use-tab');
-        if (howToUseTab && producto.modo_uso) {
-            let useHTML = '<h3>Modo de uso</h3>';
-            
-            useHTML += '<p>Para obtener los mejores resultados con nuestra ' + producto.nombre + ', sigue estos sencillos pasos:</p>';
-            
-            useHTML += '<ol>';
-            producto.modo_uso.forEach(paso => {
-                // Extraer y destacar el título del paso si existe (formato: "Título: descripción")
-                if (paso.includes(':')) {
-                    const [titulo, desc] = paso.split(':');
-                    useHTML += `<li><strong>${titulo}:</strong>${desc}</li>`;
-                } else {
-                    useHTML += `<li>${paso}</li>`;
-                }
-            });
-            useHTML += '</ol>';
-            
-            howToUseTab.innerHTML = useHTML;
-        }
-        
-        // Actualizar slider de productos relacionados
-        await cargarProductosRelacionados(producto);
-        
-        // Configurar botón de añadir al carrito
-        const addToCartButton = document.getElementById('add-to-cart');
-        if (addToCartButton) {
-            addToCartButton.addEventListener('click', async function() {
-                // Recopilar información del producto y opciones seleccionadas
-                const opciones = {};
-                
-                // Obtener opciones seleccionadas (tamaños, colores, etc.)
-                if (producto.opciones) {
-                    Object.keys(producto.opciones).forEach(tipoOpcion => {
-                        const selectElement = document.getElementById(tipoOpcion);
-                        if (selectElement) {
-                            opciones[tipoOpcion] = selectElement.value;
-                        }
-                    });
-                }
-                
-                // Obtener cantidad
-                const cantidad = parseInt(document.getElementById('product-quantity').value || '1');
-                
-                // Obtener datos del producto para el carrito
-                const productData = await window.productosManager.obtenerDatosProductoParaCarrito(
-                    producto.id,
-                    opciones,
-                    cantidad
-                );
-                
-                // Añadir al carrito
-                if (window.karumyCart && productData) {
-                    window.karumyCart.addItem(productData);
-                }
-            });
-        }
-    } catch (error) {
-        console.error('Error al cargar producto individual:', error);
-        productDetailContainer.innerHTML = '<p class="error-message">Ha ocurrido un error al cargar el producto. Por favor, intenta nuevamente más tarde.</p>';
+            break;
+        // Por defecto (relevance), no hacemos nada o podríamos implementar un algoritmo de relevancia
     }
-}
-
-// Cargar productos relacionados en la página de producto
-async function cargarProductosRelacionados(producto) {
-    const sliderTrack = document.querySelector('.slider-track');
-    if (!sliderTrack || !producto) return;
-    
-    try {
-        // Obtener productos relacionados
-        const relacionados = await window.productosManager.obtenerProductosRelacionados(producto);
-        
-        if (relacionados.length === 0) {
-            // Si no hay relacionados, ocultar sección
-            document.querySelector('.related-products').style.display = 'none';
-            return;
-        }
-        
-        // Generar HTML
-        let html = '';
-        
-        relacionados.forEach(productoRel => {
-            html += `
-                <div class="slider-item">
-                    ${renderizarProductoCard(productoRel)}
-                </div>
-            `;
-        });
-        
-        sliderTrack.innerHTML = html;
-        
-        // Reiniciar slider
-        inicializarSlider();
-        
-        // Añadir event listeners para botones de añadir al carrito
-        sliderTrack.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-            btn.addEventListener('click', async function() {
-                const productId = this.getAttribute('data-product-id');
-                
-                // Obtener datos del producto para el carrito
-                const productData = await window.productosManager.obtenerDatosProductoParaCarrito(productId);
-                
-                // Añadir al carrito
-                if (window.karumyCart && productData) {
-                    window.karumyCart.addItem(productData);
-                }
-            });
-        });
-    } catch (error) {
-        console.error('Error al cargar productos relacionados:', error);
-        document.querySelector('.related-products').style.display = 'none';
-    }
-}
-
-// Inicializar slider de productos relacionados
-function inicializarSlider() {
-    const sliderTrack = document.querySelector('.slider-track');
-    const sliderItems = document.querySelectorAll('.slider-item');
-    const prevBtn = document.querySelector('.slider-prev');
-    const nextBtn = document.querySelector('.slider-next');
-    
-    if (!sliderTrack || !sliderItems.length || !prevBtn || !nextBtn) return;
-    
-    let currentIndex = 0;
-    const slideWidth = sliderItems[0].offsetWidth;
-    const gap = 30; // Debe coincidir con el gap en CSS
-    
-    function getVisibleItems() {
-        const containerWidth = document.querySelector('.slider-container').offsetWidth;
-        return Math.floor(containerWidth / (slideWidth + gap));
-    }
-    
-    function updateSlider() {
-        const visibleItems = getVisibleItems();
-        const maxIndex = sliderItems.length - visibleItems;
-        
-        if (currentIndex < 0) currentIndex = 0;
-        if (currentIndex > maxIndex) currentIndex = maxIndex;
-        
-        const offset = -currentIndex * (slideWidth + gap);
-        sliderTrack.style.transform = `translateX(${offset}px)`;
-        
-        // Activar/desactivar botones según posición
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= maxIndex;
-        
-        // Reflejar estado visual
-        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
-    }
-    
-    // Event listeners para navegación
-    prevBtn.addEventListener('click', function() {
-        currentIndex--;
-        updateSlider();
-    });
-    
-    nextBtn.addEventListener('click', function() {
-        currentIndex++;
-        updateSlider();
-    });
-    
-    // Inicializar
-    updateSlider();
-    
-    // Actualizar en resize
-    window.addEventListener('resize', updateSlider);
-    
-    return {
-        update: updateSlider
-    };
-}
-
-// Cargar productos destacados en la página de inicio
-async function cargarProductosDestacados() {
-    const destacadosContainer = document.querySelector('.productos-carousel .carousel-track');
-    if (!destacadosContainer) return;
-    
-    try {
-        // Esperar a que los datos estén cargados
-        await window.productosManager.loadPromise;
-        
-        // Obtener productos destacados
-        const destacados = await window.productosManager.obtenerProductosDestacados(8);
-        
-        // Generar HTML
-        let html = '';
-        
-        destacados.forEach(producto => {
-            html += `
-                <div class="producto-slide">
-                    ${renderizarProductoCard(producto)}
-                </div>
-            `;
-        });
-        
-        destacadosContainer.innerHTML = html;
-        
-        // Añadir event listeners para botones de añadir al carrito
-        destacadosContainer.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-            btn.addEventListener('click', async function() {
-                const productId = this.getAttribute('data-product-id');
-                
-                // Obtener datos del producto para el carrito
-                const productData = await window.productosManager.obtenerDatosProductoParaCarrito(productId);
-                
-                // Añadir al carrito
-                if (window.karumyCart && productData) {
-                    window.karumyCart.addItem(productData);
-                }
-            });
-        });
-    } catch (error) {
-        console.error('Error al cargar productos destacados:', error);
-    }
+    return productos;
 }
 
 // Inicializar cuando el DOM esté listo
-
-
 document.addEventListener('DOMContentLoaded', function() {
     
     // Cargar productos según la página actual
@@ -815,6 +349,14 @@ document.addEventListener('DOMContentLoaded', function() {
         cargarProductosDestacados();
     } else if (currentPage === 'catalogo.html') {
         cargarProductosEnCatalogo();
+        
+        // Añadir event listener para el cambio en el dropdown de ordenamiento
+        const sortBySelect = document.getElementById('sortBy');
+        if (sortBySelect) {
+            sortBySelect.addEventListener('change', function() {
+                cargarProductosEnCatalogo();
+            });
+        }
     } else if (currentPage === 'producto.html') {
         cargarProductoIndividual();
     }
