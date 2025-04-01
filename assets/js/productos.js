@@ -804,7 +804,10 @@ async function cargarProductosDestacados() {
 }
 
 // Inicializar cuando el DOM esté listo
+
+
 document.addEventListener('DOMContentLoaded', function() {
+    
     // Cargar productos según la página actual
     const currentPage = window.location.pathname.split('/').pop();
     
