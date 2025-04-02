@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="assets/css/cart.css">
     
     <style>
+
         /* Estilos específicos para la página de producto */
         .product-container {
             max-width: 1200px;
@@ -568,6 +569,192 @@
                 justify-content: center;
             }
         }
+        /* Estilos para la sección de productos relacionados */
+.related-products {
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.related-products h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.related-products .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* Responsive para productos relacionados */
+@media (max-width: 1200px) {
+    .related-products .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .related-products .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .related-products .products-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Asegurarse de que las tarjetas de producto tengan el mismo estilo que en el catálogo */
+.related-products .product-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.related-products .product-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.related-products .product-image {
+    position: relative;
+    overflow: hidden;
+    padding-top: 100%; /* Aspect ratio 1:1 */
+}
+
+.related-products .product-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.related-products .product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.related-products .product-actions {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: bottom 0.3s ease;
+}
+
+.related-products .product-card:hover .product-actions {
+    bottom: 0;
+}
+
+.related-products .action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.related-products .action-btn:hover {
+    background-color: #f8c291;
+    border-color: #f8c291;
+    color: #fff;
+}
+
+.related-products .product-tags {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.related-products .product-tag {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.related-products .new-tag {
+    background-color: #55efc4;
+    color: #fff;
+}
+
+.related-products .sale-tag {
+    background-color: #ff7675;
+    color: #fff;
+}
+
+.related-products .product-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.related-products .product-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.related-products .product-title a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.related-products .product-title a:hover {
+    color: #f8c291;
+}
+
+.related-products .product-category {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.related-products .product-price {
+    margin-top: auto;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.related-products .current-price {
+    color: #f8c291;
+    font-size: 18px;
+}
+
+.related-products .old-price {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 14px;
+}
     </style>
 </head>
 
@@ -871,109 +1058,13 @@
             </div>
             
             <!-- Productos relacionados -->
-            <div class="related-products">
-                <h2 class="section-title">También te puede interesar</h2>
-                
-                <div class="products-slider">
-                    <button class="slider-arrow slider-prev">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    
-                    <div class="slider-container">
-                        <div class="slider-track">
-                            <!-- Producto 1 -->
-                            <div class="slider-item">
-                                <div class="product-card" data-product-id="mantequilla-corporal-chocolate">
-                                    <div class="product-image">
-                                        <div class="image-placeholder">
-                                            <i class="fas fa-cookie"></i>
-                                        </div>
-                                        <div class="product-tags">
-                                            <span class="product-tag tag-sale">Oferta</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-info">
-                                        <h3 class="product-name">Mantequilla Corporal Chocolate</h3>
-                                        <div class="product-category">Mantequillas Corporales</div>
-                                        <div class="product-price">
-                                            <span class="old-price">$45,000</span>
-                                            $38,000
-                                        </div>
-                                        <div class="product-actions">
-                                            <a href="producto.html?id=mantequilla-corporal-chocolate" class="view-product">Ver detalles</a>
-                                            <button class="add-to-cart-btn">Añadir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Producto 2 -->
-                            <div class="slider-item">
-                                <div class="product-card" data-product-id="locion-corporal">
-                                    <div class="product-image">
-                                        <div class="image-placeholder">
-                                            <i class="fas fa-soap"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-info">
-                                        <h3 class="product-name">Loción Corporal</h3>
-                                        <div class="product-category">Lociones Corporales</div>
-                                        <div class="product-price">$38,000</div>
-                                        <div class="product-actions">
-                                            <a href="producto.html?id=locion-corporal" class="view-product">Ver detalles</a>
-                                            <button class="add-to-cart-btn">Añadir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Producto 3 -->
-                            <div class="slider-item">
-                                <div class="product-card" data-product-id="exfoliante-facial">
-                                    <div class="product-image">
-                                        <div class="image-placeholder">
-                                            <i class="fas fa-leaf"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-info">
-                                        <h3 class="product-name">Exfoliante Facial</h3>
-                                        <div class="product-category">Exfoliantes</div>
-                                        <div class="product-price">$45,000</div>
-                                        <div class="product-actions">
-                                            <a href="producto.html?id=exfoliante-facial" class="view-product">Ver detalles</a>
-                                            <button class="add-to-cart-btn">Añadir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Producto 4 -->
-                            <div class="slider-item">
-                                <div class="product-card" data-product-id="mascarilla-hidratante">
-                                    <div class="product-image">
-                                        <div class="image-placeholder">
-                                            <i class="fas fa-mask"></i>
-                                        </div>
-                                    </div>
-                                    <div class="product-info">
-                                        <h3 class="product-name">Mascarilla Hidratante</h3>
-                                        <div class="product-category">Mascarillas</div>
-                                        <div class="product-price">$35,000</div>
-                                        <div class="product-actions">
-                                            <a href="producto.html?id=mascarilla-hidratante" class="view-product">Ver detalles</a>
-                                            <button class="add-to-cart-btn">Añadir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button class="slider-arrow slider-next">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
+            <!-- Sección de productos relacionados -->
+<section class="related-products container">
+    <h2>También te puede interesar</h2>
+    <div class="products-grid">
+        <!-- Los productos relacionados se cargarán dinámicamente aquí -->
+    </div>
+</section>
         </div>
     </main>
     

@@ -540,70 +540,77 @@ async function cargarProductoIndividual() {
 function actualizarContenidoTabs(producto) {
     // Tab de descripción detallada
     const descriptionTab = document.getElementById('description-tab');
-    if (descriptionTab && producto.descripcion_detallada) {
+    if (descriptionTab) {
         // Mantener el título h3
         const titulo = descriptionTab.querySelector('h3');
         descriptionTab.innerHTML = '';
         descriptionTab.appendChild(titulo);
         
-        // Añadir párrafos de la descripción detallada
-        if (typeof producto.descripcion_detallada === 'string') {
-            // Si es un string, dividirlo en párrafos
-            const parrafos = producto.descripcion_detallada.split('\n\n');
-            parrafos.forEach(parrafo => {
-                const p = document.createElement('p');
-                p.textContent = parrafo;
-                descriptionTab.appendChild(p);
-            });
-        } else if (Array.isArray(producto.descripcion_detallada)) {
-            // Si es un array, cada elemento es un párrafo
-            producto.descripcion_detallada.forEach(parrafo => {
-                const p = document.createElement('p');
-                p.textContent = parrafo;
-                descriptionTab.appendChild(p);
-            });
-        }
-        
-        // Añadir beneficios detallados si existen
-        if (producto.beneficios_detallados && producto.beneficios_detallados.length > 0) {
-            const h3 = document.createElement('h3');
-            h3.textContent = 'Principales beneficios:';
-            descriptionTab.appendChild(h3);
+        if (producto.descripcion_detallada) {
+            // Añadir párrafos de la descripción detallada
+            if (typeof producto.descripcion_detallada === 'string') {
+                // Si es un string, dividirlo en párrafos
+                const parrafos = producto.descripcion_detallada.split('\n\n');
+                parrafos.forEach(parrafo => {
+                    const p = document.createElement('p');
+                    p.textContent = parrafo;
+                    descriptionTab.appendChild(p);
+                });
+            } else if (Array.isArray(producto.descripcion_detallada)) {
+                // Si es un array, cada elemento es un párrafo
+                producto.descripcion_detallada.forEach(parrafo => {
+                    const p = document.createElement('p');
+                    p.textContent = parrafo;
+                    descriptionTab.appendChild(p);
+                });
+            }
             
-            const ul = document.createElement('ul');
-            producto.beneficios_detallados.forEach(beneficio => {
-                const li = document.createElement('li');
+            // Añadir beneficios detallados si existen
+            if (producto.beneficios_detallados && producto.beneficios_detallados.length > 0) {
+                const h3 = document.createElement('h3');
+                h3.textContent = 'Principales beneficios:';
+                descriptionTab.appendChild(h3);
                 
-                if (typeof beneficio === 'object' && beneficio.titulo && beneficio.descripcion) {
-                    const strong = document.createElement('strong');
-                    strong.textContent = beneficio.titulo + ': ';
-                    li.appendChild(strong);
-                    li.appendChild(document.createTextNode(beneficio.descripcion));
-                } else {
-                    li.textContent = beneficio;
-                }
-                
-                ul.appendChild(li);
-            });
-            descriptionTab.appendChild(ul);
+                const ul = document.createElement('ul');
+                producto.beneficios_detallados.forEach(beneficio => {
+                    const li = document.createElement('li');
+                    
+                    if (typeof beneficio === 'object' && beneficio.titulo && beneficio.descripcion) {
+                        const strong = document.createElement('strong');
+                        strong.textContent = beneficio.titulo + ': ';
+                        li.appendChild(strong);
+                        li.appendChild(document.createTextNode(beneficio.descripcion));
+                    } else {
+                        li.textContent = beneficio;
+                    }
+                    
+                    ul.appendChild(li);
+                });
+                descriptionTab.appendChild(ul);
+            }
+        } else {
+            // Mostrar mensaje por defecto si no hay descripción detallada
+            const p = document.createElement('p');
+            p.textContent = `${producto.nombre} es un producto de alta calidad de Karumy Cosmeticos. Estamos trabajando en una descripción detallada. Mientras tanto, puedes contactarnos para más información.`;
+            descriptionTab.appendChild(p);
         }
     }
     
     // Tab de ingredientes
     const ingredientsTab = document.getElementById('ingredients-tab');
-    if (ingredientsTab && producto.ingredientes) {
+    if (ingredientsTab) {
         // Mantener el título h3
         const titulo = ingredientsTab.querySelector('h3');
         ingredientsTab.innerHTML = '';
         ingredientsTab.appendChild(titulo);
         
-        // Añadir párrafo introductorio
-        const p = document.createElement('p');
-        p.textContent = producto.ingredientes_intro || `Nuestro producto ${producto.nombre} está formulado con ingredientes de alta calidad seleccionados por sus propiedades nutritivas:`;
-        ingredientsTab.appendChild(p);
-        
-        // Añadir lista de ingredientes
-        if (producto.ingredientes.length > 0) {
+        if (producto.ingredientes && producto.ingredientes.length > 0) {
+            // Añadir párrafo introductorio
+            const p = document.createElement('p');
+            p.textContent = producto.ingredientes_intro || `Nuestro producto ${producto.nombre} está formulado con ingredientes de alta calidad seleccionados por sus propiedades nutritivas:`;
+            ingredientsTab.appendChild(p);
+            
+            // Añadir lista de ingredientes
             const ul = document.createElement('ul');
             producto.ingredientes.forEach(ingrediente => {
                 const li = document.createElement('li');
@@ -620,177 +627,285 @@ function actualizarContenidoTabs(producto) {
                 ul.appendChild(li);
             });
             ingredientsTab.appendChild(ul);
-        }
-        
-        // Añadir información "Sin" ingredientes nocivos
-        if (producto.sin_ingredientes && producto.sin_ingredientes.length > 0) {
-            const pSin = document.createElement('p');
-            const strong = document.createElement('strong');
-            strong.textContent = 'Sin: ';
-            pSin.appendChild(strong);
-            pSin.appendChild(document.createTextNode(producto.sin_ingredientes.join(', ') + '.'));
-            ingredientsTab.appendChild(pSin);
+            
+            // Añadir información "Sin" ingredientes nocivos
+            if (producto.sin_ingredientes && producto.sin_ingredientes.length > 0) {
+                const pSin = document.createElement('p');
+                const strong = document.createElement('strong');
+                strong.textContent = 'Sin: ';
+                pSin.appendChild(strong);
+                pSin.appendChild(document.createTextNode(producto.sin_ingredientes.join(', ') + '.'));
+                ingredientsTab.appendChild(pSin);
+            }
+        } else {
+            // Mostrar mensaje por defecto si no hay ingredientes
+            const p = document.createElement('p');
+            p.textContent = `La información detallada de ingredientes para ${producto.nombre} estará disponible próximamente. Todos nuestros productos están formulados con ingredientes naturales de alta calidad.`;
+            ingredientsTab.appendChild(p);
         }
     }
     
     // Tab de modo de uso
     const howToUseTab = document.getElementById('how-to-use-tab');
-    if (howToUseTab && producto.modo_uso) {
+    if (howToUseTab) {
         // Mantener el título h3
         const titulo = howToUseTab.querySelector('h3');
         howToUseTab.innerHTML = '';
         howToUseTab.appendChild(titulo);
         
-        // Añadir párrafo introductorio
-        const p = document.createElement('p');
-        p.textContent = producto.modo_uso_intro || `Para obtener los mejores resultados con nuestro producto ${producto.nombre}, sigue estos sencillos pasos:`;
-        howToUseTab.appendChild(p);
-        
-        // Añadir pasos numerados
-        if (producto.modo_uso.pasos && producto.modo_uso.pasos.length > 0) {
-            const ol = document.createElement('ol');
-            producto.modo_uso.pasos.forEach(paso => {
-                const li = document.createElement('li');
-                
-                if (typeof paso === 'object' && paso.titulo && paso.descripcion) {
-                    const strong = document.createElement('strong');
-                    strong.textContent = paso.titulo + ': ';
-                    li.appendChild(strong);
-                    li.appendChild(document.createTextNode(paso.descripcion));
-                } else {
-                    li.textContent = paso;
-                }
-                
-                ol.appendChild(li);
-            });
-            howToUseTab.appendChild(ol);
-        }
-        
-        // Añadir consejos adicionales
-        if (producto.modo_uso.consejos && producto.modo_uso.consejos.length > 0) {
-            const pConsejos = document.createElement('p');
-            const strong = document.createElement('strong');
-            strong.textContent = 'Consejos adicionales:';
-            pConsejos.appendChild(strong);
-            howToUseTab.appendChild(pConsejos);
+        if (producto.modo_uso) {
+            // Añadir párrafo introductorio
+            const p = document.createElement('p');
+            p.textContent = producto.modo_uso_intro || `Para obtener los mejores resultados con nuestro producto ${producto.nombre}, sigue estos sencillos pasos:`;
+            howToUseTab.appendChild(p);
             
-            const ul = document.createElement('ul');
-            producto.modo_uso.consejos.forEach(consejo => {
-                const li = document.createElement('li');
-                li.textContent = consejo;
-                ul.appendChild(li);
-            });
-            howToUseTab.appendChild(ul);
+            // Añadir pasos numerados
+            if (producto.modo_uso.pasos && producto.modo_uso.pasos.length > 0) {
+                const ol = document.createElement('ol');
+                producto.modo_uso.pasos.forEach(paso => {
+                    const li = document.createElement('li');
+                    
+                    if (typeof paso === 'object' && paso.titulo && paso.descripcion) {
+                        const strong = document.createElement('strong');
+                        strong.textContent = paso.titulo + ': ';
+                        li.appendChild(strong);
+                        li.appendChild(document.createTextNode(paso.descripcion));
+                    } else {
+                        li.textContent = paso;
+                    }
+                    
+                    ol.appendChild(li);
+                });
+                howToUseTab.appendChild(ol);
+            }
+            
+            // Añadir consejos adicionales
+            if (producto.modo_uso.consejos && producto.modo_uso.consejos.length > 0) {
+                const pConsejos = document.createElement('p');
+                const strong = document.createElement('strong');
+                strong.textContent = 'Consejos adicionales:';
+                pConsejos.appendChild(strong);
+                howToUseTab.appendChild(pConsejos);
+                
+                const ul = document.createElement('ul');
+                producto.modo_uso.consejos.forEach(consejo => {
+                    const li = document.createElement('li');
+                    li.textContent = consejo;
+                    ul.appendChild(li);
+                });
+                howToUseTab.appendChild(ul);
+            }
+        } else {
+            // Mostrar mensaje por defecto si no hay modo de uso
+            const p = document.createElement('p');
+            p.textContent = `Para usar ${producto.nombre}, aplica una pequeña cantidad sobre la piel limpia y seca con movimientos circulares suaves. Para mejores resultados, úsalo diariamente como parte de tu rutina de cuidado personal.`;
+            howToUseTab.appendChild(p);
+            
+            const pConsulta = document.createElement('p');
+            pConsulta.textContent = `Para instrucciones más específicas, por favor contáctanos o consulta con un especialista.`;
+            howToUseTab.appendChild(pConsulta);
         }
     }
     
     // Tab de opiniones
     const reviewsTab = document.getElementById('reviews-tab');
-    if (reviewsTab && producto.opiniones && producto.opiniones.length > 0) {
+    if (reviewsTab) {
         // Mantener el título h3
         const titulo = reviewsTab.querySelector('h3');
         reviewsTab.innerHTML = '';
         reviewsTab.appendChild(titulo);
         
-        // Añadir opiniones
-        producto.opiniones.forEach(opinion => {
-            const reviewDiv = document.createElement('div');
-            reviewDiv.className = 'review';
-            
-            // Crear header de la opinión
-            const headerDiv = document.createElement('div');
-            headerDiv.className = 'review-header';
-            
-            // Nombre del reviewer
-            const nameDiv = document.createElement('div');
-            nameDiv.className = 'reviewer-name';
-            nameDiv.textContent = opinion.nombre;
-            headerDiv.appendChild(nameDiv);
-            
-            // Rating con estrellas
-            const ratingDiv = document.createElement('div');
-            ratingDiv.className = 'review-rating';
-            for (let i = 1; i <= 5; i++) {
-                const star = document.createElement('i');
-                star.className = i <= opinion.rating ? 'fas fa-star' : 'far fa-star';
-                ratingDiv.appendChild(star);
-            }
-            headerDiv.appendChild(ratingDiv);
-            
-            // Fecha
-            const dateDiv = document.createElement('div');
-            dateDiv.className = 'review-date';
-            dateDiv.textContent = opinion.fecha;
-            headerDiv.appendChild(dateDiv);
-            
-            reviewDiv.appendChild(headerDiv);
-            
-            // Contenido de la opinión
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'review-content';
-            const p = document.createElement('p');
-            p.textContent = opinion.texto;
-            contentDiv.appendChild(p);
-            
-            reviewDiv.appendChild(contentDiv);
-            
-            // Añadir la opinión completa al tab
-            reviewsTab.appendChild(reviewDiv);
-        });
-        
-        // Si no hay opiniones, mostrar mensaje
-        if (producto.opiniones.length === 0) {
+        if (producto.opiniones && producto.opiniones.length > 0) {
+            // Añadir opiniones
+            producto.opiniones.forEach(opinion => {
+                const reviewDiv = document.createElement('div');
+                reviewDiv.className = 'review';
+                
+                // Crear header de la opinión
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'review-header';
+                
+                // Nombre del reviewer
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'reviewer-name';
+                nameDiv.textContent = opinion.nombre;
+                headerDiv.appendChild(nameDiv);
+                
+                // Rating con estrellas
+                const ratingDiv = document.createElement('div');
+                ratingDiv.className = 'review-rating';
+                for (let i = 1; i <= 5; i++) {
+                    const star = document.createElement('i');
+                    star.className = i <= opinion.rating ? 'fas fa-star' : 'far fa-star';
+                    ratingDiv.appendChild(star);
+                }
+                headerDiv.appendChild(ratingDiv);
+                
+                // Fecha
+                const dateDiv = document.createElement('div');
+                dateDiv.className = 'review-date';
+                dateDiv.textContent = opinion.fecha;
+                headerDiv.appendChild(dateDiv);
+                
+                reviewDiv.appendChild(headerDiv);
+                
+                // Contenido de la opinión
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'review-content';
+                const p = document.createElement('p');
+                p.textContent = opinion.texto;
+                contentDiv.appendChild(p);
+                
+                reviewDiv.appendChild(contentDiv);
+                
+                // Añadir la opinión completa al tab
+                reviewsTab.appendChild(reviewDiv);
+            });
+        } else {
+            // Mostrar mensaje si no hay opiniones
             const noReviewsP = document.createElement('p');
             noReviewsP.textContent = 'Aún no hay opiniones para este producto. ¡Sé el primero en opinar!';
             reviewsTab.appendChild(noReviewsP);
+            
+            // Añadir formulario o botón para dejar opinión
+            const reviewCTA = document.createElement('div');
+            reviewCTA.className = 'review-cta';
+            reviewCTA.innerHTML = `
+                <p>¿Has usado ${producto.nombre}? Comparte tu experiencia con otros clientes.</p>
+                <button class="btn-primary" id="write-review-btn">Escribir una opinión</button>
+            `;
+            reviewsTab.appendChild(reviewCTA);
+            
+            // Añadir event listener al botón (puedes implementar la funcionalidad después)
+            setTimeout(() => {
+                const writeReviewBtn = document.getElementById('write-review-btn');
+                if (writeReviewBtn) {
+                    writeReviewBtn.addEventListener('click', function() {
+                        alert('Próximamente podrás dejar tu opinión. ¡Gracias por tu interés!');
+                    });
+                }
+            }, 100);
         }
     }
 }
 
 // Función para cargar productos relacionados
 async function cargarProductosRelacionados(producto) {
-    const sliderTrack = document.querySelector('.related-products .slider-track');
-    if (!sliderTrack || !producto) return;
-    
     try {
-        // Obtener productos relacionados
-        const productosRelacionados = await window.productosManager.obtenerProductosRelacionados(producto);
+        // Esperar a que los datos estén cargados
+        await window.productosManager.loadPromise;
         
-        // Si no hay productos relacionados, obtener algunos destacados
+        // Obtener productos de la misma categoría (excluyendo el producto actual)
+        const productosRelacionados = await window.productosManager.obtenerProductosPorCategoria(producto.categoria, 4, producto.id);
+        
+        // Si no hay productos relacionados específicos, intentar obtener productos destacados
         let productosAMostrar = productosRelacionados.length > 0 ? 
             productosRelacionados : 
-            await window.productosManager.obtenerProductosDestacados(4);
-        
-        // Asegurarse de que el producto actual no esté en los relacionados
-        productosAMostrar = productosAMostrar.filter(p => p.id !== producto.id);
+            await window.productosManager.obtenerProductosDestacados(4, producto.id);
         
         // Limitar a 4 productos
         productosAMostrar = productosAMostrar.slice(0, 4);
         
-        // Renderizar cada producto
-        let html = '';
-        productosAMostrar.forEach(producto => {
-            html += `
-                <div class="slider-item">
-                    ${renderizarProductoCard(producto)}
+        // Obtener el contenedor de productos relacionados
+        const contenedorRelacionados = document.querySelector('.related-products .products-grid');
+        if (!contenedorRelacionados) {
+            console.error('No se encontró el contenedor de productos relacionados');
+            return;
+        }
+        
+        // Limpiar el contenedor
+        contenedorRelacionados.innerHTML = '';
+        
+        // Añadir los productos relacionados
+        productosAMostrar.forEach(productoRelacionado => {
+            // Crear el elemento de producto con el mismo formato que en el catálogo
+            const productoElement = document.createElement('div');
+            productoElement.className = 'product-card';
+            productoElement.setAttribute('data-product-id', productoRelacionado.id);
+            
+            // Formatear precio
+            let precioHTML = '';
+            if (productoRelacionado.precio_oferta) {
+                const precioOriginalFormateado = window.productosManager.formatearPrecio(productoRelacionado.precio);
+                const precioOfertaFormateado = window.productosManager.formatearPrecio(productoRelacionado.precio_oferta);
+                
+                precioHTML = `
+                    <div class="product-price">
+                        <span class="old-price">${precioOriginalFormateado}</span>
+                        <span class="current-price">${precioOfertaFormateado}</span>
+                    </div>
+                `;
+            } else {
+                precioHTML = `
+                    <div class="product-price">
+                        <span class="current-price">${window.productosManager.formatearPrecio(productoRelacionado.precio)}</span>
+                    </div>
+                `;
+            }
+            
+            // Crear etiquetas de nuevo y oferta
+            const etiquetasHTML = [];
+            if (productoRelacionado.es_nuevo) {
+                etiquetasHTML.push('<span class="product-tag new-tag">Nuevo</span>');
+            }
+            if (productoRelacionado.es_oferta) {
+                etiquetasHTML.push('<span class="product-tag sale-tag">Oferta</span>');
+            }
+            
+            // Construir HTML del producto
+            productoElement.innerHTML = `
+                <div class="product-image">
+                    <a href="producto.html?id=${productoRelacionado.id}">
+                        <img src="${productoRelacionado.imagen_principal}" alt="${productoRelacionado.nombre}">
+                    </a>
+                    <div class="product-actions">
+                        <button class="action-btn quick-view-btn" data-product-id="${productoRelacionado.id}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn add-to-cart-btn" data-product-id="${productoRelacionado.id}">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                        <button class="action-btn add-to-wishlist-btn" data-product-id="${productoRelacionado.id}">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-tags">
+                        ${etiquetasHTML.join('')}
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">
+                        <a href="producto.html?id=${productoRelacionado.id}">${productoRelacionado.nombre}</a>
+                    </h3>
+                    <div class="product-category">${productoRelacionado.categoria_nombre}</div>
+                    ${precioHTML}
                 </div>
             `;
+            
+            // Añadir el producto al contenedor
+            contenedorRelacionados.appendChild(productoElement);
         });
         
-        sliderTrack.innerHTML = html;
-        
-        // Añadir event listeners para los botones de añadir al carrito
-        sliderTrack.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-            btn.addEventListener('click', async function() {
+        // Añadir event listeners a los botones
+        document.querySelectorAll('.related-products .quick-view-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
                 const productId = this.getAttribute('data-product-id');
-                
-                // Obtener datos del producto para el carrito
-                const productData = await window.productosManager.obtenerDatosProductoParaCarrito(productId);
-                
-                // Añadir al carrito
-                if (window.karumyCart && productData) {
-                    window.karumyCart.addItem(productData);
-                }
+                abrirVistaRapida(productId);
+            });
+        });
+        
+        document.querySelectorAll('.related-products .add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+                window.cartManager.agregarAlCarrito(productId, 1);
+            });
+        });
+        
+        document.querySelectorAll('.related-products .add-to-wishlist-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+                window.wishlistManager.toggleWishlistItem(productId);
+                actualizarIconoWishlist(this, productId);
             });
         });
         
@@ -798,6 +913,23 @@ async function cargarProductosRelacionados(producto) {
         console.error('Error al cargar productos relacionados:', error);
     }
 }
+
+// Función para actualizar el icono de wishlist
+function actualizarIconoWishlist(button, productId) {
+    const isInWishlist = window.wishlistManager.isInWishlist(productId);
+    const icon = button.querySelector('i');
+    
+    if (isInWishlist) {
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+        icon.classList.add('text-danger');
+    } else {
+        icon.classList.remove('fas');
+        icon.classList.remove('text-danger');
+        icon.classList.add('far');
+    }
+}
+
 // Updated function to correctly set breadcrumbs for product detail page
 async function updateBreadcrumbs(producto) {
     // Try different possible selectors for breadcrumbs
