@@ -378,7 +378,6 @@ async function cargarProductosDestacados() {
     }
 }
 
-// Función para cargar un producto individual en la página de producto
 async function cargarProductoIndividual() {
     try {
         // Obtener el ID del producto de la URL
@@ -411,16 +410,7 @@ async function cargarProductoIndividual() {
         document.querySelector('.product-category').textContent = producto.categoria_nombre;
         
         // Actualizar breadcrumbs
-        const breadcrumbProducto = document.querySelector('.product-breadcrumbs span:last-child');
-        if (breadcrumbProducto) {
-            breadcrumbProducto.textContent = producto.nombre;
-        }
-        
-        const breadcrumbCategoria = document.querySelector('.product-breadcrumbs a:nth-child(5)');
-        if (breadcrumbCategoria) {
-            breadcrumbCategoria.textContent = producto.categoria_nombre;
-            breadcrumbCategoria.href = `catalogo.html?categoria=${producto.categoria_id}`;
-        }
+        updateBreadcrumbs(producto);
         
         // Actualizar precio
         const precioElement = document.querySelector('.product-price');
@@ -455,47 +445,8 @@ async function cargarProductoIndividual() {
             });
         }
         
-        // Actualizar imagen principal
-        const mainImageElement = document.getElementById('main-product-image');
-        if (mainImageElement && producto.imagen_principal) {
-            mainImageElement.src = producto.imagen_principal;
-            mainImageElement.alt = producto.nombre;
-        }
-        
-        // Actualizar galería de imágenes
-        const thumbsContainer = document.querySelector('.gallery-thumbs');
-        if (thumbsContainer && producto.imagenes && producto.imagenes.length > 0) {
-            thumbsContainer.innerHTML = '';
-            
-            // Añadir imagen principal como primer thumb
-            const thumbPrincipal = document.createElement('div');
-            thumbPrincipal.className = 'thumb active';
-            thumbPrincipal.setAttribute('data-image', producto.imagen_principal);
-            thumbPrincipal.innerHTML = `<img src="${producto.imagen_principal}" alt="${producto.nombre} - Vista principal">`;
-            thumbsContainer.appendChild(thumbPrincipal);
-            
-            // Añadir imágenes adicionales
-            producto.imagenes.forEach((imagen, index) => {
-                const thumb = document.createElement('div');
-                thumb.className = 'thumb';
-                thumb.setAttribute('data-image', imagen);
-                thumb.innerHTML = `<img src="${imagen}" alt="${producto.nombre} - Vista ${index + 2}">`;
-                thumbsContainer.appendChild(thumb);
-            });
-            
-            // Añadir event listeners a los nuevos thumbs
-            document.querySelectorAll('.thumb').forEach(thumb => {
-                thumb.addEventListener('click', function() {
-                    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const imageSrc = this.getAttribute('data-image');
-                    if (imageSrc !== 'placeholder') {
-                        mainImageElement.src = imageSrc;
-                    }
-                });
-            });
-        }
+        // Actualizar galería de imágenes usando la nueva función
+        actualizarGaleriaProducto(producto);
         
         // Actualizar metadatos
         const skuElement = document.querySelector('.meta-item:nth-child(1) .meta-label + span');
@@ -510,7 +461,21 @@ async function cargarProductoIndividual() {
         
         const etiquetasElement = document.querySelector('.meta-item:nth-child(3) .meta-label + span');
         if (etiquetasElement && producto.etiquetas) {
-            etiquetasElement.textContent = producto.etiquetas.join(', ');
+            // Si etiquetas es un string JSON, convertirlo a array
+            let etiquetas = producto.etiquetas;
+            if (typeof etiquetas === 'string' && etiquetas.startsWith('"[')) {
+                try {
+                    etiquetas = JSON.parse(JSON.parse(etiquetas));
+                } catch (e) {
+                    console.error('Error al parsear etiquetas:', e);
+                }
+            }
+            
+            if (Array.isArray(etiquetas)) {
+                etiquetasElement.textContent = etiquetas.join(', ');
+            } else {
+                etiquetasElement.textContent = etiquetas || '';
+            }
         }
         
         // Actualizar contenido de los tabs
@@ -535,6 +500,96 @@ async function cargarProductoIndividual() {
         console.error('Error al cargar el producto individual:', error);
     }
 }
+
+async function actualizarGaleriaProducto(producto) {
+    // Actualizar imagen principal
+    const mainImageElement = document.getElementById('main-product-image');
+    if (mainImageElement && producto.imagen_principal) {
+        mainImageElement.src = producto.imagen_principal;
+        mainImageElement.alt = producto.nombre;
+    }
+    
+    // Actualizar galería de thumbnails
+    const thumbsContainer = document.querySelector('.gallery-thumbs');
+    if (thumbsContainer) {
+        thumbsContainer.innerHTML = ''; // Limpiar thumbnails existentes
+        
+        // Crear array de imágenes para la galería
+        const imagenes = [];
+        
+        // Añadir imagen principal como primera imagen
+        if (producto.imagen_principal) {
+            imagenes.push(producto.imagen_principal);
+        }
+        
+        // Añadir imágenes adicionales si existen
+        if (producto.imagenes && Array.isArray(producto.imagenes)) {
+            imagenes.push(...producto.imagenes);
+        }
+        
+        // Si no hay imágenes, usar al menos la imagen principal
+        if (imagenes.length === 0 && producto.imagen_principal) {
+            imagenes.push(producto.imagen_principal);
+        }
+        
+        // Crear thumbnails para cada imagen
+        imagenes.forEach((imagen, index) => {
+            const thumb = document.createElement('div');
+            thumb.className = 'thumb' + (index === 0 ? ' active' : '');
+            thumb.setAttribute('data-image', imagen);
+            
+            // Crear el contenido del thumbnail con la imagen correcta
+            const img = document.createElement('img');
+            img.src = imagen;
+            img.alt = `${producto.nombre} - Vista ${index + 1}`;
+            thumb.appendChild(img);
+            
+            thumbsContainer.appendChild(thumb);
+        });
+        
+        // Si hay menos de 4 imágenes, añadir placeholders
+        const totalThumbs = thumbsContainer.querySelectorAll('.thumb').length;
+        if (totalThumbs < 4) {
+            // Añadir placeholders para completar la galería
+            const iconos = ['fas fa-spa', 'fas fa-leaf', 'fas fa-tint', 'fas fa-heart'];
+            
+            for (let i = totalThumbs; i < 4; i++) {
+                const thumb = document.createElement('div');
+                thumb.className = 'thumb';
+                thumb.setAttribute('data-image', 'placeholder');
+                
+                // Crear placeholder con ícono
+                const placeholder = document.createElement('div');
+                placeholder.className = 'image-placeholder';
+                
+                const icon = document.createElement('i');
+                icon.className = iconos[i % iconos.length];
+                placeholder.appendChild(icon);
+                
+                thumb.appendChild(placeholder);
+                thumbsContainer.appendChild(thumb);
+            }
+        }
+        
+        // Añadir event listeners a los thumbnails
+        document.querySelectorAll('.thumb').forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                // Remover clase active de todos los thumbs
+                document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+                
+                // Añadir clase active al thumb clickeado
+                this.classList.add('active');
+                
+                // Actualizar imagen principal si no es placeholder
+                const imageSrc = this.getAttribute('data-image');
+                if (imageSrc !== 'placeholder' && mainImageElement) {
+                    mainImageElement.src = imageSrc;
+                }
+            });
+        });
+    }
+}
+
 
 // Función para actualizar el contenido de los tabs
 function actualizarContenidoTabs(producto) {
@@ -1477,4 +1532,5 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (currentPage === 'producto.html' || window.location.pathname.includes('producto.html')) {
         cargarProductoIndividual();
     }
+    
 });
