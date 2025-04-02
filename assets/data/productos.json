@@ -136,20 +136,6 @@
       "sku": "LC-250-001"
     },
     {
-      "categoria": "exfoliantes",
-      "categoria_nombre": "Exfoliantes",
-      "descripcion_corta": "Elimina c\u00e9lulas muertas y revitaliza la piel con ingredientes naturales.",
-      "es_nuevo": false,
-      "es_oferta": false,
-      "etiquetas": "\"[\\\"exfoliante\\\", \\\"facial\\\", \\\"renovaci\\\\u00f3n\\\"]\"",
-      "id": "exfoliante-facial",
-      "imagen_principal": "assets/img/productos/exfoliante-facial_20250320181932.jfif",
-      "nombre": "Exfoliante Facial",
-      "precio": 45000.0,
-      "precio_oferta": null,
-      "sku": "EF-100-001"
-    },
-    {
       "categoria": "labiales",
       "categoria_nombre": "Labiales",
       "descripcion_corta": "Hidrataci\u00f3n intensa con un toque de color para unos labios suaves y protegidos.",
