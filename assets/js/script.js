@@ -25,4 +25,47 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Mobile Menu Toggle Functionality - Remove the nested DOMContentLoaded
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const closeMenuButton = document.querySelector('.close-mobile-menu');
+    const overlay = document.querySelector('.overlay');
+    
+    // Toggle mobile menu when hamburger icon is clicked
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+        });
+    }
+    
+    // Close mobile menu when X button is clicked
+    if (closeMenuButton) {
+        closeMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = ''; // Re-enable scrolling
+        });
+    }
+    
+    // Close mobile menu when overlay is clicked
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = ''; // Re-enable scrolling
+        });
+    }
+    
+    // Close mobile menu when clicking on a link (optional)
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-links a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
 });
