@@ -1200,55 +1200,7 @@
                 quantityInput.value = quantity + 1;
             });
             
-            // Slider de productos relacionados
-            const sliderTrack = document.querySelector('.slider-track');
-            const sliderItems = document.querySelectorAll('.slider-item');
-            const prevBtn = document.querySelector('.slider-prev');
-            const nextBtn = document.querySelector('.slider-next');
             
-            let currentIndex = 0;
-            const itemWidth = sliderItems[0].offsetWidth;
-            const gap = 30; // debe coincidir con el gap en CSS
-            
-            function getVisibleItems() {
-                const containerWidth = document.querySelector('.slider-container').offsetWidth;
-                return Math.floor(containerWidth / (itemWidth + gap));
-            }
-            
-            function updateSlider() {
-                const visibleItems = getVisibleItems();
-                const maxIndex = sliderItems.length - visibleItems;
-                
-                if (currentIndex < 0) currentIndex = 0;
-                if (currentIndex > maxIndex) currentIndex = maxIndex;
-                
-                const offset = -currentIndex * (itemWidth + gap);
-                sliderTrack.style.transform = `translateX(${offset}px)`;
-                
-                // Activar/desactivar botones según posición
-                prevBtn.disabled = currentIndex === 0;
-                nextBtn.disabled = currentIndex >= maxIndex;
-                
-                // Reflejar estado visual
-                prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-                nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
-            }
-            
-            prevBtn.addEventListener('click', function() {
-                currentIndex--;
-                updateSlider();
-            });
-            
-            nextBtn.addEventListener('click', function() {
-                currentIndex++;
-                updateSlider();
-            });
-            
-            // Inicializar slider
-            updateSlider();
-            
-            // Actualizar en resize
-            window.addEventListener('resize', updateSlider);
             
             // Añadir al carrito funcionalidad específica de la página de producto
             const addToCartButton = document.getElementById('add-to-cart');

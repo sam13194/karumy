@@ -790,6 +790,8 @@ function actualizarContenidoTabs(producto) {
 }
 
 // Función para cargar productos relacionados
+// Función para cargar productos relacionados
+// Función para cargar productos relacionados
 async function cargarProductosRelacionados(producto) {
     try {
         // Esperar a que los datos estén cargados
@@ -852,21 +854,15 @@ async function cargarProductosRelacionados(producto) {
                 etiquetasHTML.push('<span class="product-tag sale-tag">Oferta</span>');
             }
             
-            // Construir HTML del producto
+            // Construir HTML del producto - Solo con el icono del ojo
             productoElement.innerHTML = `
                 <div class="product-image">
                     <a href="producto.html?id=${productoRelacionado.id}">
                         <img src="${productoRelacionado.imagen_principal}" alt="${productoRelacionado.nombre}">
                     </a>
                     <div class="product-actions">
-                        <button class="action-btn quick-view-btn" data-product-id="${productoRelacionado.id}">
+                        <button class="action-btn quick-view-btn" data-product-id="${productoRelacionado.id}" type="button">
                             <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="action-btn add-to-cart-btn" data-product-id="${productoRelacionado.id}">
-                            <i class="fas fa-shopping-cart"></i>
-                        </button>
-                        <button class="action-btn add-to-wishlist-btn" data-product-id="${productoRelacionado.id}">
-                            <i class="far fa-heart"></i>
                         </button>
                     </div>
                     <div class="product-tags">
@@ -886,34 +882,246 @@ async function cargarProductosRelacionados(producto) {
             contenedorRelacionados.appendChild(productoElement);
         });
         
-        // Añadir event listeners a los botones
-        document.querySelectorAll('.related-products .quick-view-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const productId = this.getAttribute('data-product-id');
-                abrirVistaRapida(productId);
-            });
+        // Usar delegación de eventos para manejar los clics en el botón de vista rápida
+        contenedorRelacionados.addEventListener('click', function(event) {
+            // Encontrar el botón más cercano si se hizo clic en un elemento hijo (como un ícono)
+            const button = event.target.closest('.quick-view-btn');
+            if (!button) return; // Si no se hizo clic en un botón o sus hijos, salir
+            
+            // Obtener el ID del producto
+            const productId = button.getAttribute('data-product-id');
+            if (!productId) return;
+            
+            // Abrir vista rápida
+            event.preventDefault();
+            abrirVistaRapida(productId);
         });
         
-        document.querySelectorAll('.related-products .add-to-cart-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const productId = this.getAttribute('data-product-id');
-                window.cartManager.agregarAlCarrito(productId, 1);
-            });
-        });
-        
-        document.querySelectorAll('.related-products .add-to-wishlist-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const productId = this.getAttribute('data-product-id');
-                window.wishlistManager.toggleWishlistItem(productId);
-                actualizarIconoWishlist(this, productId);
-            });
-        });
+        // Inicializar el slider de productos relacionados después de cargar los productos
+        inicializarSliderProductosRelacionados();
         
     } catch (error) {
         console.error('Error al cargar productos relacionados:', error);
     }
 }
 
+// Nueva función para inicializar el slider de productos relacionados
+// Función adaptable para inicializar el slider
+function inicializarSliderProductosRelacionados() {
+    console.log("Iniciando inicialización del slider con enfoque adaptable");
+    
+    // Buscar el contenedor principal de productos relacionados
+    const relatedProductsContainer = document.querySelector('.related-products');
+    if (!relatedProductsContainer) {
+        console.log('No se encontró el contenedor .related-products');
+        return;
+    }
+    
+    // Detectar la estructura que existe en el HTML
+    const productGrid = relatedProductsContainer.querySelector('.products-grid');
+    const productCards = productGrid ? productGrid.querySelectorAll('.product-card') : [];
+    
+    // Si no hay productos, no hay nada que hacer
+    if (productCards.length === 0) {
+        console.log('No se encontraron productos para mostrar en el slider');
+        return;
+    }
+    
+    console.log(`Encontrados ${productCards.length} productos para el slider`);
+    
+    // Verificar si ya existe una estructura de slider
+    let sliderContainer = relatedProductsContainer.querySelector('.slider-container');
+    let sliderTrack = relatedProductsContainer.querySelector('.slider-track');
+    
+    // Si no existe la estructura del slider, crearla
+    if (!sliderContainer || !sliderTrack) {
+        console.log('Creando estructura de slider...');
+        
+        // Crear contenedor del slider
+        sliderContainer = document.createElement('div');
+        sliderContainer.className = 'slider-container';
+        
+        // Crear track del slider
+        sliderTrack = document.createElement('div');
+        sliderTrack.className = 'slider-track';
+        sliderContainer.appendChild(sliderTrack);
+        
+        // Crear botones de navegación
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'slider-prev';
+        prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'slider-next';
+        nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        
+        // Añadir los botones al contenedor
+        relatedProductsContainer.appendChild(prevBtn);
+        relatedProductsContainer.appendChild(sliderContainer);
+        relatedProductsContainer.appendChild(nextBtn);
+        
+        // Ocultar el grid original
+        if (productGrid) {
+            productGrid.style.display = 'none';
+        }
+        
+        // Mover los productos al track del slider
+        productCards.forEach(card => {
+            const sliderItem = document.createElement('div');
+            sliderItem.className = 'slider-item';
+            
+            // Clonar el producto y añadirlo al item del slider
+            sliderItem.appendChild(card.cloneNode(true));
+            sliderTrack.appendChild(sliderItem);
+        });
+        
+        // Añadir estilos CSS necesarios
+        const styleElement = document.createElement('style');
+        styleElement.textContent = `
+            .slider-container {
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+                margin: 20px 0;
+            }
+            .slider-track {
+                display: flex;
+                gap: 30px;
+                transition: transform 0.3s ease;
+            }
+            .slider-item {
+                flex: 0 0 auto;
+                width: calc(25% - 23px);
+                min-width: 250px;
+            }
+            .slider-prev, .slider-next {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: #fff;
+                border: 1px solid #ddd;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+                z-index: 10;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .slider-prev {
+                left: -20px;
+            }
+            .slider-next {
+                right: -20px;
+            }
+            @media (max-width: 992px) {
+                .slider-item {
+                    width: calc(33.33% - 20px);
+                }
+            }
+            @media (max-width: 768px) {
+                .slider-item {
+                    width: calc(50% - 15px);
+                }
+            }
+            @media (max-width: 576px) {
+                .slider-item {
+                    width: 100%;
+                }
+            }
+        `;
+        document.head.appendChild(styleElement);
+    }
+    
+    // Seleccionar los elementos del slider
+    const sliderItems = sliderTrack.querySelectorAll('.slider-item');
+    const prevBtn = relatedProductsContainer.querySelector('.slider-prev');
+    const nextBtn = relatedProductsContainer.querySelector('.slider-next');
+    
+    if (!sliderItems.length || !prevBtn || !nextBtn) {
+        console.log('Elementos del slider no encontrados después de la creación');
+        return;
+    }
+    
+    // Esperar a que las imágenes se carguen para obtener dimensiones correctas
+    window.addEventListener('load', function() {
+        setTimeout(initializeSlider, 300);
+    });
+    
+    if (document.readyState === 'complete') {
+        setTimeout(initializeSlider, 300);
+    }
+    
+    function initializeSlider() {
+        // Obtener ancho del primer elemento
+        if (!sliderItems[0]) {
+            console.log('No hay elementos en el slider');
+            return;
+        }
+        
+        // Si no podemos obtener el ancho directamente, calcular basado en el contenedor
+        let itemWidth;
+        
+        if (sliderItems[0].offsetWidth > 0) {
+            itemWidth = sliderItems[0].offsetWidth;
+        } else {
+            // Calcular un ancho aproximado basado en el contenedor
+            const containerWidth = sliderContainer.offsetWidth;
+            itemWidth = Math.max(250, containerWidth / 4); // 4 elementos por fila o mínimo 250px
+        }
+        
+        console.log(`Inicializando slider con ancho de elemento: ${itemWidth}px`);
+        
+        const gap = 30; // gap entre elementos
+        let currentIndex = 0;
+        
+        function getVisibleItems() {
+            const containerWidth = sliderContainer.offsetWidth;
+            return Math.max(1, Math.floor(containerWidth / (itemWidth + gap)));
+        }
+        
+        function updateSlider() {
+            const visibleItems = getVisibleItems();
+            const maxIndex = Math.max(0, sliderItems.length - visibleItems);
+            
+            currentIndex = Math.min(Math.max(0, currentIndex), maxIndex);
+            
+            const offset = -currentIndex * (itemWidth + gap);
+            sliderTrack.style.transform = `translateX(${offset}px)`;
+            
+            // Actualizar estado de los botones
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= maxIndex;
+            prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+            nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+        }
+        
+        // Inicializar el slider
+        updateSlider();
+        
+        // Añadir event listeners
+        prevBtn.addEventListener('click', function() {
+            currentIndex--;
+            updateSlider();
+        });
+        
+        nextBtn.addEventListener('click', function() {
+            currentIndex++;
+            updateSlider();
+        });
+        
+        // Actualizar en resize
+        window.addEventListener('resize', updateSlider);
+        
+        console.log('Slider inicializado correctamente');
+    }
+}
+
+
+
+// También puedes ejecutar manualmente desde la consola:
+// diagnosticarSlider();
 // Función para actualizar el icono de wishlist
 function actualizarIconoWishlist(button, productId) {
     const isInWishlist = window.wishlistManager.isInWishlist(productId);
@@ -928,6 +1136,292 @@ function actualizarIconoWishlist(button, productId) {
         icon.classList.remove('text-danger');
         icon.classList.add('far');
     }
+}
+
+// Implementar la función abrirVistaRapida que falta
+async function abrirVistaRapida(productId) {
+    try {
+        // Esperar a que los datos estén cargados
+        await window.productosManager.loadPromise;
+        
+        // Obtener el producto por ID
+        const producto = await window.productosManager.obtenerProductoPorId(productId);
+        if (!producto) {
+            console.error('Producto no encontrado:', productId);
+            return;
+        }
+        
+        // Verificar si ya existe un modal de vista rápida
+        let quickViewModal = document.getElementById('quick-view-modal');
+        
+        // Si no existe, crearlo
+        if (!quickViewModal) {
+            quickViewModal = document.createElement('div');
+            quickViewModal.id = 'quick-view-modal';
+            quickViewModal.className = 'modal';
+            document.body.appendChild(quickViewModal);
+            
+            // Añadir estilos si no existen
+            if (!document.getElementById('quick-view-styles')) {
+                const styles = document.createElement('style');
+                styles.id = 'quick-view-styles';
+                styles.textContent = `
+                    .modal {
+                        display: none;
+                        position: fixed;
+                        z-index: 1000;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        overflow: auto;
+                        background-color: rgba(0,0,0,0.5);
+                    }
+                    .modal-content {
+                        background-color: #fff;
+                        margin: 5% auto;
+                        padding: 20px;
+                        border-radius: 8px;
+                        width: 90%;
+                        max-width: 900px;
+                        position: relative;
+                        max-height: 90vh;
+                        overflow-y: auto;
+                    }
+                    .close-modal {
+                        position: absolute;
+                        right: 15px;
+                        top: 15px;
+                        font-size: 24px;
+                        cursor: pointer;
+                        background: none;
+                        border: none;
+                        color: #333;
+                    }
+                    .quick-view-product {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 20px;
+                    }
+                    .quick-view-image {
+                        flex: 1;
+                        min-width: 300px;
+                    }
+                    .quick-view-image img {
+                        width: 100%;
+                        height: auto;
+                        border-radius: 4px;
+                    }
+                    .quick-view-details {
+                        flex: 1;
+                        min-width: 300px;
+                    }
+                    .quick-view-title {
+                        font-size: 24px;
+                        margin-bottom: 10px;
+                    }
+                    .quick-view-category {
+                        color: #777;
+                        margin-bottom: 15px;
+                    }
+                    .quick-view-description {
+                        margin-bottom: 20px;
+                    }
+                    .quick-view-price {
+                        font-size: 22px;
+                        font-weight: 600;
+                        color: #f8c291;
+                        margin-bottom: 20px;
+                    }
+                    .quick-view-actions {
+                        display: flex;
+                        gap: 10px;
+                        align-items: center;
+                        margin-top: 20px;
+                    }
+                    .quantity-selector {
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid #ddd;
+                        border-radius: 4px;
+                        overflow: hidden;
+                    }
+                    .quantity-btn {
+                        width: 36px;
+                        height: 36px;
+                        background: #f5f5f5;
+                        border: none;
+                        cursor: pointer;
+                    }
+                    .quantity-input {
+                        width: 50px;
+                        height: 36px;
+                        text-align: center;
+                        border: none;
+                        border-left: 1px solid #ddd;
+                        border-right: 1px solid #ddd;
+                    }
+                    .add-to-cart-quick-view {
+                        padding: 10px 20px;
+                        background-color: #f8c291;
+                        color: white;
+                        border: none;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        font-weight: 600;
+                    }
+                    .add-to-cart-quick-view:hover {
+                        background-color: #e5a677;
+                    }
+                    .view-full-details {
+                        margin-top: 20px;
+                        display: inline-block;
+                        color: #f8c291;
+                        text-decoration: none;
+                    }
+                    .view-full-details:hover {
+                        text-decoration: underline;
+                    }
+                    @media (max-width: 768px) {
+                        .modal-content {
+                            width: 95%;
+                            margin: 10% auto;
+                        }
+                    }
+                `;
+                document.head.appendChild(styles);
+            }
+        }
+        
+        // Construir el contenido del modal
+        const modalContent = `
+            <div class="modal-content">
+                <button class="close-modal" aria-label="Cerrar">&times;</button>
+                <div class="quick-view-product">
+                    <div class="quick-view-image">
+                        <img src="${producto.imagen_principal}" alt="${producto.nombre}">
+                    </div>
+                    <div class="quick-view-details">
+                        <h2 class="quick-view-title">${producto.nombre}</h2>
+                        <div class="quick-view-category">${producto.categoria_nombre}</div>
+                        <div class="quick-view-description">${producto.descripcion_corta}</div>
+                        <div class="quick-view-price">${window.productosManager.formatearPrecio(producto.precio_oferta || producto.precio)}</div>
+                        <div class="quick-view-actions">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn decrease-quantity" aria-label="Disminuir cantidad">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                <button class="quantity-btn increase-quantity" aria-label="Aumentar cantidad">+</button>
+                            </div>
+                            <button class="add-to-cart-quick-view" data-product-id="${producto.id}">Añadir al carrito</button>
+                        </div>
+                        <a href="producto.html?id=${producto.id}" class="view-full-details">Ver detalles completos</a>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Actualizar el contenido del modal
+        quickViewModal.innerHTML = modalContent;
+        
+        // Mostrar el modal
+        quickViewModal.style.display = 'block';
+        
+        // Añadir event listeners
+        const closeButton = quickViewModal.querySelector('.close-modal');
+        closeButton.addEventListener('click', () => {
+            quickViewModal.style.display = 'none';
+        });
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        quickViewModal.addEventListener('click', (event) => {
+            if (event.target === quickViewModal) {
+                quickViewModal.style.display = 'none';
+            }
+        });
+        
+        // Controles de cantidad
+        const decreaseBtn = quickViewModal.querySelector('.decrease-quantity');
+        const increaseBtn = quickViewModal.querySelector('.increase-quantity');
+        const quantityInput = quickViewModal.querySelector('.quantity-input');
+        
+        decreaseBtn.addEventListener('click', () => {
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+        
+        increaseBtn.addEventListener('click', () => {
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue < 10) {
+                quantityInput.value = currentValue + 1;
+            }
+        });
+        
+        // Botón de añadir al carrito
+        const addToCartBtn = quickViewModal.querySelector('.add-to-cart-quick-view');
+        addToCartBtn.addEventListener('click', () => {
+            const quantity = parseInt(quantityInput.value);
+            window.cartManager.agregarAlCarrito(producto.id, quantity);
+            mostrarNotificacion('Producto añadido al carrito', 'success');
+            quickViewModal.style.display = 'none';
+        });
+        
+    } catch (error) {
+        console.error('Error al abrir vista rápida:', error);
+    }
+}
+
+// Función para mostrar notificación
+function mostrarNotificacion(mensaje, tipo = 'info') {
+    // Verificar si ya existe un contenedor de notificaciones
+    let notificacionesContainer = document.getElementById('notificaciones-container');
+    
+    if (!notificacionesContainer) {
+        // Crear el contenedor si no existe
+        notificacionesContainer = document.createElement('div');
+        notificacionesContainer.id = 'notificaciones-container';
+        notificacionesContainer.style.position = 'fixed';
+        notificacionesContainer.style.top = '20px';
+        notificacionesContainer.style.right = '20px';
+        notificacionesContainer.style.zIndex = '9999';
+        document.body.appendChild(notificacionesContainer);
+    }
+    
+    // Crear la notificación
+    const notificacion = document.createElement('div');
+    notificacion.className = `notificacion ${tipo}`;
+    notificacion.style.backgroundColor = tipo === 'success' ? '#4CAF50' : '#2196F3';
+    notificacion.style.color = 'white';
+    notificacion.style.padding = '15px 20px';
+    notificacion.style.marginBottom = '10px';
+    notificacion.style.borderRadius = '4px';
+    notificacion.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+    notificacion.style.minWidth = '250px';
+    notificacion.style.opacity = '0';
+    notificacion.style.transform = 'translateX(50px)';
+    notificacion.style.transition = 'opacity 0.3s, transform 0.3s';
+    
+    notificacion.innerHTML = mensaje;
+    
+    // Añadir la notificación al contenedor
+    notificacionesContainer.appendChild(notificacion);
+    
+    // Mostrar la notificación con animación
+    setTimeout(() => {
+        notificacion.style.opacity = '1';
+        notificacion.style.transform = 'translateX(0)';
+    }, 10);
+    
+    // Eliminar la notificación después de 3 segundos
+    setTimeout(() => {
+        notificacion.style.opacity = '0';
+        notificacion.style.transform = 'translateX(50px)';
+        
+        setTimeout(() => {
+            notificacionesContainer.removeChild(notificacion);
+        }, 300);
+    }, 3000);
 }
 
 // Updated function to correctly set breadcrumbs for product detail page
