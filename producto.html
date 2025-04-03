@@ -893,7 +893,7 @@
                     </div>
                     
                     <!-- Opciones del producto -->
-                    <div class="product-options">
+                    <!-- <div class="product-options">
                         <div class="option-group">
                             <label for="size" class="option-label">Tamaño</label>
                             <select id="size" name="size" class="option-select">
@@ -902,7 +902,7 @@
                                 <option value="1000ml">1000ml (+$35,000)</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <!-- Control de cantidad -->
                     <div class="quantity-group">
@@ -1138,110 +1138,72 @@
     <script src="assets/js/cart.js"></script>
     
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Galería de imágenes
-            const mainImage = document.getElementById('main-product-image');
-            const thumbs = document.querySelectorAll('.thumb');
-            
-            thumbs.forEach(thumb => {
-                thumb.addEventListener('click', function() {
-                    // Remover clase active de todos los thumbs
-                    thumbs.forEach(t => t.classList.remove('active'));
-                    
-                    // Añadir clase active al thumb clickeado
-                    this.classList.add('active');
-                    
-                    // Actualizar imagen principal
-                    const imageSrc = this.getAttribute('data-image');
-                    
-                    if (imageSrc !== 'placeholder') {
-                        mainImage.src = imageSrc;
-                    } else {
-                        // Si es placeholder, mostrar un mensaje o manejar de otra forma
-                        console.log('Esta vista no está disponible actualmente');
-                    }
-                });
-            });
-            
-            // Tabs de información
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const tabContents = document.querySelectorAll('.tab-content');
-            
-            tabButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remover clase active de todos los botones y contenidos
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    
-                    // Añadir clase active al botón clickeado
-                    button.classList.add('active');
-                    
-                    // Mostrar el contenido correspondiente
-                    const tabId = button.getAttribute('data-tab');
-                    document.getElementById(`${tabId}-tab`).classList.add('active');
-                });
-            });
-            
-            // Control de cantidad
-            const quantityInput = document.getElementById('product-quantity');
-            const decreaseBtn = document.getElementById('decrease-quantity');
-            const increaseBtn = document.getElementById('increase-quantity');
-            
-            decreaseBtn.addEventListener('click', function() {
-                let quantity = parseInt(quantityInput.value);
-                if (quantity > 1) {
-                    quantityInput.value = quantity - 1;
-                }
-            });
-            
-            increaseBtn.addEventListener('click', function() {
-                let quantity = parseInt(quantityInput.value);
-                quantityInput.value = quantity + 1;
-            });
-            
-            
-            
-            // Añadir al carrito funcionalidad específica de la página de producto
-            const addToCartButton = document.getElementById('add-to-cart');
-            
-            addToCartButton.addEventListener('click', function() {
-                // Obtener datos del producto
-                const productId = document.querySelector('.product-detail').id;
-                const productName = document.querySelector('.product-title').textContent;
+    <!-- Reemplazar el script en línea al final de producto.html con este código -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Galería de imágenes
+        const mainImage = document.getElementById('main-product-image');
+        const thumbs = document.querySelectorAll('.thumb');
+        
+        thumbs.forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                // Remover clase active de todos los thumbs
+                thumbs.forEach(t => t.classList.remove('active'));
                 
-                // Obtener precio actual (sin formatear)
-                const priceText = document.querySelector('.product-price').textContent;
-                const price = parseFloat(priceText.replace(/[^\d]/g, ''));
+                // Añadir clase active al thumb clickeado
+                this.classList.add('active');
                 
-                // Obtener imagen
-                const productImage = document.getElementById('main-product-image').src;
+                // Actualizar imagen principal
+                const imageSrc = this.getAttribute('data-image');
                 
-                // Obtener opciones seleccionadas
-                const sizeSelect = document.getElementById('size');
-                const selectedSize = sizeSelect ? sizeSelect.value : null;
-                
-                // Obtener cantidad
-                const quantity = parseInt(document.getElementById('product-quantity').value);
-                
-                // Crear objeto de producto con opciones
-                const product = {
-                    id: productId,
-                    name: productName,
-                    price: price,
-                    image: productImage,
-                    quantity: quantity,
-                    options: {
-                        size: selectedSize
-                    }
-                };
-                
-                // Añadir al carrito a través de la clase ShoppingCart
-                if (window.karumyCart) {
-                    window.karumyCart.addItem(product);
+                if (imageSrc !== 'placeholder') {
+                    mainImage.src = imageSrc;
+                } else {
+                    // Si es placeholder, mostrar un mensaje o manejar de otra forma
+                    console.log('Esta vista no está disponible actualmente');
                 }
             });
         });
-    </script>
+        
+        // Tabs de información
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remover clase active de todos los botones y contenidos
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Añadir clase active al botón clickeado
+                button.classList.add('active');
+                
+                // Mostrar el contenido correspondiente
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+            });
+        });
+        
+        // Control de cantidad
+        const quantityInput = document.getElementById('product-quantity');
+        const decreaseBtn = document.getElementById('decrease-quantity');
+        const increaseBtn = document.getElementById('increase-quantity');
+        
+        decreaseBtn.addEventListener('click', function() {
+            let quantity = parseInt(quantityInput.value);
+            if (quantity > 1) {
+                quantityInput.value = quantity - 1;
+            }
+        });
+        
+        increaseBtn.addEventListener('click', function() {
+            let quantity = parseInt(quantityInput.value);
+            quantityInput.value = quantity + 1;
+        });
+        
+        // IMPORTANTE: El listener para "Añadir al carrito" ha sido eliminado
+        // para evitar duplicaciones con el que ya existe en cart.js
+    });
+</script>
 </body>
 </html>
