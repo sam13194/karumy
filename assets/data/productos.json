@@ -164,20 +164,6 @@
       "sku": "CO-18-001"
     },
     {
-      "categoria": "kits",
-      "categoria_nombre": "Kits",
-      "descripcion_corta": "L\u00ednea de 6 productos para tratar el acn\u00e9. Limpia, purifica y reduce imperfecciones.",
-      "es_nuevo": true,
-      "es_oferta": false,
-      "etiquetas": "\"[\\\"acn\\u00e9\\\", \\\"kit\\\", \\\"facial\\\"]\"",
-      "id": "kit-facial-acido-salicilico",
-      "imagen_principal": "assets/img/productos/kit-facial-acido-salicilico_20250327005959.jpg",
-      "nombre": "Kit facial \u00e1cido salic\u00edlico",
-      "precio": 85000.0,
-      "precio_oferta": null,
-      "sku": "KT-001"
-    },
-    {
       "categoria": "mascarillas",
       "categoria_nombre": "Mascarillas",
       "descripcion_corta": "Reafirma, ilumina y previene el envejecimiento. Gel antioxidante de r\u00e1pida absorci\u00f3n.",
@@ -204,20 +190,6 @@
       "precio": 20000.0,
       "precio_oferta": null,
       "sku": "AC-003"
-    },
-    {
-      "categoria": "kits",
-      "categoria_nombre": "Kits",
-      "descripcion_corta": "L\u00ednea anti-envejecimiento de 6 productos con extracto de perilla. Hidrataci\u00f3n y firmeza.",
-      "es_nuevo": true,
-      "es_oferta": false,
-      "etiquetas": "\"[\\\"antiage\\\", \\\"kit\\\", \\\"perilla\\\"]\"",
-      "id": "kit-facial-perilla",
-      "imagen_principal": "assets/img/productos/kit-facial-perilla_20250327005943.jpg",
-      "nombre": "Kit facial Perilla",
-      "precio": 60000.0,
-      "precio_oferta": null,
-      "sku": "KT-002"
     },
     {
       "categoria": "mascarillas",
